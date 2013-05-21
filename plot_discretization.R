@@ -1,11 +1,15 @@
 # Christopher L. Simons, 2013
 
+n_points <- 1000
+
+#png("test.png")
+
 within <- function(x, lower, upper) {
     return((x > lower) && (x < upper))
 }
 
-a <- rnorm(1000)
-b <- a + rnorm(1000)
+a <- rnorm(n_points)
+b <- a + rnorm(n_points)
 
 breaks_a <- hist(a, plot=FALSE)$breaks
 breaks_b <- hist(b, plot=FALSE)$breaks
@@ -34,40 +38,25 @@ for (i in 1:(length(breaks_b) - 1)) { # for each bin number ...
 
 plot(a, b)
 
-# Plot bins for vector a (plotted against x-axis).
 for (i in 1:(length(breaks_a) - 1)) {
-    coords_x <- c()
-    coords_x[length(coords_x) + 1] <- breaks_a[i]
-    coords_x[length(coords_x) + 1] <- breaks_a[i]
-    coords_x[length(coords_x) + 1] <- breaks_a[i + 1]
-    coords_x[length(coords_x) + 1] <- breaks_a[i + 1]
-    coords_x[length(coords_x) + 1] <- breaks_a[i]
-
-    coords_y <- c()
-    coords_y[length(coords_y) + 1] <- min(b) # "zero" for our plot
-    coords_y[length(coords_y) + 1] <- max(b)
-    coords_y[length(coords_y) + 1] <- max(b)
-    coords_y[length(coords_y) + 1] <- min(b)
-    coords_y[length(coords_y) + 1] <- min(b)
-
-    polygon(coords_x, coords_y)
+    for (j in 1:(length(breaks_b) - 1)) {
+        # Polygon for each cell =
+        # { (lo-i, lo-j), (up-i, lo-j),
+        #   (up-i, up-j), (lo-i, up-j), (lo-i, lo-j) }
+        coords_x <- c()
+        coords_x[length(coords_x) + 1] <- breaks_a[i]
+        coords_x[length(coords_x) + 1] <- breaks_a[i + 1]
+        coords_x[length(coords_x) + 1] <- breaks_a[i + 1]
+        coords_x[length(coords_x) + 1] <- breaks_a[i]
+        coords_x[length(coords_x) + 1] <- breaks_a[i]
+        coords_y <- c()
+        coords_y[length(coords_y) + 1] <- breaks_b[j]
+        coords_y[length(coords_y) + 1] <- breaks_b[j]
+        coords_y[length(coords_y) + 1] <- breaks_b[j + 1]
+        coords_y[length(coords_y) + 1] <- breaks_b[j + 1]
+        coords_y[length(coords_y) + 1] <- breaks_b[j]
+        polygon(coords_x, coords_y)
+    }
 }
 
-# Plot bins for vector b (plotted against y-axis).
-for (i in 1:(length(breaks_b) - 1)) {
-    coords_x <- c()
-    coords_x[length(coords_x) + 1] <- min(a) # "zero" for our plot
-    coords_x[length(coords_x) + 1] <- max(a)
-    coords_x[length(coords_x) + 1] <- max(a)
-    coords_x[length(coords_x) + 1] <- min(a)
-    coords_x[length(coords_x) + 1] <- min(a)
-
-    coords_y <- c()
-    coords_y[length(coords_y) + 1] <- breaks_b[i]
-    coords_y[length(coords_y) + 1] <- breaks_b[i]
-    coords_y[length(coords_y) + 1] <- breaks_b[i + 1]
-    coords_y[length(coords_y) + 1] <- breaks_b[i + 1]
-    coords_y[length(coords_y) + 1] <- breaks_b[i]
-
-    polygon(coords_x, coords_y)
-}
+#dev.off()
