@@ -38,8 +38,16 @@ for (i in 1:(length(breaks_b) - 1)) { # for each bin number ...
 
 plot(a, b)
 
+cell_points <- c()
 for (i in 1:(length(breaks_a) - 1)) {
     for (j in 1:(length(breaks_b) - 1)) {
+        points_in_cell <- 0
+        for (a_i in bins_a[[i]]) {
+            for (b_i in bins_b[[j]]) {
+                points_in_cell <- points_in_cell + 1
+            }
+        }
+        cell_points[length(cell_points) + 1] <- points_in_cell
         # Polygon for each cell =
         # { (lo-i, lo-j), (up-i, lo-j),
         #   (up-i, up-j), (lo-i, up-j), (lo-i, lo-j) }
@@ -59,4 +67,5 @@ for (i in 1:(length(breaks_a) - 1)) {
     }
 }
 
+print(cell_points)
 #dev.off()
