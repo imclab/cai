@@ -4,65 +4,54 @@ n_points <- 1000
 
 #png("test.png")
 
-within <- function(x, lower, upper) {
-    return((x > lower) && (x < upper))
-}
+x <- rnorm(n_points)
+y <- x + rnorm(n_points)
+data <- cbind(x, y)
 
-a <- rnorm(n_points)
-b <- a + rnorm(n_points)
+breaks_x <- hist(x, plot=FALSE)$breaks
+breaks_y <- hist(y, plot=FALSE)$breaks
 
-breaks_a <- hist(a, plot=FALSE)$breaks
-breaks_b <- hist(b, plot=FALSE)$breaks
-
-bins_a <- list()
-for (i in 1:(length(breaks_a) - 1)) { # for each bin number ...
-    bin_current <- c()
-    for (j in 1:length(a)) { # for each data point number ...
-        if (within(a[j], breaks_a[i], breaks_a[i + 1])) { # if within bin range
-            bin_current[(length(bin_current) + 1)] <- a[j]
-        }
+debug_flag <- TRUE
+debug <- function(message) {
+    if (debug_flag) {
+        print(message)
     }
-    bins_a[[i]] <- bin_current
 }
 
-bins_b <- list()
-for (i in 1:(length(breaks_b) - 1)) { # for each bin number ...
-    bin_current <- c()
-    for (j in 1:length(b)) { # for each data point number ...
-        if (within(b[j], breaks_b[i], breaks_b[i + 1])) { # if within bin range
-            bin_current[(length(bin_current) + 1)] <- b[j]
-        }
-    }
-    bins_b[[i]] <- bin_current
-}
-
-plot(a, b)
+plot(data)
 
 cell_points <- c()
-for (i in 1:(length(breaks_a) - 1)) {
-    for (j in 1:(length(breaks_b) - 1)) {
+for (xb in 1:(length(breaks_x) - 1)) {
+    for (yb in 1:(length(breaks_y) - 1)) {
         points_in_cell <- 0
-        for (a_i in bins_a[[i]]) {
-            for (b_i in bins_b[[j]]) {
+        for (i in 1:length(data[,1])) {
+            xi <- data[i,][1]
+            yi <- data[i,][2]
+            if (xi >= breaks_x[xb] && xi <= breaks_x[xb + 1]
+                    && yi >= breaks_y[yb] && yi <= breaks_y[yb + 1]) {
                 points_in_cell <- points_in_cell + 1
             }
         }
         cell_points[length(cell_points) + 1] <- points_in_cell
-        # Polygon for each cell =
-        # { (lo-i, lo-j), (up-i, lo-j),
-        #   (up-i, up-j), (lo-i, up-j), (lo-i, lo-j) }
+        #
+        # Draw polygon for each cell; verticies:
+        # { (lo-px, lo-py), (hi-px, lo-py),
+        #   (hi-px, hi-py), (lo-px, hi-py), (lo-px, lo-py) }
+        #
         coords_x <- c()
-        coords_x[length(coords_x) + 1] <- breaks_a[i]
-        coords_x[length(coords_x) + 1] <- breaks_a[i + 1]
-        coords_x[length(coords_x) + 1] <- breaks_a[i + 1]
-        coords_x[length(coords_x) + 1] <- breaks_a[i]
-        coords_x[length(coords_x) + 1] <- breaks_a[i]
+        coords_x[length(coords_x) + 1] <- breaks_x[xb]
+        coords_x[length(coords_x) + 1] <- breaks_x[xb + 1]
+        coords_x[length(coords_x) + 1] <- breaks_x[xb + 1]
+        coords_x[length(coords_x) + 1] <- breaks_x[xb]
+        coords_x[length(coords_x) + 1] <- breaks_x[xb]
+
         coords_y <- c()
-        coords_y[length(coords_y) + 1] <- breaks_b[j]
-        coords_y[length(coords_y) + 1] <- breaks_b[j]
-        coords_y[length(coords_y) + 1] <- breaks_b[j + 1]
-        coords_y[length(coords_y) + 1] <- breaks_b[j + 1]
-        coords_y[length(coords_y) + 1] <- breaks_b[j]
+        coords_y[length(coords_y) + 1] <- breaks_y[yb]
+        coords_y[length(coords_y) + 1] <- breaks_y[yb]
+        coords_y[length(coords_y) + 1] <- breaks_y[yb + 1]
+        coords_y[length(coords_y) + 1] <- breaks_y[yb + 1]
+        coords_y[length(coords_y) + 1] <- breaks_y[yb]
+
         polygon(coords_x, coords_y)
     }
 }
