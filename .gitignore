@@ -1,2 +1,5 @@
-test.*
+*.png
+*.Rout
 .RData
+feh_*
+test.*
