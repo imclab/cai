@@ -1,5 +1,6 @@
 # Christopher L. Simons, 2013
 
+do_color <- FALSE
 n_points <- 1000
 
 #png("test.png")
@@ -21,6 +22,7 @@ debug <- function(message) {
 plot(data)
 
 cell_points <- c()
+cell_weights <- c()
 for (xb in 1:(length(breaks_x) - 1)) {
     for (yb in 1:(length(breaks_y) - 1)) {
         points_in_cell <- 0
@@ -32,7 +34,9 @@ for (xb in 1:(length(breaks_x) - 1)) {
                 points_in_cell <- points_in_cell + 1
             }
         }
+        cell_weight <- points_in_cell / n_points
         cell_points[length(cell_points) + 1] <- points_in_cell
+        cell_weights[length(cell_weights) + 1] <- cell_weight
         #
         # Draw polygon for each cell; verticies:
         # { (lo-px, lo-py), (hi-px, lo-py),
@@ -52,9 +56,18 @@ for (xb in 1:(length(breaks_x) - 1)) {
         coords_y[length(coords_y) + 1] <- breaks_y[yb + 1]
         coords_y[length(coords_y) + 1] <- breaks_y[yb]
 
-        polygon(coords_x, coords_y)
+        if (do_color) {
+            if (cell_weight > 0) {
+                polygon(coords_x, coords_y, col="gray")
+            } else {
+                polygon(coords_x, coords_y, col="white")
+            }
+        } else {
+            polygon(coords_x, coords_y)
+        }
     }
 }
 
-print(cell_points)
+#print(cell_points)
+print(cell_weights)
 #dev.off()
