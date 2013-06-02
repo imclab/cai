@@ -1,6 +1,7 @@
 # Christopher L. Simons, 2013
 
 source("plot_discretization.R")
+#source("rand_distributions.R")
 
 n_points <- 1000
 
@@ -8,10 +9,14 @@ x <- rnorm(n_points)
 y <- x + rnorm(n_points)
 data <- cbind(x, y)
 
-png("plot_bins.png")
-disc_plot(data, color=FALSE)
+png("plot_0_grid.png")
+disc_plot(data, fill=FALSE)
 dev.off()
 
-png("plot_color.png")
-disc_plot(data, color=TRUE, debug=TRUE)
+png("plot_1_fill.png")
+disc_plot(data, fill=TRUE, gradient=FALSE, debug=TRUE)
+dev.off()
+
+png("plot_2_gradient.png")
+disc_plot(data, fill=TRUE, gradient=TRUE, debug=TRUE)
 dev.off()
