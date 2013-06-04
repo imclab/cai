@@ -1,10 +1,5 @@
 # Christopher L. Simons, 2013
 
-weightShade <- function(cell_weight) {
-    reversed <- (1 - cell_weight)
-    return(rgb(reversed, reversed, reversed))
-}
-
 build_discretized_struct <- function(data) {
     x <- data[,1]
     y <- data[,2]
@@ -26,28 +21,22 @@ build_discretized_struct <- function(data) {
                 }
             }
 
-            if (max_cell_points < cell_points) {
-                max_cell_points <- cell_points
-            }
+            if (max_cell_points < cell_points) max_cell_points <- cell_points
 
-            #
-            # Draw polygon for each cell; verticies:
-            # { (lo-px, lo-py), (hi-px, lo-py),
-            #   (hi-px, hi-py), (lo-px, hi-py), (lo-px, lo-py) }
-            #
+            # Polygon coordinates for each cell.
             coords_x <- c()
-            coords_x[length(coords_x) + 1] <- breaks_x[xb]
-            coords_x[length(coords_x) + 1] <- breaks_x[xb + 1]
-            coords_x[length(coords_x) + 1] <- breaks_x[xb + 1]
-            coords_x[length(coords_x) + 1] <- breaks_x[xb]
-            coords_x[length(coords_x) + 1] <- breaks_x[xb]
+            coords_x <- append(coords_x, breaks_x[xb])
+            coords_x <- append(coords_x, breaks_x[xb + 1])
+            coords_x <- append(coords_x, breaks_x[xb + 1])
+            coords_x <- append(coords_x, breaks_x[xb])
+            coords_x <- append(coords_x, breaks_x[xb])
 
             coords_y <- c()
-            coords_y[length(coords_y) + 1] <- breaks_y[yb]
-            coords_y[length(coords_y) + 1] <- breaks_y[yb]
-            coords_y[length(coords_y) + 1] <- breaks_y[yb + 1]
-            coords_y[length(coords_y) + 1] <- breaks_y[yb + 1]
-            coords_y[length(coords_y) + 1] <- breaks_y[yb]
+            coords_y <- append(coords_y, breaks_y[yb])
+            coords_y <- append(coords_y, breaks_y[yb])
+            coords_y <- append(coords_y, breaks_y[yb + 1])
+            coords_y <- append(coords_y, breaks_y[yb + 1])
+            coords_y <- append(coords_y, breaks_y[yb])
 
             nBin <- length(bins) + 1
             bins[[nBin]] <- list("cell_points"=cell_points,
@@ -57,6 +46,27 @@ build_discretized_struct <- function(data) {
     }
     bins[["max_cell_points"]] <- max_cell_points
     return(bins)
+}
+
+weightShade <- function(cell_weight) {
+    reversed <- (1 - cell_weight)
+    return(rgb(reversed, reversed, reversed))
+}
+
+cellColor <- function(fill, gradient, cell_weight) {
+    if (fill) {
+        if (cell_weight > 0) {
+            if (gradient) {
+                return(weightShade(cell_weight))
+            } else {
+                return(rgb(0, 0, 0))
+            }
+        } else {
+            return("white")
+        }
+    } else {
+        return(NA)
+    }
 }
 
 disc_plot <- function(data,
@@ -74,20 +84,9 @@ disc_plot <- function(data,
 
         cell_weight <- bins[[i]]$cell_points / bins$max_cell_points
         if (showPlot) {
-            if (fill) {
-                if (cell_weight > 0) {
-                    if (gradient) {
-                        polygon(coords_x, coords_y,
-                                col=weightShade(cell_weight))
-                    } else {
-                        polygon(coords_x, coords_y, col=rgb(0, 0, 0))
-                    }
-                } else {
-                    polygon(coords_x, coords_y, col="white")
-                }
-            } else {
-                polygon(coords_x, coords_y)
-            }
+            polygon(coords_x, coords_y, col=cellColor(fill,
+                                                      gradient,
+                                                      cell_weight))
         }
     }
 }
