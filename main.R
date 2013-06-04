@@ -3,7 +3,7 @@
 source("plot_disc.R")
 #source("rand_distributions.R")
 
-n_points <- 1000
+n_points <- 5000
 
 x <- rnorm(n_points)
 y <- x + rnorm(n_points)
