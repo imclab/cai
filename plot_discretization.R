@@ -37,7 +37,9 @@ build_discretized_struct <- function(data) {
     }
     agg_max_cell_points <- max_cell_points
 
-    obj <- list("coords_x"=matrix(agg_coords_x, ncol=5, byrow=TRUE),
+    obj <- list("ncol"=(length(breaks_x) - 1),
+                "nrow"=(length(breaks_y) - 1),
+                "coords_x"=matrix(agg_coords_x, ncol=5, byrow=TRUE),
                 "coords_y"=matrix(agg_coords_y, ncol=5, byrow=TRUE),
                 "cell_points"=agg_cell_points,
                 "max_cell_points"=agg_max_cell_points)
@@ -76,11 +78,23 @@ disc_plot <- function(data,
     cell_points <- disc_struct$cell_points
     max_cell_points <- disc_struct$max_cell_points
 
+    n_cells <- length(cell_points)
+
     if (showPlot) plot(data)
-    for (i in 1:length(cell_points)) {
+
+    vec_weights <- c()
+    for (i in 1:n_cells) {
         cell_weight <- cell_points[i] / max_cell_points
+        vec_weights <- append(vec_weights, cell_weight)
         if (showPlot) polygon(coords_x[i,], coords_y[i,],
                               col=cellColor(fill, gradient, cell_weight))
     }
+
+    #matrix_points <- matrix(cell_points, nrow=disc_struct$nrow)
+    #matrix_points_rrev <- matrix_points[disc_struct$nrow:1,]
+    matrix_weights <- matrix(vec_weights, nrow=disc_struct$nrow)
+    matrix_weights_rrev <- matrix_weights[disc_struct$nrow:1,]
+    #if (debug) print(round(matrix_weights_rrev, digits=1) * 10)
+    if (debug) print(round(matrix_weights_rrev, digits=2) * 100)
     return(disc_struct)
 }
