@@ -7,8 +7,10 @@ build_discretized_struct <- function(data) {
     breaks_x <- hist(x, plot=FALSE)$breaks
     breaks_y <- hist(y, plot=FALSE)$breaks
 
-    bins <- list()
+    agg_coords_x <- c()
+    agg_coords_y <- c()
     max_cell_points <- 0
+    agg_cell_points <- c()
     for (xb in 1:(length(breaks_x) - 1)) {
         for (yb in 1:(length(breaks_y) - 1)) {
             cell_points <- 0
@@ -28,16 +30,18 @@ build_discretized_struct <- function(data) {
             xbb <- breaks_x[xb + 1]
             yba <- breaks_y[yb]
             ybb <- breaks_y[yb + 1]
-            coords_x <- c(xba, xbb, xbb, xba, xba)
-            coords_y <- c(yba, yba, ybb, ybb, yba)
-
-            bins[[length(bins) + 1]] <- list("cell_points"=cell_points,
-                                             "coords_x"=coords_x,
-                                             "coords_y"=coords_y)
+            agg_coords_x <- append(agg_coords_x, c(xba, xbb, xbb, xba, xba))
+            agg_coords_y <- append(agg_coords_y, c(yba, yba, ybb, ybb, yba))
+            agg_cell_points <- append(agg_cell_points, cell_points)
         }
     }
-    bins[["max_cell_points"]] <- max_cell_points
-    return(bins)
+    agg_max_cell_points <- max_cell_points
+
+    obj <- list("coords_x"=matrix(agg_coords_x, ncol=5, byrow=TRUE),
+                "coords_y"=matrix(agg_coords_y, ncol=5, byrow=TRUE),
+                "cell_points"=agg_cell_points,
+                "max_cell_points"=agg_max_cell_points)
+    return(obj)
 }
 
 weightShade <- function(cell_weight) {
@@ -62,20 +66,21 @@ cellColor <- function(fill, gradient, cell_weight) {
 }
 
 disc_plot <- function(data,
-                        showPlot=TRUE,
-                        fill=TRUE,
-                        gradient=TRUE,
-                        debug=FALSE) {
-    bins <- build_discretized_struct(data)
+                      showPlot=TRUE,
+                      fill=TRUE,
+                      gradient=TRUE,
+                      debug=FALSE) {
+    disc_struct <- build_discretized_struct(data)
+    coords_x <- disc_struct$coords_x
+    coords_y <- disc_struct$coords_y
+    cell_points <- disc_struct$cell_points
+    max_cell_points <- disc_struct$max_cell_points
 
     if (showPlot) plot(data)
-
-    for (i in 1:length(bins)) {
-        coords_x <- bins[[i]]$coords_x
-        coords_y <- bins[[i]]$coords_y
-        cell_points <- bins[[i]]$cell_points
-        cell_weight <- cell_points / bins$max_cell_points
-        if (showPlot) polygon(coords_x, coords_y,
+    for (i in 1:length(cell_points)) {
+        cell_weight <- cell_points[i] / max_cell_points
+        if (showPlot) polygon(coords_x[i,], coords_y[i,],
                               col=cellColor(fill, gradient, cell_weight))
     }
+    return(disc_struct)
 }
