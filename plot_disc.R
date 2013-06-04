@@ -67,7 +67,7 @@ cellColor <- function(fill, gradient, cell_weight) {
     }
 }
 
-disc_plot <- function(data,
+plot_disc <- function(data,
                       showPlot=TRUE,
                       fill=TRUE,
                       gradient=TRUE,
@@ -82,22 +82,30 @@ disc_plot <- function(data,
 
     if (showPlot) plot(data)
 
+    for (i in 1:n_cells) {
+        cell_weight <- cell_points[i] / max_cell_points
+        if (showPlot) polygon(coords_x[i,], coords_y[i,],
+                              col=cellColor(fill, gradient, cell_weight))
+    }
+}
+
+build_plot_matrix <- function(data) {
+    disc_struct <- build_discretized_struct(data)
+    cell_points <- disc_struct$cell_points
+    max_cell_points <- disc_struct$max_cell_points
+
+    n_cells <- length(cell_points)
+
     vec_weights <- c()
     for (i in 1:n_cells) {
         cell_weight <- cell_points[i] / max_cell_points
         vec_weights <- append(vec_weights, cell_weight)
-        if (showPlot) polygon(coords_x[i,], coords_y[i,],
-                              col=cellColor(fill, gradient, cell_weight))
     }
 
     #matrix_points <- matrix(cell_points, nrow=disc_struct$nrow)
     #matrix_points <- matrix_points[disc_struct$nrow:1,]
     matrix_weights <- matrix(vec_weights, nrow=disc_struct$nrow)
     matrix_weights <- matrix_weights[disc_struct$nrow:1,]
-    if (debug) {
-        print("weight matrix (%):")
-        print(round(matrix_weights, digits=2) * 100)
-    }
 
-    return(disc_struct)
+    return(matrix_weights)
 }
