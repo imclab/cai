@@ -24,24 +24,16 @@ build_discretized_struct <- function(data) {
             if (max_cell_points < cell_points) max_cell_points <- cell_points
 
             # Polygon coordinates for each cell.
-            coords_x <- c()
-            coords_x <- append(coords_x, breaks_x[xb])
-            coords_x <- append(coords_x, breaks_x[xb + 1])
-            coords_x <- append(coords_x, breaks_x[xb + 1])
-            coords_x <- append(coords_x, breaks_x[xb])
-            coords_x <- append(coords_x, breaks_x[xb])
+            xba <- breaks_x[xb]
+            xbb <- breaks_x[xb + 1]
+            yba <- breaks_y[yb]
+            ybb <- breaks_y[yb + 1]
+            coords_x <- c(xba, xbb, xbb, xba, xba)
+            coords_y <- c(yba, yba, ybb, ybb, yba)
 
-            coords_y <- c()
-            coords_y <- append(coords_y, breaks_y[yb])
-            coords_y <- append(coords_y, breaks_y[yb])
-            coords_y <- append(coords_y, breaks_y[yb + 1])
-            coords_y <- append(coords_y, breaks_y[yb + 1])
-            coords_y <- append(coords_y, breaks_y[yb])
-
-            nBin <- length(bins) + 1
-            bins[[nBin]] <- list("cell_points"=cell_points,
-                                 "coords_x"=coords_x,
-                                 "coords_y"=coords_y)
+            bins[[length(bins) + 1]] <- list("cell_points"=cell_points,
+                                             "coords_x"=coords_x,
+                                             "coords_y"=coords_y)
         }
     }
     bins[["max_cell_points"]] <- max_cell_points
@@ -81,12 +73,9 @@ disc_plot <- function(data,
     for (i in 1:length(bins)) {
         coords_x <- bins[[i]]$coords_x
         coords_y <- bins[[i]]$coords_y
-
-        cell_weight <- bins[[i]]$cell_points / bins$max_cell_points
-        if (showPlot) {
-            polygon(coords_x, coords_y, col=cellColor(fill,
-                                                      gradient,
-                                                      cell_weight))
-        }
+        cell_points <- bins[[i]]$cell_points
+        cell_weight <- cell_points / bins$max_cell_points
+        if (showPlot) polygon(coords_x, coords_y,
+                              col=cellColor(fill, gradient, cell_weight))
     }
 }
