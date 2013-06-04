@@ -91,10 +91,13 @@ disc_plot <- function(data,
     }
 
     #matrix_points <- matrix(cell_points, nrow=disc_struct$nrow)
-    #matrix_points_rrev <- matrix_points[disc_struct$nrow:1,]
+    #matrix_points <- matrix_points[disc_struct$nrow:1,]
     matrix_weights <- matrix(vec_weights, nrow=disc_struct$nrow)
-    matrix_weights_rrev <- matrix_weights[disc_struct$nrow:1,]
-    #if (debug) print(round(matrix_weights_rrev, digits=1) * 10)
-    if (debug) print(round(matrix_weights_rrev, digits=2) * 100)
+    matrix_weights <- matrix_weights[disc_struct$nrow:1,]
+    if (debug) {
+        print("weight matrix (%):")
+        print(round(matrix_weights, digits=2) * 100)
+    }
+
     return(disc_struct)
 }

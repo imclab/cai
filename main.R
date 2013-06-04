@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-source("plot_discretization.R")
+source("plot_disc.R")
 #source("rand_distributions.R")
 
 n_points <- 1000
