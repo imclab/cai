@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-source("assess.R")
+source("assess_sym.R")
 
 n_points <- 1000
 
