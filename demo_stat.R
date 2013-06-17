@@ -5,11 +5,18 @@ source("assess_stat.R")
 n_points <- 1000
 
 x <- rnorm(n_points)
-y <- x + rnorm(n_points)
+#y <- x + rnorm(n_points)
+y <- rnorm(n_points)
 data <- cbind(y, x)
 
 alpha <- 0.2
 z <- build_plot_matrix(data)
 print(round(z * 100))
 
-print(cat("Overall assessment: existsDependency =", existsDependency(data)))
+alpha_mean <- 1.0
+alpha_var  <- 1.0
+
+obj <- existsDependency(data, alpha_mean, alpha_var)
+print(cat("x-independence:", z$independent_x))
+print(cat("y-independence:", z$independent_y))
+print("Result object stored in obj.")
