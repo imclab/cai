@@ -47,31 +47,35 @@ existsDependency <- function(data, alpha_mean, alpha_var) {
     obj$y_bin_means <- y_bin_means
     obj$y_bin_variances <- y_bin_variances
 
+    #
+    # WARNING: Below, sometimes the variances have been calculated as 'NA'
+    #          and in these cases we simply skip the comparison.  Is this
+    #          case important?
+    #
+
     independent_x <- TRUE
     for (i in 2:length(x_bin_means)) {
-        if (((x_bin_means[i] != NA) && (x_bin_means[i - 1] != NA))
-                && ((x_bin_variances[i] != NA) && (x_bin_variances[i - 1] != NA))) {
-            if ((abs(x_bin_means[i]
-                        - x_bin_means[i - 1]) > alpha_mean)
-                    || (abs(x_bin_variances[i]
-                        - x_bin_variances[i - 1]) > alpha_var)) {
+        xm_a <- x_bin_means[i - 1]
+        xm_b <- x_bin_means[i]
+        xv_a <- x_bin_variances[i - 1]
+        xv_b <- x_bin_variances[i]
+
+        if (!is.na(xm_a) && !is.na(xm_b) && !is.na(xv_a) && !is.na(xv_b))
+            if (abs(xm_b - xm_a) > alpha_mean || abs(xv_b - xv_a) > alpha_var)
                 independent_x <- FALSE
-            }
-        }
     }
     obj$independent_x <- independent_x
 
     independent_y <- TRUE
     for (i in 2:length(y_bin_means)) {
-        if (((y_bin_means[i] != NA) && (y_bin_means[i - 1] != NA))
-                && ((y_bin_variances[i] != NA) && (y_bin_variances[i - 1] != NA))) {
-            if ((abs(y_bin_means[i]
-                        - y_bin_means[i - 1]) > alpha_mean)
-                    || (abs(y_bin_variances[i]
-                        - y_bin_variances[i - 1]) > alpha_var)) {
+        ym_a <- y_bin_means[i - 1]
+        ym_b <- y_bin_means[i]
+        yv_a <- y_bin_variances[i - 1]
+        yv_b <- y_bin_variances[i]
+
+        if (!is.na(ym_a) && !is.na(ym_b) && !is.na(yv_a) && !is.na(yv_b))
+            if (abs(ym_b - ym_a) > alpha_mean || abs(yv_b - yv_a) > alpha_var)
                 independent_y <- FALSE
-            }
-        }
     }
     obj$independent_y <- independent_y
 
