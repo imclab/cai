@@ -48,32 +48,28 @@ existsDependency <- function(data, alpha_mean, alpha_var) {
     obj$y_bin_variances <- y_bin_variances
 
     independent_x <- TRUE
-    for (i in length(x_bin_means)) {
-        if (i > 1) {
-            if (((x_bin_means[i] != NA) && (x_bin_means[i - 1] != NA))
-                    && ((x_bin_variances[i] != NA) && (x_bin_variances[i - 1] != NA))) {
-                if ((abs(x_bin_means[i]
-                            - x_bin_means[i - 1]) > alpha_mean)
-                        || (abs(x_bin_variances[i]
-                            - x_bin_variances[i - 1]) > alpha_var)) {
-                    independent_x <- FALSE
-                }
+    for (i in 2:length(x_bin_means)) {
+        if (((x_bin_means[i] != NA) && (x_bin_means[i - 1] != NA))
+                && ((x_bin_variances[i] != NA) && (x_bin_variances[i - 1] != NA))) {
+            if ((abs(x_bin_means[i]
+                        - x_bin_means[i - 1]) > alpha_mean)
+                    || (abs(x_bin_variances[i]
+                        - x_bin_variances[i - 1]) > alpha_var)) {
+                independent_x <- FALSE
             }
         }
     }
     obj$independent_x <- independent_x
 
     independent_y <- TRUE
-    for (i in length(y_bin_means)) {
-        if (i > 1) {
-            if (((y_bin_means[i] != NA) && (y_bin_means[i - 1] != NA))
-                    && ((y_bin_variances[i] != NA) && (y_bin_variances[i - 1] != NA))) {
-                if ((abs(y_bin_means[i]
-                            - y_bin_means[i - 1]) > alpha_mean)
-                        || (abs(y_bin_variances[i]
-                            - y_bin_variances[i - 1]) > alpha_var)) {
-                    independent_y <- FALSE
-                }
+    for (i in 2:length(y_bin_means)) {
+        if (((y_bin_means[i] != NA) && (y_bin_means[i - 1] != NA))
+                && ((y_bin_variances[i] != NA) && (y_bin_variances[i - 1] != NA))) {
+            if ((abs(y_bin_means[i]
+                        - y_bin_means[i - 1]) > alpha_mean)
+                    || (abs(y_bin_variances[i]
+                        - y_bin_variances[i - 1]) > alpha_var)) {
+                independent_y <- FALSE
             }
         }
     }
