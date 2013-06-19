@@ -1,4 +1,6 @@
-source("plot_disc.R")
+# Christopher L. Simons, 2013
+
+source("src/plot_disc.R")
 
 isRowSymmetric <- function(row, alpha) {
     diff <- 0

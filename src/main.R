@@ -1,7 +1,6 @@
 # Christopher L. Simons, 2013
 
-source("plot_disc.R")
-#source("rand_distributions.R")
+source("src/plot_disc.R")
 
 n_points <- 5000
 

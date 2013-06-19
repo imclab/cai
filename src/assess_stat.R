@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-source("plot_disc.R")
+source("src/plot_disc.R")
 
 existsDependency <- function(data, alpha_mean, alpha_var) {
     x <- data[,1]
