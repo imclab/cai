@@ -1,21 +1,19 @@
 # Christopher L. Simons, 2013
 
-source("src/core/plot_disc.R")
+p <- function(...) {
+    cat(..., "\n", file="/dev/tty")
+}
 
-n_points <- 5000
+usage <- function() {
+    p("usage: <script-name> <config-file>")
+    quit(status = 1, save = "no")
+}
 
-x <- rnorm(n_points)
-y <- x + rnorm(n_points)
-data <- cbind(x, y)
+args <- commandArgs(trailingOnly = TRUE)
 
-png("plot_0_grid.png")
-plot_disc(data, fill=FALSE)
-dev.off()
+p("Number of arguments passed:", length(args))
 
-png("plot_1_fill.png")
-plot_disc(data, fill=TRUE, gradient=FALSE, debug=TRUE)
-dev.off()
+if (length(args) != 1)
+    usage()
 
-png("plot_2_gradient.png")
-plot_disc(data, fill=TRUE, gradient=TRUE, debug=TRUE)
-dev.off()
+p("You passed in \"", args[1], "\".  Good job.", sep="")
