@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-source("src/assess_stat.R")
+source("src/assessments/assess_stat.R")
 
 n_points <- 1000
 

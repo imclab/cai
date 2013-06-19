@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-source("src/plot_disc.R")
+source("src/core/plot_disc.R")
 
 n_points <- 5000
 
