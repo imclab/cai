@@ -1,2 +1,2 @@
 @echo off
-R CMD BATCH main.R
+R CMD BATCH src\main.R
