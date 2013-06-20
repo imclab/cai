@@ -1,19 +1,18 @@
 # Christopher L. Simons, 2013
 
 p <- function(...) {
-    cat(..., "\n", file="/dev/tty")
+    cat(..., "\n", sep="", file="/dev/tty")
 }
 
-usage <- function() {
+usage <- function(args) {
+    p("Got ", length(args), " arguments, expecting 1.")
     p("usage: <script-name> <config-file>")
     quit(status = 1, save = "no")
 }
 
 args <- commandArgs(trailingOnly = TRUE)
 
-p("Number of arguments passed:", length(args))
-
 if (length(args) != 1)
-    usage()
+    usage(args)
 
-p("You passed in \"", args[1], "\".  Good job.", sep="")
+p("You passed in \"", args[1], "\".  Good job.")
