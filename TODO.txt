@@ -1,0 +1,4 @@
+1. Enable optional verbose mode showing alpha comparisons.
+2. Create named plot generators for each Boigelot image.
+3. Create reporting mode which saves verbose output in
+   addition to generating images of discretized graphs.
