@@ -115,5 +115,5 @@ build_plot_matrix <- function(data) {
 
 print_weight_matrix <- function(data) {
     z <- build_plot_matrix(data)
-    print(round(z * 100))
+    p_matrix(round(z * 100))
 }

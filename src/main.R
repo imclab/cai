@@ -8,6 +8,10 @@ p <- function(...) {
     cat(..., "\n", sep="", file="/dev/tty")
 }
 
+p_matrix <- function(x) {
+    write(x, sep="\t", file="/dev/tty")
+}
+
 eprint <- function(...) {
     p(...)
     quit(status = 1, save = "no")
