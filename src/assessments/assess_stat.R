@@ -2,9 +2,11 @@
 
 source("src/core/plot_disc.R")
 
-existsDependency <- function(data, alpha_mean, alpha_var) {
+assess_stat <- list(assess <- function(data, alphas) {
     x <- data[,1]
     y <- data[,2]
+    alpha_mean <- alphas[1]
+    alpha_var  <- alphas[2]
 
     breaks_x <- hist(x, plot=FALSE)$breaks
     breaks_y <- hist(y, plot=FALSE)$breaks
@@ -16,10 +18,11 @@ existsDependency <- function(data, alpha_mean, alpha_var) {
         for (i in 1:length(data[,1])) {
             xi <- data[i,][1]
             yi <- data[i,][2]
-            if (xi >= breaks_x[xb] && xi <= breaks_x[xb + 1]) {
+
+            if (xi >= breaks_x[xb] && xi <= breaks_x[xb + 1])
                 x_bin_values <- append(x_bin_values, yi)
-            }
         }
+
         x_bin_means <- append(x_bin_means, mean(x_bin_values))
         x_bin_variances <- append(x_bin_variances, var(x_bin_values))
         x_bin_values <- c()
@@ -32,9 +35,9 @@ existsDependency <- function(data, alpha_mean, alpha_var) {
         for (i in 1:length(data[,1])) {
             xi <- data[i,][1]
             yi <- data[i,][2]
-            if (yi >= breaks_y[yb] && yi <= breaks_y[yb + 1]) {
+
+            if (yi >= breaks_y[yb] && yi <= breaks_y[yb + 1])
                 y_bin_values <- append(y_bin_values, xi)
-            }
         }
         y_bin_means <- append(y_bin_means, mean(y_bin_values))
         y_bin_variances <- append(y_bin_variances, var(y_bin_values))
@@ -79,5 +82,7 @@ existsDependency <- function(data, alpha_mean, alpha_var) {
     }
     obj$independent_y <- independent_y
 
-    return (obj)
-}
+    return (obj$independent_x && obj$independent_y)
+})
+
+class(assess_stat) <- "assessment"

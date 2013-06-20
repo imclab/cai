@@ -2,34 +2,50 @@
 
 source("src/core/plot_disc.R")
 
-isRowSymmetric <- function(row, alpha) {
-    diff <- 0
-    for (i in 1:floor(length(row) / 2)) {
-        diff <- diff + abs(row[i] - row[length(row) + 1 - i])
-    }
-    return (diff < alpha)
-}
+assess_sym <- list(assess <- function(data, alphas) {
+    alpha <- alphas[1]
 
-diffSymmetric <- function(row) {
-    diff <- 0
-    for (i in 1:floor(length(row) / 2)) {
-        diff <- diff + abs(row[i] - row[length(row) + 1 - i])
-    }
-    return (diff)
-}
+    isRowSymmetric <- function(row, alpha) {
+        diff <- 0
 
-isSymmetric <- function(data, alpha) {
-    z <- build_plot_matrix(data)
-    nrows <- length(z[,1])
-    symmetric <- TRUE
-    for (i in 1:nrows) {
-        row <- z[i,]
-        rowSymmetric <- isRowSymmetric(row, alpha)
-        #print(cat(i, ": row is symmetric (", diffSymmetric(row),
-        #        "<", alpha, ")?: ", rowSymmetric))
-        if (! rowSymmetric) {
-            symmetric <- FALSE
+        for (i in 1:floor(length(row) / 2))
+            diff <- diff + abs(row[i] - row[length(row) + 1 - i])
+
+        return (diff < alpha)
+    }
+
+    diffSymmetric <- function(row) {
+        diff <- 0
+
+        for (i in 1:floor(length(row) / 2))
+            diff <- diff + abs(row[i] - row[length(row) + 1 - i])
+
+        return (diff)
+    }
+
+    isSymmetric <- function(data, alpha) {
+        z <- build_plot_matrix(data)
+        nrows <- length(z[,1])
+        symmetric <- TRUE
+
+        for (i in 1:nrows) {
+            row <- z[i,]
+            rowSymmetric <- isRowSymmetric(row, alpha)
+            p(i, ": row is symmetric (", diffSymmetric(row),
+              "<", alpha, ")?: ", rowSymmetric)
+
+            if (! rowSymmetric)
+                symmetric <- FALSE
         }
+
+        return (symmetric)
     }
-    return (symmetric)
-}
+
+    x <- data[,1]
+    y <- data[,2]
+    rdata <- cbind(y, x)
+
+    return (isSymmetric(data) && isSymmetric(rdata))
+})
+
+class(assess_sym) <- "assessment"

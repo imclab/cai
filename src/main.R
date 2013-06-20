@@ -1,5 +1,9 @@
 # Christopher L. Simons, 2013
 
+source("src/assessments/assess_stat.R")
+source("src/assessments/assess_sym.R")
+source("src/generators/gen_basic_additive.R")
+
 p <- function(...) {
     cat(..., "\n", sep="", file="/dev/tty")
 }
@@ -31,3 +35,9 @@ if (!exists("k") || !exists("n")
                   "\n\tExpecting {k, n, generator, assessment} to be defined.")
 
 p("Successfully parsed configuration file.")
+
+data <- generator$generate(n)
+
+print_weight_matrix(data)
+
+p("Independence test result: ", assessment$assess(data, alphas))

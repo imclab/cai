@@ -14,6 +14,7 @@ build_discretized_struct <- function(data) {
     for (xb in 1:(length(breaks_x) - 1)) {
         for (yb in 1:(length(breaks_y) - 1)) {
             cell_points <- 0
+
             for (i in 1:length(data[,1])) {
                 xi <- data[i,][1]
                 yi <- data[i,][2]
@@ -23,7 +24,8 @@ build_discretized_struct <- function(data) {
                 }
             }
 
-            if (max_cell_points < cell_points) max_cell_points <- cell_points
+            if (max_cell_points < cell_points)
+                max_cell_points <- cell_points
 
             # Polygon coordinates for each cell.
             xba <- breaks_x[xb]
@@ -52,18 +54,18 @@ weightShade <- function(cell_weight) {
 }
 
 cellColor <- function(fill, gradient, cell_weight) {
-    if (fill) {
-        if (cell_weight > 0) {
+    if (!fill)
+        return (NA)
+    else {
+        if (cell_weight <= 0)
+            return ("white")
+        else {
             if (gradient) {
                 return(weightShade(cell_weight))
             } else {
                 return(rgb(0, 0, 0))
             }
-        } else {
-            return("white")
         }
-    } else {
-        return(NA)
     }
 }
 
@@ -111,7 +113,7 @@ build_plot_matrix <- function(data) {
     return(matrix_weights)
 }
 
-print_matrix <- function(data) {
+print_weight_matrix <- function(data) {
     z <- build_plot_matrix(data)
     print(round(z * 100))
 }
