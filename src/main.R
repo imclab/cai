@@ -33,13 +33,13 @@ if (length(args) != 1)
 
 fileConfig <- args[1]
 tryCatch(source(fileConfig), error=function(e) corrupt(fileConfig, e))
-if (!exists("n") || !exists("generator")
-        || !exists("assessment") || !exists("alphas"))
+if (!exists("param.n") || !exists("param.generator")
+        || !exists("param.assessment") || !exists("param.alphas"))
     corrupt(fileConfig,
-            "Expecting {n, generator, assessment, alphas} to be defined.")
+        "Expecting params {n, generator, assessment, alphas} to be defined.")
 
 p("Successfully parsed configuration file.")
 
-data <- generator$generate(n)
+data <- param.generator$generate(param.n)
 print_weight_matrix(data)
-p("Independence test result: ", assessment$assess(data, alphas))
+p("Independence test result: ", param.assessment$assess(data, param.alphas))
