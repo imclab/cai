@@ -2,7 +2,7 @@
 
 source("src/core/plot_disc.R")
 
-assess_sym <- list(assess <- function(data, alphas) {
+assess_sym <- list(assess = function(data, alphas) {
     alpha <- alphas[1]
 
     isRowSymmetric <- function(row, alpha) {
@@ -31,8 +31,8 @@ assess_sym <- list(assess <- function(data, alphas) {
         for (i in 1:nrows) {
             row <- z[i,]
             rowSymmetric <- isRowSymmetric(row, alpha)
-            p(i, ": row is symmetric (", diffSymmetric(row),
-              "<", alpha, ")?: ", rowSymmetric)
+            #p(i, ": row is symmetric (", diffSymmetric(row),
+            #  "<", alpha, ")?: ", rowSymmetric)
 
             if (! rowSymmetric)
                 symmetric <- FALSE
@@ -45,7 +45,7 @@ assess_sym <- list(assess <- function(data, alphas) {
     y <- data[,2]
     rdata <- cbind(y, x)
 
-    return (isSymmetric(data) && isSymmetric(rdata))
+    return (isSymmetric(data, alpha) && isSymmetric(rdata, alpha))
 })
 
 class(assess_sym) <- "assessment"

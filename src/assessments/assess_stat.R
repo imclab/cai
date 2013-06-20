@@ -2,7 +2,7 @@
 
 source("src/core/plot_disc.R")
 
-assess_stat <- list(assess <- function(data, alphas) {
+assess_stat <- list(assess = function(data, alphas) {
     x <- data[,1]
     y <- data[,2]
     alpha_mean <- alphas[1]

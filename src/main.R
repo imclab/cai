@@ -9,7 +9,7 @@ p <- function(...) {
 }
 
 p_matrix <- function(x) {
-    write(x, sep="\t", file="/dev/tty")
+    write(x, sep="\t", ncolumns=length(x[,1]), file="/dev/tty")
 }
 
 eprint <- function(...) {
@@ -41,7 +41,5 @@ if (!exists("k") || !exists("n")
 p("Successfully parsed configuration file.")
 
 data <- generator$generate(n)
-
 print_weight_matrix(data)
-
 p("Independence test result: ", assessment$assess(data, alphas))
