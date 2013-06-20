@@ -110,3 +110,8 @@ build_plot_matrix <- function(data) {
 
     return(matrix_weights)
 }
+
+print_matrix <- function(data) {
+    z <- build_plot_matrix(data)
+    print(round(z * 100))
+}
