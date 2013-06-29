@@ -15,6 +15,8 @@ if (length(args) != 1 && length(args) != 2)
     usage()
 
 fileConfig <- args[1]
+
+verboseMode <- FALSE
 if (length(args) == 2) {
     verboseArg <- tolower(args[2])
     if (verboseArg != "true" && verboseArg != "false")
