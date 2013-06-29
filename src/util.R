@@ -13,6 +13,10 @@ eprint <- function(...) {
     quit(status = 1, save = "no")
 }
 
+usage <- function() {
+    eprint("usage: <script-name> <config-file> [verbose-mode-boolean]")
+}
+
 corrupt <- function(filename, e = "") {
     if (length(toString(e)) > 0)
         eprint("Fatal error reading configuration file \"",

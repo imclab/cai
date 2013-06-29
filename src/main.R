@@ -11,10 +11,17 @@ source("src/generators/gen_boigelot_ring.R")
 
 args <- commandArgs(trailingOnly = TRUE)
 
-if (length(args) != 1)
-    eprint("usage: <script-name> <config-file>")
+if (length(args) != 1 && length(args) != 2)
+    usage()
 
 fileConfig <- args[1]
+if (length(args) == 2) {
+    verboseArg <- tolower(args[2])
+    if (verboseArg != "true" && verboseArg != "false")
+        usage()
+    verboseMode <- (verboseArg == "true")
+}
+
 tryCatch(source(fileConfig), error=function(e) corrupt(fileConfig, e))
 if (!exists("param.n") || !exists("param.generator")
         || !exists("param.assessment") || !exists("param.alphas"))
