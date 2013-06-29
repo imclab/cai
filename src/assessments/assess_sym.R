@@ -3,8 +3,6 @@
 source("src/core/plot_disc.R")
 
 assess_sym <- list(assess = function(data, alphas) {
-    alpha <- alphas[1]
-
     isRowSymmetric <- function(row, alpha) {
         diff <- 0
 
@@ -40,6 +38,8 @@ assess_sym <- list(assess = function(data, alphas) {
 
         return (symmetric)
     }
+
+    alpha <- alphas[1]
 
     x <- data[,1]
     y <- data[,2]
