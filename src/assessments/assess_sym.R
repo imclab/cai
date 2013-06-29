@@ -29,8 +29,10 @@ assess_sym <- list(assess = function(data, alphas) {
         for (i in 1:nrows) {
             row <- z[i,]
             rowSymmetric <- isRowSymmetric(row, alpha)
-            #p(i, ": row is symmetric (", diffSymmetric(row),
-            #  "<", alpha, ")?: ", rowSymmetric)
+
+            if (verboseMode)
+                p(i, ": row is symmetric (", diffSymmetric(row),
+                  "<", alpha, ")?: ", rowSymmetric)
 
             if (! rowSymmetric)
                 symmetric <- FALSE
