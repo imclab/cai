@@ -45,12 +45,12 @@ assess_stat <- list(assess = function(data, alphas) {
 
             if (!is.na(xm_a) && !is.na(xm_b) && !is.na(xv_a) && !is.na(xv_b)) {
                 comp_mean_transgress <- (abs(xm_b - xm_a) > alpha_mean)
-                verbose("mean comparison: abs(", xm_b, " - ", xm_a, ") > ",
-                        alpha_mean, " ?: ", comp_mean_transgress)
+                verbose("significant delta in mean? abs(", xm_b, " - ", xm_a, ") > ",
+                        alpha_mean, ": ", comp_mean_transgress)
 
                 comp_var_transgress  <- (abs(xv_b - xv_a) > alpha_var)
-                verbose("variance comparison: abs(", xv_b, " - ", xv_a, ") > ",
-                        alpha_var, " ?: ", comp_var_transgress)
+                verbose("significant delta in variance? abs(", xv_b, " - ", xv_a, ") > ",
+                        alpha_var, ": ", comp_var_transgress)
 
                 if (comp_mean_transgress || comp_var_transgress)
                     independent_x <- FALSE

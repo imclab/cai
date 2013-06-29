@@ -30,8 +30,8 @@ assess_sym <- list(assess = function(data, alphas) {
             row <- z[i,]
             rowSymmetric <- isRowSymmetric(row, alpha)
 
-            verbose(i, ": row is symmetric (", diffSymmetric(row),
-                    "<", alpha, ")?: ", rowSymmetric)
+            verbose(i, ": row is symmetric? (", diffSymmetric(row),
+                    " < ", alpha, "): ", rowSymmetric)
 
             if (! rowSymmetric)
                 symmetric <- FALSE
