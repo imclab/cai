@@ -4,6 +4,10 @@ source("src/util.R")
 source("src/assessments/assess_stat.R")
 source("src/assessments/assess_sym.R")
 source("src/generators/gen_basic_additive.R")
+source("src/generators/gen_boigelot_sin.R")
+source("src/generators/gen_boigelot_four.R")
+source("src/generators/gen_boigelot_ex.R")
+source("src/generators/gen_boigelot_ring.R")
 
 args <- commandArgs(trailingOnly = TRUE)
 
