@@ -7,6 +7,10 @@ assess_stat <- list(assess = function(data, alphas) {
         x <- data[,1]
         breaks_x <- hist(x, plot=FALSE)$breaks
 
+        #
+        # Walk along x-axis creating vertical "stripe" bins.
+        #
+
         x_bin_values <- c()
         x_bin_means <- c()
         x_bin_variances <- c()
@@ -25,9 +29,11 @@ assess_stat <- list(assess = function(data, alphas) {
         }
 
         #
-        # WARNING: Below, sometimes the variances have been calculated as 'NA'
-        #          and in these cases we simply skip the comparison.  Is this
-        #          case important?
+        # Walk along vertical "stripe" bins comparing delta in mean, variance.
+        #
+        # WARNING: Sometimes the variances have been calculated as 'NA' and in
+        #          these cases we simply skip the comparison.  What is the
+        #          significance of this?
         #
 
         independent_x <- TRUE
