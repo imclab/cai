@@ -34,4 +34,13 @@ p("Successfully parsed configuration file.")
 
 data <- param.generator$generate(param.n)
 print_weight_matrix(data)
-p("Independence test result: ", param.assessment$assess(data, param.alphas))
+
+independent <- param.assessment$assess(data, param.alphas)
+
+if (independent) {
+    result <- "There is NOT a relationship between the variables."
+} else {
+    result <- "There IS a relationship between the variables."
+}
+
+p("Independence test result: ", result)
