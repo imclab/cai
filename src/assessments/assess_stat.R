@@ -3,7 +3,7 @@
 source("src/core/plot_disc.R")
 
 assess_stat <- list(assess = function(data, alphas) {
-    isIndependentX <- function(data, alpha_mean, alpha_var) {
+    isIndependent <- function(data, alpha_mean, alpha_var) {
         x <- data[,1]
         breaks_x <- hist(x, plot=FALSE)$breaks
 
@@ -52,8 +52,15 @@ assess_stat <- list(assess = function(data, alphas) {
     y <- data[,2]
     rdata <- cbind(y, x)
 
-    return (isIndependentX(data, alpha_mean, alpha_var)
-                && isIndependentX(rdata, alpha_mean, alpha_var))
+    verbose("Assessing independence walking horizontally ...")
+    hInd <- isIndependent(data, alpha_mean, alpha_var)
+    verbose("Horizontally independent?: ", hInd)
+
+    verbose("Assessing independence walking vertically ...")
+    vInd <- isIndependent(rdata, alpha_mean, alpha_var)
+    verbose("Vertically independent?: ", vInd)
+
+    return (hInd && vInd)
 })
 
 class(assess_stat) <- "assessment"

@@ -30,9 +30,8 @@ assess_sym <- list(assess = function(data, alphas) {
             row <- z[i,]
             rowSymmetric <- isRowSymmetric(row, alpha)
 
-            if (verboseMode)
-                p(i, ": row is symmetric (", diffSymmetric(row),
-                  "<", alpha, ")?: ", rowSymmetric)
+            verbose(i, ": row is symmetric (", diffSymmetric(row),
+                    "<", alpha, ")?: ", rowSymmetric)
 
             if (! rowSymmetric)
                 symmetric <- FALSE
@@ -47,7 +46,15 @@ assess_sym <- list(assess = function(data, alphas) {
     y <- data[,2]
     rdata <- cbind(y, x)
 
-    return (isSymmetric(data, alpha) && isSymmetric(rdata, alpha))
+    verbose("Assessing symmetry horizontally ...")
+    hSym <- isSymmetric(data, alpha)
+    verbose("Horizontally symmetric?: ", hSym)
+
+    verbose("Assessing symmetry vertically ...")
+    vSym <- isSymmetric(rdata, alpha)
+    verbose("Vertically symmetric?: ", vSym)
+
+    return (hSym && vSym)
 })
 
 class(assess_sym) <- "assessment"

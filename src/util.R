@@ -4,6 +4,11 @@ p <- function(...) {
     cat(..., "\n", sep="", file="/dev/tty")
 }
 
+verbose <- function(...) {
+    if (verboseMode)
+        p(...)
+}
+
 p_matrix <- function(x) {
     write(x, sep="\t", ncolumns=length(x[,1]), file="/dev/tty")
 }
