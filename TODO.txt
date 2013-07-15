@@ -1,7 +1,12 @@
 Software:
 
-    1. Enable optional verbose mode showing alpha comparisons.
-    2. Create reporting mode which saves verbose output in
+    1. New parameter: percentage of "micro" tests to pass/fail
+       for "macro" test to pass/fail.
+
+    2. New parameter: number of discretization bins?
+       Proportional to data set size?
+
+    3. Create reporting mode which saves verbose output in
        addition to generating images of discretized graphs.
 
 Other:
@@ -10,3 +15,4 @@ Other:
        (If not, symmetry test is just as valuable in practical terms.)
 
     2. Write out statistical algorithm.
+
