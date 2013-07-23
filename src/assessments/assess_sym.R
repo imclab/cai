@@ -24,8 +24,9 @@ assess_sym <- list(assess = function(data, alphas) {
     isSymmetric <- function(data, alpha) {
         z <- build_plot_matrix(data)
         nrows <- length(z[,1])
-        symmetric <- TRUE
 
+        n_checks <- 0
+        n_transgressions <- 0
         for (i in 1:nrows) {
             row <- z[i,]
             rowSymmetric <- isRowSymmetric(row, alpha)
@@ -33,9 +34,20 @@ assess_sym <- list(assess = function(data, alphas) {
             verbose(i, ": row is symmetric? (", diffSymmetric(row),
                     " < ", alpha, "): ", rowSymmetric)
 
+            n_checks <- n_checks + 1
             if (! rowSymmetric)
-                symmetric <- FALSE
+                n_transgressions <- n_transgressions + 1
         }
+
+        symmetric <- TRUE
+        if ((n_transgressions / n_checks) > param.failure_threshold)
+            symmetric <- FALSE
+
+        verbose("checking row-vector symmetry: (",
+                n_transgressions, "/", n_checks,
+                " = ", (n_transgressions / n_checks),
+                ") > (failure_threshold = ", param.failure_threshold,
+                "): ", symmetric)
 
         return (symmetric)
     }

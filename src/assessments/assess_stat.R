@@ -36,7 +36,8 @@ assess_stat <- list(assess = function(data, alphas) {
         #          significance of this?
         #
 
-        independent_x <- TRUE
+        n_checks <- 0
+        n_transgressions <- 0
         for (i in 2:length(x_bin_means)) {
             xm_a <- x_bin_means[i - 1]
             xm_b <- x_bin_means[i]
@@ -54,10 +55,21 @@ assess_stat <- list(assess = function(data, alphas) {
                         abs(xv_b - xv_a), "] > ",
                         alpha_var, ": ", comp_var_transgress)
 
+                n_checks <- n_checks + 1
                 if (comp_mean_transgress || comp_var_transgress)
-                    independent_x <- FALSE
+                    n_transgressions <- n_transgressions + 1
             }
         }
+
+        independent_x <- TRUE
+        if ((n_transgressions / n_checks) > param.failure_threshold)
+            independent_x <- FALSE
+
+        verbose("checking X-axis independence: (",
+                n_transgressions, "/", n_checks,
+                " = ", (n_transgressions / n_checks),
+                ") > (failure_threshold = ", param.failure_threshold,
+                "): ", independent_x)
 
         return (independent_x)
     }

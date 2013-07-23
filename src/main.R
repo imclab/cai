@@ -27,9 +27,9 @@ if (length(args) == 2) {
 tryCatch(source(fileConfig), error=function(e) corrupt(fileConfig, e))
 if (!exists("param.n") || !exists("param.generator")
         || !exists("param.assessment") || !exists("param.alphas")
-        || !exists("param.disc_bins"))
+        || !exists("param.disc_bins") || !exists("param.failure_threshold"))
     corrupt(fileConfig,
-        "Expecting params {n, generator, assessment, alphas, disc_bins} to be defined.")
+        "Expecting params {n, generator, assessment, alphas, disc_bins, failure_threshold} to be defined.")
 
 p("Successfully parsed configuration file.")
 
