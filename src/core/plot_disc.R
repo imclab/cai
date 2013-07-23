@@ -4,8 +4,8 @@ build_discretized_struct <- function(data) {
     x <- data[,1]
     y <- data[,2]
 
-    breaks_x <- hist(x, plot=FALSE)$breaks
-    breaks_y <- hist(y, plot=FALSE)$breaks
+    breaks_x <- hist(x, plot=FALSE, breaks=param.disc_bins)$breaks
+    breaks_y <- hist(y, plot=FALSE, breaks=param.disc_bins)$breaks
 
     agg_coords_x <- c()
     agg_coords_y <- c()
