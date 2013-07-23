@@ -1,15 +1,12 @@
 Software:
 
-    1. New parameter: percentage of "micro" tests to pass/fail
-       for "macro" test to pass/fail.
+    1. Ability to force observaton of param.disc_bins.
 
-    2. Ability to force observaton of param.disc_bins.
+    2. Change statistic-based test to compare from opposite
+       margins rather than from left-to-right.
 
     3. Create reporting mode which saves verbose output in
        addition to generating images of discretized graphs.
-
-    4. Change statistic-based test to compare from opposite
-       margins rather than from left-to-right.
 
 Other:
 
