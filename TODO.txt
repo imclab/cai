@@ -8,6 +8,9 @@ Software:
     3. Create reporting mode which saves verbose output in
        addition to generating images of discretized graphs.
 
+    4. Change statistic-based test to compare from opposite
+       margins rather than from left-to-right.
+
 Other:
 
     1. Ring, four-cloud plots: will these be encountered in practice?
