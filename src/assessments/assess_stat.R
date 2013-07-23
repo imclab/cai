@@ -5,7 +5,7 @@ source("src/core/plot_disc.R")
 assess_stat <- list(assess = function(data, alphas) {
     isIndependent <- function(data, alpha_mean, alpha_var) {
         x <- data[,1]
-        breaks_x <- hist(x, plot=FALSE)$breaks
+        breaks_x <- hist(x, plot=FALSE, breaks=param.disc_bins)$breaks
 
         #
         # Walk along x-axis creating vertical "stripe" bins.
