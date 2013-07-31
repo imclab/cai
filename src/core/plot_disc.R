@@ -1,11 +1,15 @@
 # Christopher L. Simons, 2013
 
+source("src/core/breaks.R")
+
 build_discretized_struct <- function(data) {
     x <- data[,1]
     y <- data[,2]
 
-    breaks_x <- hist(x, plot=FALSE, breaks=param.disc_bins)$breaks
-    breaks_y <- hist(y, plot=FALSE, breaks=param.disc_bins)$breaks
+    #breaks_x <- hist(x, plot=FALSE, breaks=param.disc_bins)$breaks
+    #breaks_y <- hist(y, plot=FALSE, breaks=param.disc_bins)$breaks
+    breaks_x <- breaks_uniform_width(x, param.disc_bins)
+    breaks_y <- breaks_uniform_width(y, param.disc_bins)
 
     agg_coords_x <- c()
     agg_coords_y <- c()
