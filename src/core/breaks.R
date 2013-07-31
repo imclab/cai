@@ -8,7 +8,7 @@ breaks_uniform_width <- function(data, n_bins) {
     bin_width <- span / n_bins
 
     breakpoints <- c(vec_min)
-    while (length(breakpoints) < n_bins) {
+    while (length(breakpoints) <= n_bins) {
         next_break <- vec_min + (length(breakpoints) * bin_width)
         breakpoints[length(breakpoints) + 1] <- next_break
     }
@@ -22,7 +22,7 @@ breaks_uniform_counts <- function(data, n_bins) {
     vec_min <- sorted_data[1]
 
     breakpoints <- c(vec_min)
-    while (length(breakpoints) < n_bins) {
+    while (length(breakpoints) <= n_bins) {
         next_break <- sorted_data[length(breakpoints) * bin_count]
         breakpoints[length(breakpoints) + 1] <- next_break
     }
