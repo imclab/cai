@@ -1,11 +1,12 @@
 # Christopher L. Simons, 2013
 
 source("src/core/plot_disc.R")
+source("src/core/breaks.R")
 
 assess_stat <- list(assess = function(data, alphas) {
     isIndependent <- function(data, alpha_mean, alpha_var) {
         x <- data[,1]
-        breaks_x <- hist(x, plot=FALSE, breaks=param.disc_bins)$breaks
+        breaks_x <- breaks_uniform_width(x, param.disc_bins)
 
         #
         # Walk along x-axis creating vertical "stripe" bins.
