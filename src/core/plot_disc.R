@@ -107,8 +107,6 @@ build_plot_matrix <- function(data) {
         vec_weights <- append(vec_weights, cell_weight)
     }
 
-    #matrix_points <- matrix(cell_points, nrow=disc_struct$nrow)
-    #matrix_points <- matrix_points[disc_struct$nrow:1,]
     matrix_weights <- matrix(vec_weights, nrow=disc_struct$nrow)
     matrix_weights <- matrix_weights[disc_struct$nrow:1,]
 
