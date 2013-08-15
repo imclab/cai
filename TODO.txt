@@ -66,6 +66,11 @@ References:
         acyclic structure learning with weakly additive noise models.
         Advances in neural information processing systems, 1847-1855.
 
+    Voortman, M., & Druzdzel, M. J. (2008). Insensitivity of constraint-based
+        causal discovery algorithms to violations of the assumption of
+        multivariate normality. In Proceedings of the Twenty-First
+        International FLAIRS Conference.
+
     Wang, Z., & Chang, L. (2009). A heuristic partial-correlation-based
         algorithm for causal relationship discovery on continuous data.
         In Proceedings of the Conference on Intelligent Data Engineering
