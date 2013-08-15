@@ -12,6 +12,9 @@ References:
     Pearl, J. (2009). Causality: Models, reasoning, and inference (2nd Ed.).
         Cambridge University Press.
 
+    Spirtes, P. (2010). Introduction to causal inference. Journal of
+        Machine Learning Research, 99, 1643-1662.
+
     Spirtes, P., Glymour, C., & Scheines, R. (2001). Causation, prediction,
         and search (2nd Ed.). Bradford Books.
 
