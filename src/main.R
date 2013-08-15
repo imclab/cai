@@ -25,23 +25,16 @@ if (length(args) == 2) {
 }
 
 tryCatch(source(fileConfig), error=function(e) corrupt(fileConfig, e))
-if (!exists("param.n") || !exists("param.generator")
-        || !exists("param.assessment") || !exists("param.alphas")
-        || !exists("param.disc_bins") || !exists("param.failure_threshold"))
+if (!exists("param.n") || !exists("param.disc_bins")
+        || !exists("param.generator") || !exists("param.assessment"))
     corrupt(fileConfig,
-        "Expecting params {n, generator, assessment, alphas, disc_bins, failure_threshold} to be defined.")
+        "Expecting params {n, disc_bins, generator, assessment} to be defined.")
 
 p("Successfully parsed configuration file.")
 
 data <- param.generator$generate(param.n)
 print_weight_matrix(data)
 
-independent <- param.assessment$assess(data, param.alphas)
+score <- param.assessment$assess(data)
 
-if (independent) {
-    result <- "There is NOT a relationship between the variables."
-} else {
-    result <- "There IS a relationship between the variables."
-}
-
-p("Independence test result: ", result)
+p("Score: ", score)

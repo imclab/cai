@@ -2,17 +2,8 @@
 
 source("src/core/plot_disc.R")
 
-assess_sym <- list(assess = function(data, alphas) {
-    isRowSymmetric <- function(row, alpha) {
-        diff <- 0
-
-        for (i in 1:floor(length(row) / 2))
-            diff <- diff + abs(row[i] - row[length(row) + 1 - i])
-
-        return (diff < alpha)
-    }
-
-    diffSymmetric <- function(row) {
+assess_sym <- list(assess = function(data) {
+    row_score <- function(row) {
         diff <- 0
 
         for (i in 1:floor(length(row) / 2))
@@ -21,52 +12,29 @@ assess_sym <- list(assess = function(data, alphas) {
         return (diff)
     }
 
-    isSymmetric <- function(data, alpha) {
+    axis_score <- function(data) {
         z <- build_plot_matrix(data)
         nrows <- length(z[,1])
 
-        n_checks <- 0
-        n_transgressions <- 0
+        cum_delta <- 0
         for (i in 1:nrows) {
             row <- z[i,]
-            rowSymmetric <- isRowSymmetric(row, alpha)
-
-            verbose(i, ": row is symmetric? (", diffSymmetric(row),
-                    " < ", alpha, "): ", rowSymmetric)
-
-            n_checks <- n_checks + 1
-            if (! rowSymmetric)
-                n_transgressions <- n_transgressions + 1
+            row_delta <- row_score(row)
+            cum_delta <- cum_delta + row_delta
         }
 
-        symmetric <- TRUE
-        if ((n_transgressions / n_checks) > param.failure_threshold)
-            symmetric <- FALSE
-
-        verbose("checking row-vector symmetry: (",
-                n_transgressions, "/", n_checks,
-                " = ", (n_transgressions / n_checks),
-                ") > (failure_threshold = ", param.failure_threshold,
-                "): ", symmetric)
-
-        return (symmetric)
+        return (cum_delta / nrows)
     }
-
-    alpha <- alphas[1]
 
     x <- data[,1]
     y <- data[,2]
     rdata <- cbind(y, x)
 
-    verbose("Assessing symmetry horizontally ...")
-    hSym <- isSymmetric(data, alpha)
-    verbose("Horizontally symmetric?: ", hSym)
+    hScore <- axis_score(data)
+    vScore <- axis_score(rdata)
+    score <- ((hScore + vScore) / 2)
 
-    verbose("Assessing symmetry vertically ...")
-    vSym <- isSymmetric(rdata, alpha)
-    verbose("Vertically symmetric?: ", vSym)
-
-    return (hSym && vSym)
+    return (score)
 })
 
 class(assess_sym) <- "assessment"

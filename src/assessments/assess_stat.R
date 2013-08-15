@@ -1,16 +1,13 @@
 # Christopher L. Simons, 2013
 
-source("src/core/plot_disc.R")
 source("src/core/breaks.R")
 
-assess_stat <- list(assess = function(data, alphas) {
-    isIndependent <- function(data, alpha_mean, alpha_var) {
+assess_stat <- list(assess = function(data) {
+    axis_score <- function(data) {
         x <- data[,1]
         breaks_x <- breaks_uniform_width(x, param.disc_bins)
 
-        #
         # Walk along x-axis creating vertical "stripe" bins.
-        #
 
         x_bin_values <- c()
         x_bin_means <- c()
@@ -29,68 +26,42 @@ assess_stat <- list(assess = function(data, alphas) {
             x_bin_values <- c()
         }
 
-        #
         # Walk along vertical "stripe" bins comparing delta in mean, variance.
-        #
-        # WARNING: Sometimes the variances have been calculated as 'NA' and in
-        #          these cases we simply skip the comparison.  What is the
-        #          significance of this?
-        #
 
-        n_checks <- 0
-        n_transgressions <- 0
+        cum_diff_mean <- 0
+        cum_diff_var  <- 0
         for (i in 2:length(x_bin_means)) {
             xm_a <- x_bin_means[i - 1]
             xm_b <- x_bin_means[i]
             xv_a <- x_bin_variances[i - 1]
             xv_b <- x_bin_variances[i]
 
+            # TODO: What is the significance of skipping "NA" comparisons
+            #       (NA due to division by zero in earlier calculations)?
+
             if (!is.na(xm_a) && !is.na(xm_b) && !is.na(xv_a) && !is.na(xv_b)) {
-                comp_mean_transgress <- (abs(xm_b - xm_a) > alpha_mean)
-                verbose("mean delta: [abs(", xm_b, " - ", xm_a, ") = ",
-                        abs(xm_b - xm_a), "] > ",
-                        alpha_mean, ": ", comp_mean_transgress)
-
-                comp_var_transgress  <- (abs(xv_b - xv_a) > alpha_var)
-                verbose("variance delta: [abs(", xv_b, " - ", xv_a, ") = ",
-                        abs(xv_b - xv_a), "] > ",
-                        alpha_var, ": ", comp_var_transgress)
-
-                n_checks <- n_checks + 1
-                if (comp_mean_transgress || comp_var_transgress)
-                    n_transgressions <- n_transgressions + 1
+                diff_mean <- abs(xm_b - xm_a)
+                diff_var <- abs(xv_b - xv_a)
+                cum_diff_mean <- cum_diff_mean + diff_mean
+                cum_diff_var  <- cum_diff_var + diff_var
             }
         }
 
-        independent_x <- TRUE
-        if ((n_transgressions / n_checks) > param.failure_threshold)
-            independent_x <- FALSE
+        cum_diff_mean <- cum_diff_mean / (length(x_bin_means) - 1)
+        cum_diff_var  <- cum_diff_var  / (length(x_bin_means) - 1)
 
-        verbose("checking X-axis independence: (",
-                n_transgressions, "/", n_checks,
-                " = ", (n_transgressions / n_checks),
-                ") > (failure_threshold = ", param.failure_threshold,
-                "): ", independent_x)
-
-        return (independent_x)
+        return ((cum_diff_mean + cum_diff_var) / 2)
     }
-
-    alpha_mean <- alphas[1]
-    alpha_var  <- alphas[2]
 
     x <- data[,1]
     y <- data[,2]
     rdata <- cbind(y, x)
 
-    verbose("Assessing independence walking horizontally ...")
-    hInd <- isIndependent(data, alpha_mean, alpha_var)
-    verbose("Horizontally independent?: ", hInd)
+    hScore <- axis_score(data)
+    vScore <- axis_score(rdata)
+    score <- ((hScore + vScore) / 2)
 
-    verbose("Assessing independence walking vertically ...")
-    vInd <- isIndependent(rdata, alpha_mean, alpha_var)
-    verbose("Vertically independent?: ", vInd)
-
-    return (hInd && vInd)
+    return (score)
 })
 
 class(assess_stat) <- "assessment"
