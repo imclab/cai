@@ -1,11 +1,11 @@
 General:
 
     1. Change statistic-based test to compare from opposite
-       or random margins rather than from left-to-right.
+       or random bins rather than from left to right.
 
     2. Start using dynamic discretization bin count determination.
         Consider Sturge's method, Scott's method, and
-        Freedman/Diaconis's method from (Margaritis, 2005).
+        Freedman/Diaconis's method (see Margaritis, 2005).
 
     3. Rather than allowing for single generator-assessment
        combinations, always run all assessments against all
@@ -23,14 +23,19 @@ General:
 Add existing algorithms from literature:
 
     1. Margaritis/Thrun method.
+       (a) To read: Dirichlet priors.
+
     2. Zhang's method.
+       (a) To read: vector spaces, nonlinear transformations.
+       (b) To read: tensors.
+       (c) To read: reproducing kernel Hilbert spaces.
 
 Other questions:
 
     1. Ring, four-cloud plots: will these be encountered in practice?
        (If not, symmetry test is just as valuable in practical terms.)
 
-    2. Concise representation of statistical algorithm.
+    2. Concise representation of "stat" assessment algorithm.
 
 References:
 
