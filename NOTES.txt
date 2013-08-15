@@ -1,0 +1,43 @@
+References:
+
+    Margaritis, D. (2005). Distribution-free learning of Bayesian network
+        structure in continuous domains. In Proceedings of the Twentieth
+        National Conference on Artificial Intelligence (AAAI), Pittsburgh,
+        PA, July 2005.
+
+    Margaritis, D., & Thrun, S. (2001). A Bayesian multiresolution
+        independence test for continuous variables. In Proceedings of the
+        Seventeenth Conference on Uncertainty in Artificial Intelligence.
+
+    Pearl, J. (2009). Causality: Models, reasoning, and inference (2nd Ed.).
+        Cambridge University Press.
+
+    Spirtes, P., Glymour, C., & Scheines, R. (2001). Causation, prediction,
+        and search (2nd Ed.). Bradford Books.
+
+    Spirtes, P., Glymour, C., Scheines, R., & Tillman, R. (2010). Automated
+        search for causal relations: Theory and practice. Carnegie Mellon
+        University Department of Philosophy Paper 435.
+
+    Sun, X. (2008). Distribution-free learning of Bayesian network structure.
+        In Proceedings of Machine Learning and Knowledge Discovery in
+        Databases, 423-439.
+
+    Tillman, R., Gretton, A., & Spirtes, P. (2009). Nonlinear directed
+        acyclic structure learning with weakly additive noise models.
+        Advances in neural information processing systems, 1847-1855.
+
+    Voortman, M., & Druzdzel, M. J. (2008). Insensitivity of constraint-based
+        causal discovery algorithms to violations of the assumption of
+        multivariate normality. In Proceedings of the Twenty-First
+        International FLAIRS Conference.
+
+    Wang, Z., & Chang, L. (2009). A heuristic partial-correlation-based
+        algorithm for causal relationship discovery on continuous data.
+        In Proceedings of the Conference on Intelligent Data Engineering
+        and Automated Learning, 234-241.
+
+    Zhang, K., Peters, J., Janzing, D., Schoelkopf, B. (2012). Kernel-based
+        conditional independence test and application in causal discovery.
+        arXiv:1202.3775.
+
