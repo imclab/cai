@@ -1,17 +1,72 @@
-Software:
+General:
 
-    1. Ability to force observaton of param.disc_bins.
+    1. Change statistic-based test to compare from opposite
+       or random margins rather than from left-to-right.
 
-    2. Change statistic-based test to compare from opposite
-       margins rather than from left-to-right.
+    2. Start using dynamic discretization bin count determination.
+        Consider Sturge's method, Scott's method, and
+        Freedman/Diaconis's method from (Margaritis, 2005).
 
-    3. Create reporting mode which saves verbose output in
-       addition to generating images of discretized graphs.
+    3. Rather than allowing for single generator-assessment
+       combinations, always run all assessments against all
+       generators and produce a comprehensive comparative
+       data file.
 
-Other:
+    4. Add Boston housing data from UCI ML repository.
+
+    5. Add rank-correlation assessments.
+
+    6. Dynamic loading of new assessments and generators.
+
+    7. Handling unconditioned vs. conditioned data?
+
+Add existing algorithms from literature:
+
+    1. Margaritis/Thrun method.
+    2. Zhang's method.
+
+Other questions:
 
     1. Ring, four-cloud plots: will these be encountered in practice?
        (If not, symmetry test is just as valuable in practical terms.)
 
-    2. Write out statistical algorithm.
+    2. Concise representation of statistical algorithm.
+
+References:
+
+    Margaritis, D. (2005). Distribution-free learning of Bayesian network
+        structure in continuous domains. In Proceedings of the Twentieth
+        National Conference on Artificial Intelligence (AAAI), Pittsburgh,
+        PA, July 2005.
+
+    Margaritis, D., & Thrun, S. (2001). A Bayesian multiresolution
+        independence test for continuous variables. In Proceedings of the
+        Seventeenth Conference on Uncertainty in Artificial Intelligence.
+
+    Pearl, J. (2009). Causality: Models, reasoning, and inference (2nd Ed.).
+        Cambridge University Press.
+
+    Spirtes, P., Glymour, C., & Scheines, R. (2001). Causation, prediction,
+        and search (2nd Ed.). Bradford Books.
+
+    Spirtes, P., Glymour, C., Scheines, R., & Tillman, R. (2010). Automated
+        search for causal relations: Theory and practice. Carnegie Mellon
+        University Department of Philosophy Paper 435.
+
+    Sun, X. (2008). Distribution-free learning of Bayesian network structure.
+        In Proceedings of Machine Learning and Knowledge Discovery in
+        Databases, 423-439.
+
+    Tillman, R., Gretton, A., & Spirtes, P. (2009). Nonlinear directed
+        acyclic structure learning with weakly additive noise models.
+        Advances in neural information processing systems, 1847-1855.
+
+    Wang, Z., & Chang, L. (2009). A heuristic partial-correlation-based
+        algorithm for causal relationship discovery on continuous data.
+        In Proceedings of the Conference on Intelligent Data Engineering
+        and Automated Learning, 234-241.
+
+    Zhang, K., Peters, J., Janzing, D., Schoelkopf, B. (2012). Kernel-based
+        conditional independence test and application in causal discovery.
+        arXiv:1202.3775.
 
