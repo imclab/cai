@@ -9,3 +9,5 @@ gen_boigelot_ring <- list(generate = function(n) {
 )
 
 class(gen_boigelot_ring) <- "generator"
+
+generators <- append(generators, gen_boigelot_ring)

@@ -38,3 +38,5 @@ assess_sym <- list(assess = function(data) {
 })
 
 class(assess_sym) <- "assessment"
+
+assessments <- append(assessments, assess_sym)

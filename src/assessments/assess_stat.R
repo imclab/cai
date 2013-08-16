@@ -65,3 +65,5 @@ assess_stat <- list(assess = function(data) {
 })
 
 class(assess_stat) <- "assessment"
+
+assessments <- append(assessments, assess_stat)

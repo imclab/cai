@@ -8,3 +8,5 @@ gen_basic_additive <- list(generate = function(n) {
 )
 
 class(gen_basic_additive) <- "generator"
+
+generators <- append(generators, gen_basic_additive)

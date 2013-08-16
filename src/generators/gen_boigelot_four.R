@@ -12,3 +12,5 @@ gen_boigelot_four <- list(generate = function(n) {
 )
 
 class(gen_boigelot_four) <- "generator"
+
+generators <- append(generators, gen_boigelot_four)

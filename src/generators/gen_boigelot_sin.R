@@ -8,3 +8,5 @@ gen_boigelot_sin <- list(generate = function(n) {
 )
 
 class(gen_boigelot_sin) <- "generator"
+
+generators <- append(generators, gen_boigelot_sin)
