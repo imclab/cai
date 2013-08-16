@@ -8,8 +8,8 @@ General:
        or random bins rather than from left to right.
 
     3. Start using dynamic discretization bin count determination.
-        Consider Sturge's method, Scott's method, and
-        Freedman/Diaconis's method (see Margaritis, 2005).
+       Consider Sturge's method, Scott's method, and
+       Freedman/Diaconis's method (see Margaritis, 2005).
 
     4. Add Boston housing data from UCI ML repository.
 

@@ -28,3 +28,23 @@ breaks_uniform_counts <- function(data, n_bins) {
     }
     return (breakpoints)
 }
+
+# Sturges's method (see Margaritis, 2005).
+breaks_dyn_sturges <- function(data) {
+    # TODO: k = 1 + log_2(N) bins of equal width.
+}
+
+# Scott's method (see Margaritis, 2005).
+breaks_dyn_scott <- function(data) {
+    # TODO:
+    # Optimal bin width: h = 3.5sN^(-1/(2+d)),
+    # where s is sample standard deviation,
+    # and d is number of dimensions.
+}
+
+# Freedman and Diaconis's method (see Margaritis, 2005).
+breaks_dyn_freedman_diaconis <- function(data) {
+    # TODO:
+    # Optimal bin width: h = 2(IQ)N^(-1/(2+d)),
+    # where IQ is interquartile range.
+}
