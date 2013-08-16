@@ -2,7 +2,7 @@
 
 library(mvtnorm)
 
-gen_boigelot_four <- list(generate = function(n) {
+generator <- list(name = "boigelot_four", generate = function(n) {
         xy1 = rmvnorm(n/4, c( 3,  3))
         xy2 = rmvnorm(n/4, c(-3,  3))
         xy3 = rmvnorm(n/4, c(-3, -3))
@@ -11,6 +11,5 @@ gen_boigelot_four <- list(generate = function(n) {
     }
 )
 
-class(gen_boigelot_four) <- "generator"
-
-generators <- append(generators, gen_boigelot_four)
+class(generator) <- "generator"
+generators[[length(generators) + 1]] <- generator

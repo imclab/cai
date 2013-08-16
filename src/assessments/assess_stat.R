@@ -2,7 +2,7 @@
 
 source("src/core/breaks.R")
 
-assess_stat <- list(assess = function(data) {
+assessment <- list(name = "stat_custom", assess = function(data) {
     axis_score <- function(data) {
         x <- data[,1]
         breaks_x <- breaks_uniform_width(x, param.disc_bins)
@@ -64,6 +64,5 @@ assess_stat <- list(assess = function(data) {
     return (score)
 })
 
-class(assess_stat) <- "assessment"
-
-assessments <- append(assessments, assess_stat)
+class(assessment) <- "assessment"
+assessments[[length(assessments) + 1]] <- assessment

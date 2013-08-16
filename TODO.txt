@@ -1,16 +1,15 @@
 General:
 
-    1. Change statistic-based test to compare from opposite
+    0. Fix bug with sym_custom assessment: score > 1
+
+    1. Produce comprehensive data file rather than printing results.
+
+    2. Change statistic-based test to compare from opposite
        or random bins rather than from left to right.
 
-    2. Start using dynamic discretization bin count determination.
+    3. Start using dynamic discretization bin count determination.
         Consider Sturge's method, Scott's method, and
         Freedman/Diaconis's method (see Margaritis, 2005).
-
-    3. Rather than allowing for single generator-assessment
-       combinations, always run all assessments against all
-       generators and produce a comprehensive comparative
-       data file.
 
     4. Add Boston housing data from UCI ML repository.
 

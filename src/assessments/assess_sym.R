@@ -2,7 +2,7 @@
 
 source("src/core/plot_disc.R")
 
-assess_sym <- list(assess = function(data) {
+assessment <- list(name = "sym_custom", assess = function(data) {
     row_score <- function(row) {
         diff <- 0
 
@@ -37,6 +37,5 @@ assess_sym <- list(assess = function(data) {
     return (score)
 })
 
-class(assess_sym) <- "assessment"
-
-assessments <- append(assessments, assess_sym)
+class(assessment) <- "assessment"
+assessments[[length(assessments) + 1]] <- assessment

@@ -1,12 +1,11 @@
 # Christopher L. Simons, 2013
 
-gen_basic_additive <- list(generate = function(n) {
+generator <- list(name = "basic_additive", generate = function(n) {
         x <- rnorm(n)
         y <- x + rnorm(n)
         return (cbind(x, y))
     }
 )
 
-class(gen_basic_additive) <- "generator"
-
-generators <- append(generators, gen_basic_additive)
+class(generator) <- "generator"
+generators[[length(generators) + 1]] <- generator
