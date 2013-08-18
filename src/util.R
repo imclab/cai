@@ -19,7 +19,7 @@ eprint <- function(...) {
 }
 
 usage <- function() {
-    eprint("usage: <script-name> <config-file> [verbose-mode-boolean]")
+    eprint("usage: <script-name> [verbose-mode-boolean]")
 }
 
 corrupt <- function(filename, e = "") {
