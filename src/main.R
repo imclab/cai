@@ -11,7 +11,10 @@ for (dirname in AUTOLOAD_DIRS)
             source(paste(dirname, "/", filename, sep = ""))
 
 #print_weight_matrix(data)
-for (assessment in assessments)
-    for (generator in generators)
+for (generator in generators) {
+    data <- generator$generate(param.n)
+    for (assessment in assessments) {
         p(assessment$name, "\t", generator$name, "\t",
-          assessment$assess(generator$generate(param.n)))
+          assessment$assess(data))
+    }
+}
