@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = "boigelot_run", generate = function(n) {
+generator <- list(name = "boigelot_ring", generate = function(n) {
         x = runif(n, -1, 1)
         y = cos(x*pi) + rnorm(n, 0, 1/8)
         x = sin(x*pi) + rnorm(n, 0, 1/8)
