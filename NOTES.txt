@@ -26,6 +26,13 @@ References:
         In Proceedings of Machine Learning and Knowledge Discovery in
         Databases, 423-439.
 
+    Sun, X., & White, H. (2007). A consistent characteristic function-based
+        test for conditional independence.  Journal of Econometrics, 141,
+        807-834.
+
+    Sun, X. & White, H. (2008). A nonparametric hellinger metric test for
+        conditional independence.  Econometric Theory, 24, 829-864.
+
     Tillman, R., Gretton, A., & Spirtes, P. (2009). Nonlinear directed
         acyclic structure learning with weakly additive noise models.
         Advances in neural information processing systems, 1847-1855.

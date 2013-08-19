@@ -1,13 +1,13 @@
 General:
 
-    0. Fix bug with sym_custom assessment: score > 1
+    0. Rescaling stat_custom to [0, 1] properly.
 
     1. Produce comprehensive data file rather than printing results.
 
     2. Change statistic-based test to compare from opposite
        or random bins rather than from left to right.
 
-    3. Start using dynamic discretization bin count determination.
+    3. Consider using dynamic discretization for bin count determination.
        Consider Sturge's method, Scott's method, and
        Freedman/Diaconis's method (see Margaritis, 2005).
 
@@ -18,6 +18,8 @@ General:
     6. Dynamic loading of new assessments and generators.
 
     7. Handling unconditioned vs. conditioned data?
+
+    8. Compare density-comparison method.
 
 Add existing algorithms from literature:
 
