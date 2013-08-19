@@ -21,8 +21,16 @@ assessment <- list(name = "stat_custom", assess = function(data) {
                     x_bin_values <- append(x_bin_values, yi)
             }
 
-            x_bin_means <- append(x_bin_means, mean(x_bin_values))
-            x_bin_variances <- append(x_bin_variances, var(x_bin_values))
+            x_bin_means <- append(x_bin_means,
+                                  if (length(x_bin_values) > 0)
+                                      mean(x_bin_values)
+                                  else
+                                      0)
+            x_bin_variances <- append(x_bin_variances,
+                                      if (length(x_bin_values) > 0)
+                                          var(x_bin_values)
+                                      else
+                                          0)
             x_bin_values <- c()
         }
 
