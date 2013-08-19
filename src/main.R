@@ -35,11 +35,12 @@ for (generator in generators) {
     annotation <- ""
     for (assessment in assessments) {
         result <- assessment$assess(data) / scale_factors[[assessment$name]]
-        if (is.na(result)) {
+
+        if (is.na(result))
             result <- "?"
-        } else if (result > 1) {
+        else if (result > 1)
             result <- "1 *"
-        }
+
         p(assessment$name, "\t", generator$name, "\t", result)
     }
 }
