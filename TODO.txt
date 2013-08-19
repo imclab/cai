@@ -1,6 +1,6 @@
 General:
 
-    0. Rescaling stat_custom to [0, 1] properly.
+    0. Rescaling stat/sym assessments to [0, 1] properly.
 
     1. Produce comprehensive data file rather than printing results.
 
@@ -13,13 +13,9 @@ General:
 
     4. Add Boston housing data from UCI ML repository.
 
-    5. Add rank-correlation assessments.
+    5. Handling unconditioned vs. conditioned data?
 
-    6. Dynamic loading of new assessments and generators.
-
-    7. Handling unconditioned vs. conditioned data?
-
-    8. Compare density-comparison method.
+    6. Compare density-comparison method.
 
 Add existing algorithms from literature:
 
@@ -31,10 +27,12 @@ Add existing algorithms from literature:
        (b) To read: tensors.
        (c) To read: reproducing kernel Hilbert spaces.
 
+    3. Sun & White's method.
+
 Other questions:
 
     1. Ring, four-cloud plots: will these be encountered in practice?
        (If not, symmetry test is just as valuable in practical terms.)
 
-    2. Concise representation of "stat" assessment algorithm.
+    2. Formula expressions for custom assessments.
 
