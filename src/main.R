@@ -23,11 +23,23 @@ for (dirname in AUTOLOAD_DIRS)
         for (filename in list.files(path = dirname, pattern = ".+\\.R"))
             source(paste(dirname, "/", filename, sep = ""))
 
+# Scale assessment results to results of a maximally-dependent data set.
+scale_factors <- list()
+maxdep_data <- gen_max_dependence$generate(param.n)
+for (assessment in assessments)
+    scale_factors[[assessment$name]] <- assessment$assess(maxdep_data)
+
 #print_weight_matrix(data)
 for (generator in generators) {
     data <- generator$generate(param.n)
+    annotation <- ""
     for (assessment in assessments) {
-        p(assessment$name, "\t", generator$name, "\t",
-          assessment$assess(data))
+        result <- assessment$assess(data) / scale_factors[[assessment$name]]
+        if (is.na(result)) {
+            result <- "?"
+        } else if (result > 1) {
+            result <- "1 *"
+        }
+        p(assessment$name, "\t", generator$name, "\t", result)
     }
 }

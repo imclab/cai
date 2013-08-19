@@ -28,13 +28,14 @@ assessment <- list(name = "stat_custom", assess = function(data) {
 
         # Walk along vertical "stripe" bins comparing delta in mean, variance.
 
-        cum_diff_mean <- 0
-        cum_diff_var  <- 0
-        for (i in 2:length(x_bin_means)) {
-            xm_a <- x_bin_means[i - 1]
-            xm_b <- x_bin_means[i]
-            xv_a <- x_bin_variances[i - 1]
-            xv_b <- x_bin_variances[i]
+        ncomparisons <- length(x_bin_means)
+        acc_diff_mean <- 0
+        acc_diff_var  <- 0
+        for (i in 1:ncomparisons) {
+            xm_a <- x_bin_means[i]
+            xm_b <- x_bin_means[i + 1]
+            xv_a <- x_bin_variances[i]
+            xv_b <- x_bin_variances[i + 1]
 
             # TODO: What is the significance of skipping "NA" comparisons
             #       (NA due to division by zero in earlier calculations)?
@@ -42,15 +43,21 @@ assessment <- list(name = "stat_custom", assess = function(data) {
             if (!is.na(xm_a) && !is.na(xm_b) && !is.na(xv_a) && !is.na(xv_b)) {
                 diff_mean <- abs(xm_b - xm_a)
                 diff_var <- abs(xv_b - xv_a)
-                cum_diff_mean <- cum_diff_mean + diff_mean
-                cum_diff_var  <- cum_diff_var + diff_var
+                acc_diff_mean <- acc_diff_mean + diff_mean
+                acc_diff_var  <- acc_diff_var + diff_var
             }
         }
 
-        cum_diff_mean <- cum_diff_mean / (length(x_bin_means) - 1)
-        cum_diff_var  <- cum_diff_var  / (length(x_bin_means) - 1)
+        #acc_diff_mean <- acc_diff_mean / ncomparisons
+        #acc_diff_var  <- acc_diff_var  / ncomparisons
 
-        return ((cum_diff_mean + cum_diff_var) / 2)
+        diff <- (acc_diff_mean + acc_diff_var)
+        # Not bounded by [0, 1], so scale.
+        #max_diff_mean <- max(x_bin_means)
+        #max_diff_var  <- max(x_bin_variances)
+        #diff <- diff / (max_diff_mean + max_diff_var)
+
+        return (diff)
     }
 
     x <- data[,1]
