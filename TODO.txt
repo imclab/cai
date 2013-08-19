@@ -1,38 +1,36 @@
 General:
 
-    0. Rescaling stat/sym assessments to [0, 1] properly.
-
     1. Produce comprehensive data file rather than printing results.
 
-    2. Change statistic-based test to compare from opposite
-       or random bins rather than from left to right.
+    2. Rescaling stat/sym assessments to [0, 1] properly.
 
-    3. Consider using dynamic discretization for bin count determination.
-       Consider Sturge's method, Scott's method, and
-       Freedman/Diaconis's method (see Margaritis, 2005).
+    3. Change statistic-based test to compare from opposite
+       or random bins rather than from left to right.
 
     4. Add Boston housing data from UCI ML repository.
 
-    5. Handling unconditioned vs. conditioned data?
+    5. Consider using dynamic discretization for bin count determination.
+       Consider Sturge's method, Scott's method, and
+       Freedman/Diaconis's method (see Margaritis, 2005).
 
-    6. Compare density-comparison method.
+    6. Handling unconditioned vs. conditioned data?
 
 Add existing algorithms from literature:
 
     1. Margaritis/Thrun method.
        (a) To read: Dirichlet priors.
 
-    2. Zhang's method.
+    2. Sun & White's method.
+
+    3. Zhang's method.
        (a) To read: vector spaces, nonlinear transformations.
        (b) To read: tensors.
        (c) To read: reproducing kernel Hilbert spaces.
 
-    3. Sun & White's method.
-
 Other questions:
 
-    1. Ring, four-cloud plots: will these be encountered in practice?
-       (If not, symmetry test is just as valuable in practical terms.)
+    1. Formula expressions for custom assessments.
 
-    2. Formula expressions for custom assessments.
+    2. Ring, four-cloud plots: will these be encountered in practice?
+       (If not, symmetry test is just as valuable in practical terms.)
 
