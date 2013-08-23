@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = "basic_additive", generate = function(n) {
+generator <- list(name = "basic_add", generate = function(n) {
         x <- rnorm(n)
         y <- x + rnorm(n)
         return (cbind(x, y))
