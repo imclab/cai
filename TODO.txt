@@ -1,19 +1,21 @@
 General:
 
-    1. Produce comprehensive data file rather than printing results.
+    1. Fix rotation bug (see comments in src/testing.R).
 
-    2. Rescaling stat/sym assessments to [0, 1] properly.
+    2. Rescale custom stat/sym assessments to [0, 1] properly.
 
-    3. Change statistic-based test to compare from opposite
+    3. Produce comprehensive data file rather than printing results.
+
+    4. Change statistic-based test to compare from opposite
        or random bins rather than from left to right.
 
-    4. Add Boston housing data from UCI ML repository.
+    5. Add Boston housing data from UCI ML repository.
 
-    5. Consider using dynamic discretization for bin count determination.
+    6. Consider using dynamic discretization for bin count determination.
        Consider Sturge's method, Scott's method, and
        Freedman/Diaconis's method (see Margaritis, 2005).
 
-    6. Handling unconditioned vs. conditioned data?
+    7. Handling unconditioned vs. conditioned data?
 
 Add existing algorithms from literature:
 
