@@ -12,6 +12,8 @@ General:
 
     5. Handling unconditioned vs. conditioned data?
 
+    6. Refactor similar custom assessments (remove duplicated code).
+
 Add existing algorithms from literature:
 
     1. Margaritis/Thrun method.
