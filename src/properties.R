@@ -1,4 +1,4 @@
-param.n = 1000
+param.n         = 1000
 param.disc_bins = 10
 
 AUTOLOAD_DIRS = c(
