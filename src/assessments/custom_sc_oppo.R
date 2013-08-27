@@ -2,7 +2,7 @@
 
 source("src/core/breaks.R")
 
-assessment <- list(name = "stat_custom", assess = function(data) {
+assessment <- list(name = "custom_sc_oppo", assess = function(data) {
     axis_score <- function(data) {
         x <- data[,1]
         breaks_x <- breaks_uniform_width(x, param.disc_bins)
@@ -36,14 +36,16 @@ assessment <- list(name = "stat_custom", assess = function(data) {
 
         # Walk along vertical "stripe" bins comparing delta in mean, variance.
 
-        ncomparisons <- length(x_bin_means)
         acc_diff_mean <- 0
         acc_diff_var  <- 0
+
+        ncomparisons <- floor(length(x_bin_means) / 2)
         for (i in 1:ncomparisons) {
             xm_a <- x_bin_means[i]
-            xm_b <- x_bin_means[i + 1]
+            xm_b <- x_bin_means[length(x_bin_means) + 1 - i]
+
             xv_a <- x_bin_variances[i]
-            xv_b <- x_bin_variances[i + 1]
+            xv_b <- x_bin_variances[length(x_bin_means) + 1 - i]
 
             # TODO: What is the significance of skipping "NA" comparisons
             #       (NA due to division by zero in earlier calculations)?
@@ -56,14 +58,7 @@ assessment <- list(name = "stat_custom", assess = function(data) {
             }
         }
 
-        #acc_diff_mean <- acc_diff_mean / ncomparisons
-        #acc_diff_var  <- acc_diff_var  / ncomparisons
-
         diff <- (acc_diff_mean + acc_diff_var)
-        # Not bounded by [0, 1], so scale.
-        #max_diff_mean <- max(x_bin_means)
-        #max_diff_var  <- max(x_bin_variances)
-        #diff <- diff / (max_diff_mean + max_diff_var)
 
         return (diff)
     }

@@ -2,7 +2,7 @@
 
 source("src/core/plot_disc.R")
 
-assessment <- list(name = "sym_custom", assess = function(data) {
+assessment <- list(name = "custom_sym", assess = function(data) {
     row_score <- function(row) {
         diff <- 0
         ncomparisons <- floor(length(row) / 2)
