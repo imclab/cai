@@ -1,5 +1,9 @@
 # Christopher L. Simons, 2013
 
+nformat <- function(n) {
+    return (sprintf("%1.3f%s", n, if (n > 1) " *" else ""))
+}
+
 p <- function(...) {
     cat(..., "\n", sep="", file="/dev/tty")
 }
