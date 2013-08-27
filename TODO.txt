@@ -1,38 +1,32 @@
 General:
 
-    1. Fix rotation bug (see comments in src/testing.R).
+    1. Scale stat/sym assessments to [0, 1].
 
-    2. Rescale custom stat/sym assessments to [0, 1] properly.
+    2. Produce comprehensive data file rather than printing results.
 
-    3. Produce comprehensive data file rather than printing results.
-
-    4. Change statistic-based test to compare from opposite
+    3. Change statistic-based test to compare from opposite
        or random bins rather than from left to right.
 
-    5. Add Boston housing data from UCI ML repository.
+    4. Add Boston housing data from UCI ML repository.
 
-    6. Consider using dynamic discretization for bin count determination.
+    5. Consider using dynamic discretization for bin count determination.
        Consider Sturge's method, Scott's method, and
        Freedman/Diaconis's method (see Margaritis, 2005).
 
-    7. Handling unconditioned vs. conditioned data?
+    6. Handling unconditioned vs. conditioned data?
 
 Add existing algorithms from literature:
 
     1. Margaritis/Thrun method.
-       (a) To read: Dirichlet priors.
 
     2. Sun & White's method.
 
     3. Zhang's method.
-       (a) To read: vector spaces, nonlinear transformations.
-       (b) To read: tensors.
-       (c) To read: reproducing kernel Hilbert spaces.
+       (a) To read: tensors.
+       (b) To read: reproducing kernel Hilbert spaces.
+       (c) To read: kernel methods.
 
 Other questions:
 
     1. Formula expressions for custom assessments.
-
-    2. Ring, four-cloud plots: will these be encountered in practice?
-       (If not, symmetry test is just as valuable in practical terms.)
 
