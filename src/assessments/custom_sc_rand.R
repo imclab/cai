@@ -41,14 +41,14 @@ assessment <- list(name = "custom_sc_rand", assess = function(data) {
 
         ncomparisons <- length(x_bin_means)
         bins_compared <- c()
-        while ((length(bins_compared) + 1) < length(x_bin_means)) {
+        while ((length(bins_compared) + 1) < ncomparisons) {
             i <- (-1)
             while (i < 0 || i %in% bins_compared)
-                i <- round(runif(1, 1, length(x_bin_means)))
+                i <- round(runif(1, 1, ncomparisons))
 
             j <- (-1)
             while (j < 0 || j %in% bins_compared)
-                j <- round(runif(1, 1, length(x_bin_means)))
+                j <- round(runif(1, 1, ncomparisons))
 
             xm_a <- x_bin_means[i]
             xm_b <- x_bin_means[j]
