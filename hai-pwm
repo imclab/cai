@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec R CMD BATCH "--no-save --args $*" src/print-weight-matricies.R /dev/null

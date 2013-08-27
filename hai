@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exec R CMD BATCH "--no-save --args $*" src/main.R /dev/null
