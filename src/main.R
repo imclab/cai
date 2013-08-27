@@ -60,4 +60,5 @@ for (generator in generators) {
     result_matrix_str <- paste(result_matrix_str, "\n", sep="")
 }
 
-p("\n * scaling issue\n\n", result_matrix_str)
+p("\n", result_matrix_str)
+p("\n * scaling issue\n")
