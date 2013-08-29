@@ -1,18 +1,20 @@
-General:
+Unconditional comparisons:
 
-    1. Scale stat/sym assessments to [0, 1].
+    1. Refactor similar custom assessments (remove duplicated code).
 
-    2. Produce comprehensive data file rather than printing results.
+    2. Add Boston housing data from UCI ML repository.
 
-    3. Add Boston housing data from UCI ML repository.
-
-    4. Consider using dynamic discretization for bin count determination.
+    3. Consider using dynamic discretization for bin count determination.
        Consider Sturge's method, Scott's method, and
        Freedman/Diaconis's method (see Margaritis, 2005).
 
-    5. Handling unconditioned vs. conditioned data?
+    X. Scale stat/sym assessments to [0, 1].
+       (a) Generate and tag variations (SD, etc.) of Biogelot graphs.
+       (b) ROC/DET curve after tagged (ind/dep) data sets in place.
 
-    6. Refactor similar custom assessments (remove duplicated code).
+Conditional comparisons:
+
+    TODO after unconditional stuff complete.
 
 Add existing algorithms from literature:
 
