@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = "max_indep", generate = function(n) {
+generator <- list(name = "indep_rnorm", generate = function(n) {
         x <- rnorm(n)
         y <- rnorm(n)
         return (cbind(x, y))
@@ -9,4 +9,3 @@ generator <- list(name = "max_indep", generate = function(n) {
 
 class(generator) <- "generator"
 generators[[length(generators) + 1]] <- generator
-gen_max_independence <- generator

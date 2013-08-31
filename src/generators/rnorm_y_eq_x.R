@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = "max_depend", generate = function(n) {
+generator <- list(name = "rnorm_y_eq_x", generate = function(n) {
         x <- rnorm(n)
         y <- x
         return (cbind(x, y))
@@ -9,4 +9,3 @@ generator <- list(name = "max_depend", generate = function(n) {
 
 class(generator) <- "generator"
 generators[[length(generators) + 1]] <- generator
-gen_max_dependence <- generator
