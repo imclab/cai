@@ -10,10 +10,6 @@ assessment <- list(name = "custom_sym", assess = function(data) {
         for (i in 1:ncomparisons)
             diff <- diff + abs(row[i] - row[length(row) + 1 - i])
 
-        diff <- diff / ncomparisons
-        if ((diff < 0) || (diff > 1))
-            verbose("Impossible row diff (should be 0 <= x <= 1): ", diff)
-
         return (diff)
     }
 
@@ -28,7 +24,7 @@ assessment <- list(name = "custom_sym", assess = function(data) {
             acc_delta <- acc_delta + row_delta
         }
 
-        return (acc_delta / nrows)
+        return (acc_delta)
     }
 
     x <- data[,1]
@@ -37,7 +33,7 @@ assessment <- list(name = "custom_sym", assess = function(data) {
 
     hScore <- axis_score(data)
     vScore <- axis_score(rdata)
-    score <- ((hScore + vScore) / 2)
+    score <- (hScore + vScore)
 
     return (score)
 })

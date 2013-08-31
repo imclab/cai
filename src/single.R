@@ -25,12 +25,6 @@ for (dirname in AUTOLOAD_DIRS)
         for (filename in list.files(path = dirname, pattern = ".+\\.R"))
             source(paste(dirname, "/", filename, sep = ""))
 
-# Scale assessment results to results of a maximally-dependent data set.
-scale_factors <- list()
-maxdep_data <- gen_max_dependence$generate(param.n)
-for (assessment in assessments)
-    scale_factors[[assessment$name]] <- assessment$assess(maxdep_data)
-
 #print_weight_matrix(data)
 df_assessment_name <- c()
 df_generator_name <- c()
@@ -46,7 +40,7 @@ for (generator in generators) {
     annotation <- ""
     result_matrix_str <- paste(result_matrix_str, generator$name, "\t", sep="")
     for (assessment in assessments) {
-        result <- assessment$assess(data) / scale_factors[[assessment$name]]
+        result <- assessment$assess(data)
 
         if (is.na(result))
             result <- "NA"
@@ -61,4 +55,3 @@ for (generator in generators) {
 }
 
 p("\n", result_matrix_str)
-p("\n * scaling issue\n")

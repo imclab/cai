@@ -1,7 +1,7 @@
 # Christopher L. Simons, 2013
 
 nformat <- function(n) {
-    return (sprintf("%1.3f%s", n, if (n > 1) " *" else ""))
+    return (sprintf("%2.3f", n))
 }
 
 p <- function(...) {
