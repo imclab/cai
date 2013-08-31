@@ -1,8 +1,8 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = "rnorm_y_eq_x", generate = function(n) {
+generator <- list(name = "y_eq_x+rnorm", generate = function(n) {
         x <- rnorm(n)
-        y <- x
+        y <- x + rnorm(n)
         return (cbind(x, y))
     }
 )

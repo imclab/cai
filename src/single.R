@@ -30,7 +30,7 @@ df_assessment_name <- c()
 df_generator_name <- c()
 df_results <- c()
 
-result_matrix_str <- "\t\t"
+result_matrix_str <- "\t\t\t"
 for (assessment in assessments)
     result_matrix_str <- paste(result_matrix_str, assessment$name, "\t", sep="")
 result_matrix_str <- paste(result_matrix_str, "\n", sep="")
@@ -38,7 +38,7 @@ result_matrix_str <- paste(result_matrix_str, "\n", sep="")
 for (generator in generators) {
     data <- generator$generate(param.n)
     annotation <- ""
-    result_matrix_str <- paste(result_matrix_str, generator$name, "\t", sep="")
+    result_matrix_str <- paste(result_matrix_str, sprintf("%16s\t", generator$name))
     for (assessment in assessments) {
         result <- assessment$assess(data)
 
@@ -48,7 +48,7 @@ for (generator in generators) {
         df_assessment_name <- append(df_assessment_name, assessment$name)
         df_generator_name <- append(df_generator_name, generator$name)
         df_results <- append(df_results, result)
-        p(assessment$name, "\t", generator$name, "\t", nformat(result))
+        p(assessment$name, "\t", sprintf("%16s", generator$name), "\t", nformat(result))
         result_matrix_str <- paste(result_matrix_str, nformat(result), "\t\t", sep="")
     }
     result_matrix_str <- paste(result_matrix_str, "\n", sep="")

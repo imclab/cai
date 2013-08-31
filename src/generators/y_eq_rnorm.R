@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = "indep_rnorm", generate = function(n) {
+generator <- list(name = "y_eq_rnorm", generate = function(n) {
         x <- rnorm(n)
         y <- rnorm(n)
         return (cbind(x, y))
