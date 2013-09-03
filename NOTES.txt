@@ -26,11 +26,11 @@ References:
         In Proceedings of Machine Learning and Knowledge Discovery in
         Databases, 423-439.
 
-    Sun, X., & White, H. (2007). A consistent characteristic function-based
+    Su, L., & White, H. (2007). A consistent characteristic function-based
         test for conditional independence.  Journal of Econometrics, 141,
         807-834.
 
-    Sun, X. & White, H. (2008). A nonparametric hellinger metric test for
+    Su, L. & White, H. (2008). A nonparametric hellinger metric test for
         conditional independence.  Econometric Theory, 24, 829-864.
 
     Tillman, R., Gretton, A., & Spirtes, P. (2009). Nonlinear directed
