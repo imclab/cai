@@ -1,5 +1,7 @@
 # Christopher L. Simons, 2013
 
+fmt_s <- "%20s"
+
 nformat <- function(n) {
     return (sprintf("%8.3f", n))
 }
