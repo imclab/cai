@@ -1,4 +1,4 @@
-hai
-===
+vitoi
+=====
 
-Heuristic Assessment of Independence
+VIsual Test Of Independence
