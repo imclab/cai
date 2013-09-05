@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec R CMD BATCH "--no-save --args $*" src/pwm.R /dev/tty
