@@ -1,1 +1,1 @@
-vitobi: VIsual Test Of Bivariate Independence
+vai: Visual Assessment of Independence
