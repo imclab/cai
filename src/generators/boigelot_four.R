@@ -2,7 +2,9 @@
 
 library(mvtnorm)
 
-generator <- list(name = "boigelot_four", generate = function(n) {
+generator <- list(name = "boigelot_four",
+                  dependent = FALSE, # ... right?
+                  generate = function(n) {
         xy1 = rmvnorm(n/4, c( 3,  3))
         xy2 = rmvnorm(n/4, c(-3,  3))
         xy3 = rmvnorm(n/4, c(-3, -3))

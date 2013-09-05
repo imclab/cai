@@ -1,6 +1,8 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = "boigelot_sin", generate = function(n) {
+generator <- list(name = "boigelot_sin",
+                  dependent = TRUE,
+                  generate = function(n) {
         x = runif(n, -1, 1)
         y = 4 * (x^2 - 1/2)^2 + runif(n, -1, 1)/3
         return (cbind(x, y))
