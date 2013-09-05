@@ -1,0 +1,5 @@
+1. Dynamic determination of optimal "failure threshold" for each assessment.
+2. Importing of data sets.
+3. Determination of conditionally-independent data set attributes.
+
+X. Add other CI tests from literatures for benchmarking (see NOTES.txt).
