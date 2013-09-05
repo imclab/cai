@@ -2,6 +2,7 @@
 
 generator <- list(name = "boigelot_ex",
                   dependent = TRUE,
+                  modifiable = FALSE,
                   generate = function(n) {
         x = runif(n, -1, 1)
         y = (x^2 + runif(n, 0, 1/2)) * sample(seq(-1, 1, 2), n, replace = TRUE)

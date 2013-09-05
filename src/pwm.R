@@ -25,6 +25,9 @@ for (dirname in AUTOLOAD_DIRS)
         for (filename in list.files(path = dirname, pattern = ".+\\.R"))
             source(paste(dirname, "/", filename, sep = ""))
 
+# Only print default version of generators.
+VAI__GEN_MOD = VAI__GEN_MOD_DEFAULT
+
 for (generator in generators) {
     data <- generator$generate(param.n)
     p("\n", generator$name, ":")
