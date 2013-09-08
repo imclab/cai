@@ -1,4 +1,4 @@
-1. Determining optimal "failure threshold" for each assessment.
+1. Need more independent generators for higher training quality.
 2. Importing of data sets.
 3. Determination of conditionally-independent data set attributes.
 
