@@ -18,8 +18,6 @@ if (length(args) == 1) {
 
 p("\nUsing n = ", param.n, " data points per generator ...\n")
 
-assessments <- list()
-generators <- list()
 for (dirname in AUTOLOAD_DIRS)
     if (length(dirname) > 0)
         for (filename in list.files(path = dirname, pattern = ".+\\.R"))
@@ -36,17 +34,31 @@ for (assessment in assessments)
                                sprintf(fmt_s, assessment$name))
 result_matrix_str <- paste(result_matrix_str, "\n", sep="")
 
+generatorMap <- list()
+for (generator in generators)
+    generatorMap[[generator$name]] <- generator
+
+scores <- list()
+for (assessment in assessments) {
+    scores[[assessment$name]] <- list()
+    for (generator in generators) {
+        scores[[assessment$name]][[generator$name]] <- list()
+    }
+}
+
 for (generator in generators) {
     data <- generator$generate(param.n)
     annotation <- ""
     result_matrix_str <- paste(result_matrix_str,
                                sprintf(fmt_s, generator$name))
+
     for (assessment in assessments) {
         result <- assessment$assess(data)
 
         if (is.na(result))
             result <- "NA"
 
+        scores[[assessment$name]][[generator$name]] <- result
         df_assessment_name <- append(df_assessment_name, assessment$name)
         df_generator_name <- append(df_generator_name, generator$name)
         df_results <- append(df_results, result)
@@ -58,6 +70,12 @@ for (generator in generators) {
                                    sep="")
     }
     result_matrix_str <- paste(result_matrix_str, "\n", sep="")
+}
+
+for (assessment in assessments) {
+    for (generator in generators) {
+        # TODO: Determine which threshold yields least error rate.
+    }
 }
 
 p("\n", result_matrix_str)
