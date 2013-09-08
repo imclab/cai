@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-fmt_s <- "%20s"
+fmt_s <- "%22s"
 
 nformat <- function(n) {
     return (sprintf("%8.3f", n))

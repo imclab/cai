@@ -2,8 +2,8 @@
 
 for (i in 1:length(VAI__GEN_MODS)) {
     VAI__GEN_MOD = VAI__GEN_MODS[i]
-    generator <- list(name = paste("y_eq_rnorm__MOD_",
-                                   VAI__GEN_MOD, sep=""),
+    generator <- list(name = paste("y_eq_rnorm[",
+                                   VAI__GEN_MOD, "]", sep=""),
                       dependent = FALSE,
                       modifiable = TRUE,
                       generate = function(n) {
