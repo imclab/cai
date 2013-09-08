@@ -67,17 +67,19 @@ p("\nOptimizing assessment score thresholds ...")
 for (assessment in assessments) {
     best <- list()
     # TODO: Proper optimization rather than just checking arbitrary numbers.
-    for (threshold in seq(0, 10, 0.5)) {
+    for (threshold in seq(0, 50, 0.1)) {
         ntotal <- 0
         nerror <- 0
         for (generator in generators) {
             ntotal <- ntotal + 1
-            if (threshold < scores[[assessment$name]][[generator$name]]
-                    && !generator$dependent)
+            if ((threshold < scores[[assessment$name]][[generator$name]]
+                        && !generator$dependent) # false positive
+                    || (scores[[assessment$name]][[generator$name]] < threshold
+                        && generator$dependent)) # false negative
                 nerror <- nerror + 1
         }
         if (is.null(best$error_rate)
-                || ((nerror / ntotal) < best$error_rate)) {
+                || ((nerror / ntotal) <= best$error_rate)) {
             best$threshold <- threshold
             best$error_rate <- (nerror / ntotal)
         }
