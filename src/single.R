@@ -34,37 +34,27 @@ for (assessment in assessments)
                                sprintf(fmt_s, assessment$name))
 result_matrix_str <- paste(result_matrix_str, "\n", sep="")
 
-generatorMap <- list()
-for (generator in generators)
-    generatorMap[[generator$name]] <- generator
-
 scores <- list()
-for (assessment in assessments) {
-    scores[[assessment$name]] <- list()
-    for (generator in generators) {
-        scores[[assessment$name]][[generator$name]] <- list()
-    }
-}
-
 for (generator in generators) {
     data <- generator$generate(param.n)
     annotation <- ""
     result_matrix_str <- paste(result_matrix_str,
                                sprintf(fmt_s, generator$name))
 
+    p("Calculating assessment scores for generator '", generator$name, "' ...")
     for (assessment in assessments) {
         result <- assessment$assess(data)
 
         if (is.na(result))
             result <- "NA"
 
+        if (is.null(scores[[assessment$name]]))
+            scores[[assessment$name]] <- list()
         scores[[assessment$name]][[generator$name]] <- result
-        df_assessment_name <- append(df_assessment_name, assessment$name)
-        df_generator_name <- append(df_generator_name, generator$name)
-        df_results <- append(df_results, result)
-        p(sprintf(fmt_s, assessment$name),
-          sprintf(fmt_s, generator$name),
-          sprintf(fmt_s, nformat(result)))
+
+        #p(sprintf(fmt_s, assessment$name),
+        #  sprintf(fmt_s, generator$name),
+        #  sprintf(fmt_s, nformat(result)))
         result_matrix_str <- paste(result_matrix_str,
                                    sprintf(fmt_s, nformat(result)),
                                    sep="")
@@ -72,10 +62,28 @@ for (generator in generators) {
     result_matrix_str <- paste(result_matrix_str, "\n", sep="")
 }
 
+p("\nOptimizing assessment score thresholds ...")
+
 for (assessment in assessments) {
-    for (generator in generators) {
-        # TODO: Determine which threshold yields least error rate.
+    best <- list()
+    # TODO: Proper optimization rather than just checking arbitrary numbers.
+    for (threshold in seq(0, 10, 0.5)) {
+        ntotal <- 0
+        nerror <- 0
+        for (generator in generators) {
+            ntotal <- ntotal + 1
+            if (threshold < scores[[assessment$name]][[generator$name]]
+                    && !generator$dependent)
+                nerror <- nerror + 1
+        }
+        if (is.null(best$error_rate)
+                || ((nerror / ntotal) < best$error_rate)) {
+            best$threshold <- threshold
+            best$error_rate <- (nerror / ntotal)
+        }
     }
+    p("Optimal (eh) threshold for assessment '", assessment$name, "' is [",
+      best$threshold, "] with error rate of [", best$error_rate, "].")
 }
 
 p("\n", result_matrix_str)

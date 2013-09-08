@@ -1,4 +1,4 @@
-1. Dynamic determination of optimal "failure threshold" for each assessment.
+1. Determining optimal "failure threshold" for each assessment.
 2. Importing of data sets.
 3. Determination of conditionally-independent data set attributes.
 
