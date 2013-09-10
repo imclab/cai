@@ -1,5 +1,9 @@
 References:
 
+    Bache, K. & Lichman, M. (2013). UCI Machine Learning Repository
+        [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California,
+        School of Information and Computer Science.
+
     Margaritis, D. (2005). Distribution-free learning of Bayesian network
         structure in continuous domains. In Proceedings of the Twentieth
         National Conference on Artificial Intelligence (AAAI), Pittsburgh,
