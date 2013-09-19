@@ -24,9 +24,6 @@ for (dirname in AUTOLOAD_DIRS)
             source(paste(dirname, "/", filename, sep = ""))
 
 #print_weight_matrix(data)
-df_assessment_name <- c()
-df_generator_name <- c()
-df_results <- c()
 
 result_matrix_str <- sprintf(fmt_s, "")
 for (assessment in assessments)
