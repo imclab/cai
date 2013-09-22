@@ -4,6 +4,12 @@ References:
         [http://archive.ics.uci.edu/ml]. Irvine, CA: University of California,
         School of Information and Computer Science.
 
+    Feuerverger, A. (1993). A consistent test for bivariate dependence.
+        International statistical review, 61(3), 419-433.
+
+    Hoeffding, W. (1948). A non-parametric test of independence. Annals of
+        mathematical statistics, 19, 549-557.
+
     Margaritis, D. (2005). Distribution-free learning of Bayesian network
         structure in continuous domains. In Proceedings of the Twentieth
         National Conference on Artificial Intelligence (AAAI), Pittsburgh,
