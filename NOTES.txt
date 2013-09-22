@@ -16,6 +16,10 @@ References:
     Pearl, J. (2009). Causality: Models, reasoning, and inference (2nd Ed.).
         Cambridge University Press.
 
+    Scott, D. W. (1992). Multivariate density estimation. Wiley series in
+        probability and mathematical statistics. Hoboken, New Jersey:
+        John Wiley & Sons, Inc.
+
     Spirtes, P. (2010). Introduction to causal inference. Journal of
         Machine Learning Research, 99, 1643-1662.
 

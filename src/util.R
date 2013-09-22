@@ -36,3 +36,7 @@ corrupt <- function(filename, e = "") {
         eprint("Fatal error reading configuration file \"",
                filename, "\"; use hai-debug for detail.")
 }
+
+bin_count_sturge <- function(n) {
+    return (ceiling(1 + log2(n)))
+}
