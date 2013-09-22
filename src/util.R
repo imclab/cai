@@ -37,6 +37,7 @@ corrupt <- function(filename, e = "") {
                filename, "\"; use hai-debug for detail.")
 }
 
+# (Sturges, 1926)
 bin_count_sturge <- function(n) {
     return (ceiling(1 + log2(n)))
 }

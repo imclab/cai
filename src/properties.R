@@ -1,7 +1,7 @@
 param.n         = 1000
 
 #param.disc_bins = 10
-param.disc_bins = bin_count_sturge(param.n) # See (Scott, 1992)
+param.disc_bins = bin_count_sturge(param.n)
 
 # Generator "sigma" modifiers.
 VAI__GEN_MOD_DEFAULT = 1
