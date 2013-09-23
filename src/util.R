@@ -1,13 +1,11 @@
 # Christopher L. Simons, 2013
 
-fmt_s <- "%22s"
-
 nformat <- function(n) {
     return (sprintf("%8.3f", n))
 }
 
 p <- function(...) {
-    cat(..., "\n", sep="", file="/dev/tty")
+    cat(..., "\n", sep="")
 }
 
 verbose <- function(...) {
@@ -16,7 +14,7 @@ verbose <- function(...) {
 }
 
 p_matrix <- function(x) {
-    write(x, sep="\t", ncolumns=length(x[,1]), file="/dev/tty")
+    write(x, sep="\t", ncolumns=length(x[,1]))
 }
 
 eprint <- function(...) {
