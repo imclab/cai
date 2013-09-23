@@ -1,5 +1,6 @@
 1. Need more independent generators for higher training quality.
 2. Importing of data sets.
-3. Determination of conditionally-independent data set attributes.
+3. Bivariate test -> CI test.
+4. Implement PC algorithm, test on Rentention-10K data set.
 
-X. Add other CI tests from literatures for benchmarking (see NOTES.txt).
+X. Add other CI tests from literature for benchmarking (see NOTES.txt).
