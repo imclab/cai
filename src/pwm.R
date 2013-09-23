@@ -2,19 +2,7 @@
 
 source("src/util.R")
 source("src/properties.R")
-
-args <- commandArgs(trailingOnly = TRUE)
-
-if (length(args) != 0 && length(args) != 1)
-        usage()
-
-verboseMode <- FALSE
-if (length(args) == 1) {
-        verboseArg <- tolower(args[1])
-    if (verboseArg != "true" && verboseArg != "false")
-                usage()
-        verboseMode <- (verboseArg == "true")
-}
+source("src/init.R")
 
 p("\nUsing n = ", param.n, " data points per generator ...\n")
 
