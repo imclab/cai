@@ -8,31 +8,8 @@ p <- function(...) {
     cat(..., "\n", sep="")
 }
 
-verbose <- function(...) {
-    if (verboseMode)
-        p(...)
-}
-
 p_matrix <- function(x) {
-    write(x, sep="\t", ncolumns=length(x[,1]))
-}
-
-eprint <- function(...) {
-    p(...)
-    quit(status = 1, save = "no")
-}
-
-usage <- function() {
-    eprint("usage: <script-name> [verbose-mode-boolean]")
-}
-
-corrupt <- function(filename, e = "") {
-    if (length(toString(e)) > 0)
-        eprint("Fatal error reading configuration file \"",
-               filename, "\":\n\t", toString(e))
-    else
-        eprint("Fatal error reading configuration file \"",
-               filename, "\"; use hai-debug for detail.")
+    write(x, sep="\t", ncolumns=length(x[,1]), file="")
 }
 
 # (Sturges, 1926)
