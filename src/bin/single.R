@@ -30,9 +30,6 @@ for (generator in generators) {
             scores[[assessment$name]] <- list()
         scores[[assessment$name]][[generator$name]] <- result
 
-        #p(sprintf(fmt_s, assessment$name),
-        #  sprintf(fmt_s, generator$name),
-        #  sprintf(fmt_s, nformat(result)))
         result_matrix_str <- paste(result_matrix_str,
                                    sprintf(fmt_s, nformat(result)),
                                    sep="")
@@ -44,8 +41,7 @@ p("\nOptimizing assessment score thresholds ...")
 
 for (assessment in assessments) {
     best <- list()
-    # TODO: Proper optimization rather than just checking arbitrary numbers.
-    for (threshold in seq(0, 50, 0.1)) {
+    for (threshold in seq(0, 50, 0.1)) { # Improvement: Proper optimization?
         ntotal <- 0
         nerror <- 0
         for (generator in generators) {
