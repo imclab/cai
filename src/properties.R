@@ -1,4 +1,4 @@
-param.n         = 1000
+param.n         = 100
 fmt_s           = "%19s"
 param.disc_bins = bin_count_sturge(param.n)
 
