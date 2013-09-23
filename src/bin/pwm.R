@@ -1,8 +1,8 @@
 # Christopher L. Simons, 2013
 
-source("src/util.R")
-source("src/properties.R")
-source("src/init.R")
+source("src/core/util.R")
+source("src/conf/properties.R")
+source("src/core/init.R")
 
 p("\nUsing n = ", param.n, " data points per generator ...\n")
 
