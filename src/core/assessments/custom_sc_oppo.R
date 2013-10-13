@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-source("src/core/breaks.R")
+source("src/core/util/breaks.R")
 
 assessment <- list(name = "custom_sc_oppo", assess = function(data) {
     axis_score <- function(data) {

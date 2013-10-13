@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-source("src/core/plot_disc.R")
+source("src/core/util/plot_disc.R")
 
 assessment <- list(name = "custom_sym", assess = function(data) {
     row_score <- function(row) {
