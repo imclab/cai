@@ -1,1 +1,1 @@
-vai: Visual Assessment of Independence
+cai: Computational Assessment of Independence
