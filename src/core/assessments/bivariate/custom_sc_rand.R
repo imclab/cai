@@ -86,4 +86,4 @@ assessment <- list(name = "custom_sc_rand", assess = function(data) {
 })
 
 class(assessment) <- "assessment"
-assessments[[length(assessments) + 1]] <- assessment
+assessments[[assessment$name]] <- assessment
