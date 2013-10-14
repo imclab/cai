@@ -52,13 +52,9 @@ for (assessment in assessments) {
 }
 
 data_ret <- read.table("data/retention-25.txt", header = TRUE)
-p("Length of data_ret = [", length(data_ret), "].")
 
-p("Assessments thresholds available in list 'thresholds'.")
-p("CI tests ci_pcor.test and ci_comp.test available, taking (x, y, z, a).")
-
-for (i in assessments)
-    p("Threshold for [", i$name, "] is [", thresholds[[i$name]], "].")
+p("Retention data available as 'data_ret'.")
+p("CI tests ci_pcor and ci_comp available, taking (x, y, z, bit|a).")
 
 p("Pearson pCor on data_ret[1:3] is [",
   ci_pcor(data_ret[,1], data_ret[,2], data_ret[,3]),
