@@ -57,6 +57,14 @@ p("Pearson pCor on data_ret[1:3] is [",
   ci_pcor(data_ret[,1], data_ret[,2], data_ret[,3]),
   "].")
 
+p("Spearman pCor on data_ret[1:3] is [",
+  ci_pcor(data_ret[,1], data_ret[,2], data_ret[,3], method_cor="spearman"),
+  "].")
+
+p("Kendall pCor on data_ret[1:3] is [",
+  ci_pcor(data_ret[,1], data_ret[,2], data_ret[,3], method_cor="kendall"),
+  "].")
+
 p("Custom-SYM raw score on data_ret[1:3] is [",
   ci_comp(data_ret[,1], data_ret[,2], data_ret[,3],
           assessments$custom_sym$assess),
