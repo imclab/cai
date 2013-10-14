@@ -1,5 +1,7 @@
 # Christopher L. Simons, 2013
 
+source("src/conf/properties.R")
+
 ci_pcor <- function(x, y, z, method_cor="pearson") {
     data_subset <- data.frame(cbind(x, y, z))
 
