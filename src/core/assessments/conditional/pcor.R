@@ -2,7 +2,6 @@
 
 ci_pcor <- function(x, y, z, method_cor="pearson") {
     data_subset <- data.frame(cbind(x, y, z))
-    names(data_subset) <- c("x", "y", "z")
 
     resid_xz <- residuals(lm(formula = x ~ z, data = data_subset))
     resid_yz <- residuals(lm(formula = y ~ z, data = data_subset))
