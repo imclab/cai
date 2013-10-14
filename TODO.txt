@@ -1,5 +1,4 @@
-1. Fix computational CI test issue.
-2. Implement and test PC* algorithm.
-3. Add other CI tests from literature for benchmarking.
+1. Implement and test PC* algorithm.
+2. Add other CI tests from literature for benchmarking.
 
 X. More independent generators for higher training quality.

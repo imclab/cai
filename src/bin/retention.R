@@ -53,19 +53,21 @@ data_ret <- read.table("data/retention-25.txt", header = TRUE)
 p("Retention data available as 'data_ret'.")
 p("CI tests ci_pcor and ci_comp available, taking (x, y, z, bit|a).")
 
-p("Pearson pCor on data_ret[1:3] is [",
-  ci_pcor(data_ret[,1], data_ret[,2], data_ret[,3]),
-  "].")
+x <- data_ret[,1]
+y <- data_ret[,2]
+z <- data_ret[,3]
 
+p("Pearson  pCor on data_ret[1:3] is [", ci_pcor(x, y, z), "].")
 p("Spearman pCor on data_ret[1:3] is [",
-  ci_pcor(data_ret[,1], data_ret[,2], data_ret[,3], method_cor="spearman"),
-  "].")
-
+  ci_pcor(x, y, z, method_cor="spearman"), "].")
 p("Kendall pCor on data_ret[1:3] is [",
-  ci_pcor(data_ret[,1], data_ret[,2], data_ret[,3], method_cor="kendall"),
-  "].")
+  ci_pcor(x, y, z, method_cor="kendall"), "].")
 
-p("Custom-SYM raw score on data_ret[1:3] is [",
-  ci_comp(data_ret[,1], data_ret[,2], data_ret[,3],
-          assessments$custom_sym$assess),
-  "].")
+p("Custom SC_INCR raw score on data_ret[1:3] is [",
+  ci_comp(x, y, z, assessments$custom_sc_incr$assess), "].")
+
+p("Custom SC_OPPO raw score on data_ret[1:3] is [",
+  ci_comp(x, y, z, assessments$custom_sc_oppo$assess), "].")
+
+p("Custom SC_RAND raw score on data_ret[1:3] is [",
+  ci_comp(x, y, z, assessments$custom_sc_rand$assess), "].")
