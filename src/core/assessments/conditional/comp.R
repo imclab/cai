@@ -18,6 +18,6 @@ ci_comp <- function(x, y, z, bivariate_test) {
     return (highest)
 }
 
-ci_comp.test <- function(x, y, z, threshold_dep) {
+ci_comp.test <- function(x, y, z, bivariate_test, threshold_dep) {
     return (abs(ci_comp(x, y, z)) >= threshold)
 }
