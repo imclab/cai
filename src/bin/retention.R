@@ -3,6 +3,7 @@
 source("src/core/util/util.R")
 source("src/conf/properties.R")
 source("src/core/util/init.R")
+source("src/core/bn/pcAlg.R")
 
 p("Using n = ", param.n, " data points per generator ...")
 
@@ -60,7 +61,7 @@ z <- data_ret[,3]
 p("Pearson  pCor on data_ret[1:3] is [", ci_pcor(x, y, z), "].")
 p("Spearman pCor on data_ret[1:3] is [",
   ci_pcor(x, y, z, method_cor="spearman"), "].")
-p("Kendall pCor on data_ret[1:3] is [",
+p("Kendall  pCor on data_ret[1:3] is [",
   ci_pcor(x, y, z, method_cor="kendall"), "].")
 
 p("Custom SC_INCR raw score on data_ret[1:3] is [",
@@ -71,3 +72,6 @@ p("Custom SC_OPPO raw score on data_ret[1:3] is [",
 
 p("Custom SC_RAND raw score on data_ret[1:3] is [",
   ci_comp(x, y, z, assessments$custom_sc_rand$assess), "].")
+
+g <- pcAlg(data_ret, ci_pcor)
+plot(g)
