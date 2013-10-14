@@ -15,17 +15,13 @@ build_discretized_struct <- function(data) {
     agg_cell_points <- c()
     for (xb in 1:(length(breaks_x) - 1)) {
         for (yb in 1:(length(breaks_y) - 1)) {
-            cell_points <- 0
-
-            for (i in 1:length(data[,1])) {
-                xi <- data[i,][1]
-                yi <- data[i,][2]
-                if (xi >= breaks_x[xb] && xi <= breaks_x[xb + 1]
-                        && yi >= breaks_y[yb] && yi <= breaks_y[yb + 1]) {
-                    cell_points <- cell_points + 1
-                }
-            }
-
+            data_df <- data.frame(data)
+            names(data_df) <- c("x", "y")
+            cell_points <- length(subset(data,
+                                         subset = (  x >= breaks_x[xb]
+                                                   & x <= breaks_x[xb + 1]
+                                                   & y >= breaks_y[yb]
+                                                   & y <= breaks_y[yb + 1])))
             if (max_cell_points < cell_points)
                 max_cell_points <- cell_points
 
@@ -41,12 +37,12 @@ build_discretized_struct <- function(data) {
     }
     agg_max_cell_points <- max_cell_points
 
-    obj <- list("ncol"=(length(breaks_x) - 1),
-                "nrow"=(length(breaks_y) - 1),
-                "coords_x"=matrix(agg_coords_x, ncol=5, byrow=TRUE),
-                "coords_y"=matrix(agg_coords_y, ncol=5, byrow=TRUE),
-                "cell_points"=agg_cell_points,
-                "max_cell_points"=agg_max_cell_points)
+    obj <- list("ncol"            = (length(breaks_x) - 1),
+                "nrow"            = (length(breaks_y) - 1),
+                "coords_x"        = matrix(agg_coords_x, ncol=5, byrow=TRUE),
+                "coords_y"        = matrix(agg_coords_y, ncol=5, byrow=TRUE),
+                "cell_points"     = agg_cell_points,
+                "max_cell_points" = agg_max_cell_points)
     return(obj)
 }
 
