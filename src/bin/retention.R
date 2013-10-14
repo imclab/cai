@@ -4,9 +4,6 @@ source("src/core/util/util.R")
 source("src/conf/properties.R")
 source("src/core/util/init.R")
 
-source("src/core/assessments/conditional/pcor.R")
-source("src/core/assessments/conditional/comp.R")
-
 p("Using n = ", param.n, " data points per generator ...")
 
 p("Training over synthetic data, 1/2 (scoring) ...")
