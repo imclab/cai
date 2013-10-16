@@ -3,7 +3,6 @@
 source("src/core/util/util.R")
 source("src/conf/properties.R")
 source("src/core/util/init.R")
-source("src/core/bn/pcAlg.R")
 
 p("Using n = ", param.n, " data points per generator ...")
 
@@ -49,29 +48,25 @@ for (assessment in assessments) {
     thresholds[assessment$name] <- best$threshold
 }
 
-data_ret <- read.table("data/retention-25.txt", header = TRUE)
+data_ret <- read.table("data/retention-10k.txt", header = TRUE)
 
 p("Retention data available as 'data_ret'.")
-p("CI tests ci_pcor and ci_comp available, taking (x, y, z, bit|a).")
 
-x <- data_ret[,1]
-y <- data_ret[,2]
-z <- data_ret[,3]
+ex.suffStat <- list(C = cor(data_ret), n = nrow(data_ret))
+ex.fit      <- pc(suffStat  = ex.suffStat,
+                  indepTest = gaussCItest,
+                  p         = ncol(data_ret),
+                  alpha     = 0.01)
 
-p("Pearson  pCor on data_ret[1:3] is [", ci_pcor(x, y, z), "].")
-p("Spearman pCor on data_ret[1:3] is [",
-  ci_pcor(x, y, z, method_cor="spearman"), "].")
-p("Kendall  pCor on data_ret[1:3] is [",
-  ci_pcor(x, y, z, method_cor="kendall"), "].")
-
-p("Custom SC_INCR raw score on data_ret[1:3] is [",
-  ci_comp(x, y, z, assessments$custom_sc_incr$assess), "].")
-
-p("Custom SC_OPPO raw score on data_ret[1:3] is [",
-  ci_comp(x, y, z, assessments$custom_sc_oppo$assess), "].")
-
-p("Custom SC_RAND raw score on data_ret[1:3] is [",
-  ci_comp(x, y, z, assessments$custom_sc_rand$assess), "].")
-
-g <- pcAlg(data_ret, ci_pcor)
-plot(g)
+#customCI <- list(method_cor = "pearson")
+#pcor.fit <- pc(suffStat  = data_ret,
+#               indepTest = ci_pcor,
+#               p         = ncol(data_ret),
+#               alpha     = 0.01)
+#customCI <- list(bivariate_test = assessments$custom_sc_oppo$assess,
+#                 threshold      = thresholds[assessments$custom_sc_oppo$name])
+#comp.fit <- pc(suffStat  = data_ret,
+#               indepTest = ci_comp,
+#               p         = ncol(data_ret),
+#               alpha     = 0.01)
+#par(mfrow = c(1, 2)) # if multiple plots.

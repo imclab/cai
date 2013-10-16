@@ -1,18 +1,19 @@
 # Christopher L. Simons, 2013
 
-source("src/conf/properties.R")
+ci_pcor <- function(x, y, S, suffStat) {
+    stopifnot(exists("customCI"))
+    method_cor <- customCI$method_cor
+    if (is.null(method_cor))
+        stop("customCI$method_cor is NULL.")
 
-ci_pcor <- function(x, y, z, method_cor="pearson") {
-    data_subset <- data.frame(cbind(x, y, z))
+    x. <- suffStat[,x]
+    y. <- suffStat[,y]
+    S. <- as.matrix(suffStat[,S])
 
-    resid_xz <- residuals(lm(formula = x ~ z, data = data_subset))
-    resid_yz <- residuals(lm(formula = y ~ z, data = data_subset))
+    resid_xz <- residuals(lm(formula = x. ~ S.))
+    resid_yz <- residuals(lm(formula = y. ~ S.))
     return (cor(x      = resid_xz,
                 y      = resid_yz,
                 use    = "complete.obs",
                 method = method_cor))
-}
-
-ci_pcor.test <- function(x, y, z, threshold_dep=0.05, cor_method="pearson") {
-    return (abs(ci_pcor(x, y, z, cor_method)) >= threshold_dep)
 }
