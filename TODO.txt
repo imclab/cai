@@ -1,6 +1,5 @@
-1. Fix pcor and comp CI tests.
-2. Implement structural distance measures.
-3. Add other CI tests from literature for benchmarking.
+1. Scale custom CI tests to get useful p-value/alpha comparison.
+2. Add other CI tests from literature for benchmarking.
    1. Margaritis approach.
    2. Kernel method approach.
    3. Copula approach.
