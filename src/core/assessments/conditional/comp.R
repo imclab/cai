@@ -3,20 +3,17 @@
 ci_comp <- function(x, y, S, suffStat) {
     data. <- suffStat$data
     bivariate_test <- suffStat$bivariate_test
-    threshold <- suffStat$threshold
     if (is.null(data.))
         stop("suffStat$data is NULL.")
     if (is.null(bivariate_test))
         stop("suffStat$bivariate_test is NULL.")
-    if (is.null(threshold))
-        stop("suffStat$threshold is NULL.")
 
     x. <- data.[,x]
     y. <- data.[,y]
     S. <- as.matrix(data.[,S])
 
+#p("Called ci_comp(", x, ", ", y, ", ", S, ", <suffStat>[data length = ", ncol(S.), "]).")
     highest <- NULL
-
     if (ncol(S.) > 0) {
         for (Si in 1:ncol(S.)) {
             z. <- S.[,Si]
@@ -45,11 +42,7 @@ ci_comp <- function(x, y, S, suffStat) {
     } else {
         highest <- bivariate_test(cbind(x., y.))
     }
-
-    if (highest > threshold)
-        result <- 1
-    else
-        result <- 0
-
-    return (result)
+p("Called ci_comp(", x, ", ", y, ", ", S, ", <suffStat>[data length = ", ncol(S.), "]) --> ",
+    "p::alpha = [", highest, "]::[", thresholds$custom_sc_oppo, "].")
+    return (highest)
 }
