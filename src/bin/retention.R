@@ -52,21 +52,30 @@ data_ret <- read.table("data/retention-10k.txt", header = TRUE)
 
 p("Retention data available as 'data_ret'.")
 
+p("Learning structure using pcalg::gaussCItest ...")
 ex.suffStat <- list(C = cor(data_ret), n = nrow(data_ret))
 ex.fit      <- pc(suffStat  = ex.suffStat,
                   indepTest = gaussCItest,
                   p         = ncol(data_ret),
                   alpha     = 0.01)
 
-#customCI <- list(method_cor = "pearson")
-#pcor.fit <- pc(suffStat  = data_ret,
-#               indepTest = ci_pcor,
-#               p         = ncol(data_ret),
-#               alpha     = 0.01)
-#customCI <- list(bivariate_test = assessments$custom_sc_oppo$assess,
-#                 threshold      = thresholds[assessments$custom_sc_oppo$name])
-#comp.fit <- pc(suffStat  = data_ret,
-#               indepTest = ci_comp,
-#               p         = ncol(data_ret),
-#               alpha     = 0.01)
-#par(mfrow = c(1, 2)) # if multiple plots.
+p("Learning structure using pcor test ...")
+customCI <- list(method_cor = "pearson")
+pcor.fit <- pc(suffStat  = data_ret,
+               indepTest = ci_pcor,
+               p         = ncol(data_ret),
+               alpha     = 0.01)
+
+p("Learning structure using computational test (may take a while) ...")
+customCI <- list(bivariate_test = assessments$custom_sc_oppo$assess,
+                 threshold      = thresholds[assessments$custom_sc_oppo$name])
+comp.fit <- pc(suffStat  = data_ret,
+               indepTest = ci_comp,
+               p         = ncol(data_ret),
+               alpha     = 0.01)
+
+p("Plotting learned structures ...")
+par(mfrow = c(1, 3)) # if multiple plots.
+plot(ex.fit)
+plot(pcor.fit)
+plot(comp.fit)

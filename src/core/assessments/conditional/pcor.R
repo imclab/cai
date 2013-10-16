@@ -10,10 +10,19 @@ ci_pcor <- function(x, y, S, suffStat) {
     y. <- suffStat[,y]
     S. <- as.matrix(suffStat[,S])
 
-    resid_xz <- residuals(lm(formula = x. ~ S.))
-    resid_yz <- residuals(lm(formula = y. ~ S.))
-    return (cor(x      = resid_xz,
-                y      = resid_yz,
-                use    = "complete.obs",
-                method = method_cor))
+    if (ncol(S.) > 0) {
+        resid_xz <- residuals(lm(formula = x. ~ S.))
+        resid_yz <- residuals(lm(formula = y. ~ S.))
+        result <- cor(x      = resid_xz,
+                      y      = resid_yz,
+                      use    = "complete.obs",
+                      method = method_cor)
+    } else {
+        result <- cor(x      = x.,
+                      y      = y.,
+                      use    = "complete.obs",
+                      method = method_cor)
+    }
+
+    return (result)
 }
