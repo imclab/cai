@@ -1,4 +1,8 @@
-1. Implement and test PC* algorithm.
+1. Fix pcor and comp CI tests.
 2. Add other CI tests from literature for benchmarking.
+   1. Margaritis approach.
+   2. Kernel method approach.
+   3. Copula approach.
+   4. ECF approach.
 
 X. More independent generators for higher training quality.
