@@ -5,7 +5,7 @@ source("src/core/util/breaks.R")
 assessment <- list(name = "custom_sc_rand", assess = function(data) {
     axis_score <- function(data) {
         x <- data[,1]
-        breaks_x <- breaks_uniform_width(x, param.disc_bins)
+        breaks_x <- breaks_uniform_width(x, bin_count_sturge(nrow(data)))
 
         # Walk along x-axis creating vertical "stripe" bins.
 
