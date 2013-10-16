@@ -50,6 +50,10 @@ for (assessment in assessments) {
 
 data_ret <- read.table("data/retention-10k.txt", header = TRUE)
 
+# TODO: Create "gold standard" graph for evaluation of learned structures.
+# g <- graphNEL(nodes=names(data_ret), edgemode="directed")
+# g <- addEdge(pair[1], pair[2], g)
+
 p("Retention data available as 'data_ret'.")
 
 p("Learning structure using pcalg::gaussCItest ...")
@@ -60,16 +64,16 @@ ex.fit      <- pc(suffStat  = ex.suffStat,
                   alpha     = 0.01)
 
 p("Learning structure using pcor test ...")
-customCI <- list(method_cor = "pearson")
-pcor.fit <- pc(suffStat  = data_ret,
+pcor.fit <- pc(suffStat  = list(data = data_ret,
+                                method_cor = "pearson"),
                indepTest = ci_pcor,
                p         = ncol(data_ret),
                alpha     = 0.01)
 
 p("Learning structure using computational test (may take a while) ...")
-customCI <- list(bivariate_test = assessments$custom_sc_oppo$assess,
-                 threshold      = thresholds[assessments$custom_sc_oppo$name])
-comp.fit <- pc(suffStat  = data_ret,
+comp.fit <- pc(suffStat  = list(data = data_ret,
+                                bivariate_test = assessments$custom_sc_oppo$assess,
+                                threshold = thresholds[assessments$custom_sc_oppo$name]),
                indepTest = ci_comp,
                p         = ncol(data_ret),
                alpha     = 0.01)

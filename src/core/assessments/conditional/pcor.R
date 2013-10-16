@@ -1,14 +1,16 @@
 # Christopher L. Simons, 2013
 
 ci_pcor <- function(x, y, S, suffStat) {
-    stopifnot(exists("customCI"))
-    method_cor <- customCI$method_cor
+    data. <- suffStat$data
+    method_cor <- suffStat$method_cor
+    if (is.null(data.))
+        stop("suffStat$data is NULL.")
     if (is.null(method_cor))
-        stop("customCI$method_cor is NULL.")
-
-    x. <- suffStat[,x]
-    y. <- suffStat[,y]
-    S. <- as.matrix(suffStat[,S])
+        stop("suffStat$method_cor is NULL.")
+    
+    x. <- data.[,x]
+    y. <- data.[,y]
+    S. <- as.matrix(data.[,S])
 
     if (ncol(S.) > 0) {
         resid_xz <- residuals(lm(formula = x. ~ S.))

@@ -1,17 +1,19 @@
 # Christopher L. Simons, 2013
 
 ci_comp <- function(x, y, S, suffStat) {
-    stopifnot(exists("customCI"))
-    bivariate_test <- customCI$bivariate_test
-    threshold <- customCI$threshold
+    data. <- suffStat$data
+    bivariate_test <- suffStat$bivariate_test
+    threshold <- suffStat$threshold
+    if (is.null(data.))
+        stop("suffStat$data is NULL.")
     if (is.null(bivariate_test))
-        stop("customCI$bivariate_test is NULL.")
+        stop("suffStat$bivariate_test is NULL.")
     if (is.null(threshold))
-        stop("customCI$threshold is NULL.")
+        stop("suffStat$threshold is NULL.")
 
-    x. <- suffStat[,x]
-    y. <- suffStat[,y]
-    S. <- as.matrix(suffStat[,S])
+    x. <- data.[,x]
+    y. <- data.[,y]
+    S. <- as.matrix(data.[,S])
 
     highest <- NULL
 
