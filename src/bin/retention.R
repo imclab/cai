@@ -62,6 +62,7 @@ ex.fit      <- pc(suffStat  = ex.suffStat,
                   indepTest = gaussCItest,
                   p         = ncol(data_ret),
                   alpha     = 0.01)
+nodes(ex.fit@graph) <- names(data_ret)
 
 p("Learning structure using pcor test ...")
 pcor.fit <- pc(suffStat  = list(data = data_ret,
@@ -69,6 +70,7 @@ pcor.fit <- pc(suffStat  = list(data = data_ret,
                indepTest = ci_pcor,
                p         = ncol(data_ret),
                alpha     = 0.01)
+nodes(pcor.fit@graph) <- names(data_ret)
 
 p("Learning structure using computational test (may take a while) ...")
 comp.fit <- pc(suffStat  = list(data = data_ret,
@@ -77,6 +79,7 @@ comp.fit <- pc(suffStat  = list(data = data_ret,
                indepTest = ci_comp,
                p         = ncol(data_ret),
                alpha     = 0.01)
+nodes(comp.fit@graph) <- names(data_ret)
 
 p("Plotting learned structures ...")
 par(mfrow = c(1, 3)) # if multiple plots.
