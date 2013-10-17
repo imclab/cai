@@ -48,7 +48,7 @@ for (assessment in assessments) {
     thresholds[assessment$name] <- best$threshold
 }
 
-data_ret <- read.table("data/retention-10k.txt", header = TRUE)
+data_ret <- read.table("data/retention-1k.txt", header = TRUE)
 
 # TODO: Create "gold standard" graph for evaluation of learned structures.
 # g <- graphNEL(nodes=names(data_ret), edgemode="directed")
