@@ -12,6 +12,23 @@ p_matrix <- function(x) {
     write(x, sep="\t", ncolumns=length(x[,1]), file="")
 }
 
+interval_scale <- function(x, a = 0, b = 1) {
+    # To [0, 1]:
+    #
+    #         x - min
+    # f(x) = ---------
+    #        max - min
+    #
+    # To [a, b]:
+    #
+    #        (b-a)(x - min)
+    # f(x) = --------------  +  a
+    #          max - min
+    #
+    return ((((b - a) * (x - min(x)))
+             / (max(x) - min(x))) + a)
+}
+
 bin_count_fixed <- function(n) {
     return (break.fixed.n);
 }

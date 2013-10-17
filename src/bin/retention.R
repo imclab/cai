@@ -10,7 +10,8 @@ p("Training over synthetic data, 1/2 (scoring) ...")
 scores <- list()
 for (generator in generators) {
     data <- generator$generate(training.n)
-    data <- scale(data, center = TRUE, scale = TRUE)
+    #data <- scale(data, center = TRUE, scale = TRUE)
+    data <- interval_scale(data)
     annotation <- ""
 
     for (assessment in assessments) {
@@ -50,7 +51,8 @@ for (assessment in assessments) {
 }
 
 data_ret <- read.table("data/retention-1k.txt", header = TRUE)
-data_ret <- data.frame(scale(as.matrix(data_ret), center = TRUE, scale = TRUE))
+#data_ret <- data.frame(scale(as.matrix(data_ret), center = TRUE, scale = TRUE))
+data_ret <- data.frame(interval_scale(as.matrix(data_ret)))
 
 # TODO: Create "gold standard" graph for evaluation of learned structures.
 # g <- graphNEL(nodes=names(data_ret), edgemode="directed")
@@ -76,10 +78,10 @@ nodes(pcor.fit@graph) <- names(data_ret)
 
 p("Learning structure using computational test (may take a while) ...")
 comp.fit <- pc(suffStat  = list(data = data_ret,
-                                bivariate_test = assessments$custom_sc_oppo$assess),
+                                bivariate_test = assessments$custom_sc_rand$assess),
                indepTest = ci_comp,
                p         = ncol(data_ret),
-               alpha     = thresholds$custom_sc_oppo)
+               alpha     = thresholds$custom_sc_rand)
 nodes(comp.fit@graph) <- names(data_ret)
 
 p("Plotting learned structures ...")
