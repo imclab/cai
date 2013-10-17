@@ -6,8 +6,8 @@ build_discretized_struct <- function(data) {
     x <- data[,1]
     y <- data[,2]
 
-    breaks_x <- breaks_uniform_width(x, bin_count_sturge(nrow(data)))
-    breaks_y <- breaks_uniform_width(y, bin_count_sturge(nrow(data)))
+    breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
+    breaks_y <- breaks_uniform_width(y, bin_count(nrow(data)))
 
     agg_coords_x <- c()
     agg_coords_y <- c()

@@ -1,6 +1,8 @@
-verboseMode     = FALSE
-param.n         = 100
-fmt_s           = "%19s"
+verboseMode   = FALSE
+training.n    = 100
+fmt_s         = "%19s"
+break.fixed.n = 10
+break_method  = "fixed" # alternative: "sturges"
 
 # Generator "sigma" modifiers.
 VAI__GEN_MOD_DEFAULT = 1
