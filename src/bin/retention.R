@@ -4,12 +4,12 @@ source("src/core/util/util.R")
 source("src/conf/properties.R")
 source("src/core/util/init.R")
 
-p("Using n = ", param.n, " data points per generator ...")
+p("Using n = ", training.n, " data points per generator ...")
 
 p("Training over synthetic data, 1/2 (scoring) ...")
 scores <- list()
 for (generator in generators) {
-    data <- generator$generate(param.n)
+    data <- generator$generate(training.n)
     annotation <- ""
 
     for (assessment in assessments) {

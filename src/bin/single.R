@@ -4,7 +4,7 @@ source("src/core/util/util.R")
 source("src/conf/properties.R")
 source("src/core/util/init.R")
 
-p("\nUsing n = ", param.n, " data points per generator ...\n")
+p("\nUsing n = ", training.n, " data points per generator ...\n")
 
 result_matrix_str <- sprintf(fmt_s, "")
 for (assessment in assessments)
@@ -14,7 +14,7 @@ result_matrix_str <- paste(result_matrix_str, "\n", sep="")
 
 scores <- list()
 for (generator in generators) {
-    data <- generator$generate(param.n)
+    data <- generator$generate(training.n)
     annotation <- ""
     result_matrix_str <- paste(result_matrix_str,
                                sprintf(fmt_s, generator$name))

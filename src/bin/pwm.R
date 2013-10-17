@@ -4,7 +4,7 @@ source("src/core/util/util.R")
 source("src/conf/properties.R")
 source("src/core/util/init.R")
 
-p("\nUsing n = ", param.n, " data points per generator ...\n")
+p("\nUsing n = ", training.n, " data points per generator ...\n")
 
 assessments <- list()
 generators <- list()
@@ -17,7 +17,7 @@ for (dirname in AUTOLOAD_DIRS)
 CAI__GEN_MOD = CAI__GEN_MOD_DEFAULT
 
 for (generator in generators) {
-    data <- generator$generate(param.n)
+    data <- generator$generate(training.n)
     p("\n", generator$name, ":")
     print_weight_matrix(data)
 }
