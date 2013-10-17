@@ -1,13 +1,13 @@
 # Christopher L. Simons, 2013
 
 generator <- list(name = paste("boigelot_ring::",
-                               VAI__GEN_MOD, sep=""),
+                               CAI__GEN_MOD, sep=""),
                   dependent = TRUE,
                   modifiable = TRUE,
                   generate = function(n) {
         x = runif(n, -1, 1)
-        y = cos(x*pi) + rnorm(n, 0, (1/8) * VAI__GEN_MOD)
-        x = sin(x*pi) + rnorm(n, 0, (1/8) * VAI__GEN_MOD)
+        y = cos(x*pi) + rnorm(n, 0, (1/8) * CAI__GEN_MOD)
+        x = sin(x*pi) + rnorm(n, 0, (1/8) * CAI__GEN_MOD)
         return (cbind(x, y))
     }
 )

@@ -1,11 +1,11 @@
 # Christopher L. Simons, 2013
 
 generator <- list(name = paste("y_eq_-x::",
-                               VAI__GEN_MOD, sep=""),
+                               CAI__GEN_MOD, sep=""),
                   dependent = TRUE,
                   modifiable = TRUE,
                   generate = function(n) {
-        x <- rnorm(n, 0, 1 * VAI__GEN_MOD)
+        x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
         y <-  x * (-1)
         return (cbind(x, y))
     }

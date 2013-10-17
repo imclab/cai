@@ -14,7 +14,7 @@ for (dirname in AUTOLOAD_DIRS)
             source(paste(dirname, "/", filename, sep = ""))
 
 # Only print default version of generators.
-VAI__GEN_MOD = VAI__GEN_MOD_DEFAULT
+CAI__GEN_MOD = CAI__GEN_MOD_DEFAULT
 
 for (generator in generators) {
     data <- generator$generate(param.n)

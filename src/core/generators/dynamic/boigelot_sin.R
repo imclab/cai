@@ -1,7 +1,7 @@
 # Christopher L. Simons, 2013
 
 generator <- list(name = paste("boigelot_sin::",
-                               VAI__GEN_MOD, sep=""),
+                               CAI__GEN_MOD, sep=""),
                   dependent = TRUE,
                   modifiable = FALSE,
                   generate = function(n) {
