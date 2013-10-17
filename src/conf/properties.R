@@ -1,4 +1,3 @@
-verboseMode   = FALSE
 training.n    = 100
 fmt_s         = "%19s"
 break.fixed.n = 10
