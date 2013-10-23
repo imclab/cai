@@ -8,6 +8,10 @@ p <- function(...) {
     cat(..., "\n", sep="")
 }
 
+pn <- function(...) {
+    cat(..., sep="")
+}
+
 p_matrix <- function(x) {
     write(x, sep="\t", ncolumns=length(x[,1]), file="")
 }

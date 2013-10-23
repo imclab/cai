@@ -1,4 +1,4 @@
-training.n    = 2000
+training.n    = 100
 testing.n     = 2000
 fmt_s         = "%19s"
 break.fixed.n = 10
@@ -12,5 +12,6 @@ AUTOLOAD_DIRS = c(
     "src/core/generators",
     "src/core/assessments/bivariate",
     "src/core/assessments/conditional",
+    "src/learning/learners",
     "src/learning/models",
 "")
