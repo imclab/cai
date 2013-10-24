@@ -36,7 +36,7 @@ d <- data.frame(cbind(temp_t0, temp_outside, sensor, door, temp_t1))
 
 model = list(name  = "temperature.mixed",
              graph = g,
-             data  = d)
+             data  = interval_scale(d))
 
 class(model) <- "model"
 models[[length(models) + 1]] <- model

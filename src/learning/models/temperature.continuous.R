@@ -23,7 +23,7 @@ d <- data.frame(cbind(temp_t0, temp_outside, sensor, temp_t1))
 
 model = list(name  = "temperature.continuous",
              graph = g,
-             data  = d)
+             data  = interval_scale(d))
 
 class(model) <- "model"
 models[[length(models) + 1]] <- model
