@@ -45,7 +45,7 @@ p("Training over synthetic data, 2/2 (optimizing decision thresholds) ...")
 thresholds <- list()
 for (assessment in assessments) {
     best <- list()
-    for (threshold in seq(0, max_score, 0.1)) { # Improvement: Proper optimization?
+    for (threshold in seq(0, max_score, 0.01)) { # Improvement: Proper optimization?
         ntotal <- 0
         nerror <- 0
         for (generator in generators) {
@@ -56,8 +56,9 @@ for (assessment in assessments) {
                     && generator$dependent)) # false negative
                 nerror <- nerror + 1
         }
+        # DET tradeoff: < vs. <=
         if (is.null(best$error_rate)
-            || ((nerror / ntotal) <= best$error_rate)) {
+            || ((nerror / ntotal) < best$error_rate)) {
             best$threshold <- threshold
             best$error_rate <- (nerror / ntotal)
         }

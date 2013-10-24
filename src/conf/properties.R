@@ -1,5 +1,5 @@
-training.n    = 100
-testing.n     = 2000
+training.n    = 200
+testing.n     = 40000 # n >= 30 @ / 10 x 10 x 10 = 1000
 fmt_s         = "%19s"
 break.fixed.n = 10
 break_method  = "fixed" # alternative: "sturges"

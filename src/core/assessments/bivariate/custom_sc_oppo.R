@@ -36,9 +36,7 @@ assessment <- list(name = "custom_sc_oppo", assess = function(data) {
 
         # Walk along vertical "stripe" bins comparing delta in mean, variance.
 
-        acc_diff_mean <- 0
-        acc_diff_var  <- 0
-
+        max_diff <- 0
         ncomparisons <- floor(length(x_bin_means) / 2)
         for (i in 1:ncomparisons) {
             xm_a <- x_bin_means[i]
@@ -53,14 +51,11 @@ assessment <- list(name = "custom_sc_oppo", assess = function(data) {
             if (!is.na(xm_a) && !is.na(xm_b) && !is.na(xv_a) && !is.na(xv_b)) {
                 diff_mean <- abs(xm_b - xm_a)
                 diff_var <- abs(xv_b - xv_a)
-                acc_diff_mean <- acc_diff_mean + diff_mean
-                acc_diff_var  <- acc_diff_var + diff_var
+                max_diff <- max(max_diff, diff_mean, diff_var)
             }
         }
 
-        diff <- (acc_diff_mean + acc_diff_var)
-
-        return (diff)
+        return (max_diff)
     }
 
     x <- data[,1]
@@ -69,7 +64,7 @@ assessment <- list(name = "custom_sc_oppo", assess = function(data) {
 
     hScore <- axis_score(data)
     vScore <- axis_score(rdata)
-    score <- ((hScore + vScore) / 2)
+    score <- max(hScore, vScore)
 
     return (score)
 })
