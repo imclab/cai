@@ -1,7 +1,5 @@
 # Christopher L. Simons, 2013
 
-p("Using n = ", training.n, " data points per generator ...")
-
 result_matrix_str <- sprintf(fmt_s, "")
 for (assessment in assessments)
     result_matrix_str <- paste(result_matrix_str,
