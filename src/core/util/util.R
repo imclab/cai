@@ -1,7 +1,10 @@
 # Christopher L. Simons, 2013
 
 nformat <- function(n) {
-    return (sprintf("%8.3f", n))
+    if (is.numeric(n))
+        return (sprintf("%8.3f", n))
+    else
+        return (sprintf("%12s", n))
 }
 
 p <- function(...) {
