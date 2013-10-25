@@ -55,9 +55,9 @@ assessment <- list(name = "sc_maxdev", assess = function(data) {
     y <- data[,2]
     rdata <- cbind(y, x)
 
-    hScore <- axis_score(data)
-    vScore <- axis_score(rdata)
-    score <- max(hScore, vScore)
+    hScore <- navl(axis_score(data), 0)
+    vScore <- navl(axis_score(rdata), 0)
+    score <- navl(max(hScore, vScore), 0)
 
     return (score)
 })

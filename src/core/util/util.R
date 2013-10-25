@@ -1,5 +1,13 @@
 # Christopher L. Simons, 2013
 
+nvl <- function (a, b) {
+    return (if (is.null(a)) b else a)
+}
+
+navl <- function (a, b) {
+    return (if (is.na(a)) b else a)
+}
+
 nformat <- function(n) {
     if (is.numeric(n))
         return (sprintf("%.3f", n))

@@ -34,8 +34,12 @@ assessment <- list(name = "sc_range", assess = function(data) {
             x_bin_values <- c()
         }
 
-        return (max(abs(max(x_bin_means) - min(x_bin_means)),
-                    abs(max(x_bin_variances) - min(x_bin_variances))))
+        result <- max(navl(abs(max(x_bin_means)
+                        - min(x_bin_means)), 0),
+                    navl(abs(max(x_bin_variances)
+                        - min(x_bin_variances)), 0))
+
+        return (navl(result, 0))
     }
 
     x <- data[,1]
