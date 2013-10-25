@@ -3,7 +3,7 @@
 source("src/core/util/util.R")
 source("src/conf/properties.R")
 source("src/core/util/init.R")
-source("src/learning/support/train.R")
+source("src/core/learning/support/train.R")
 
 data. <- read.csv("data/iris.data", header = TRUE)
 data. <- data.frame(interval_scale(as.matrix(data.)))

@@ -3,7 +3,7 @@
 source("src/core/util/util.R")
 source("src/conf/properties.R")
 source("src/core/util/init.R")
-source("src/learning/support/train.R")
+source("src/core/learning/support/train.R")
 
 model <- NULL
 for (i in 1:length(models))
