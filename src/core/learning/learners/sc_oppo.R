@@ -5,10 +5,10 @@ learner <- list(name  = "sc_oppo",
                     result <- pc(suffStat
                                    = list(data = data.,
                                           bivariate_test =
-                                            assessments$custom_sc_oppo$assess),
+                                            assessments$sc_oppo$assess),
                                  indepTest = ci_comp,
                                  p         = ncol(data.),
-                                 alpha     = thresholds$custom_sc_oppo)
+                                 alpha     = thresholds$sc_oppo)
                     nodes(result@graph) <- names(data.)
                     return (result)
                 })
