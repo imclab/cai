@@ -1,9 +1,7 @@
 1. Fix computational CIT assessment.
-2. Implement Margaritis approach.
-3. Review pertinence of other approaches.
-   1. Kernel method approach.
-   2. Copula approach.
-   3. ECF approach.
-   4. Others?
+2. Implement other approaches.
+   1. Margaritis.
+   2. Zhang.
+   3. Other methods (copula-, ECF-based?).
 
 X. More independent generators for higher training quality.
