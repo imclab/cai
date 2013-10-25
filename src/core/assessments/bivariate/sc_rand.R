@@ -2,7 +2,7 @@
 
 source("src/core/util/breaks.R")
 
-assessment <- list(name = "custom_sc_range", assess = function(data) {
+assessment <- list(name = "sc_rand", assess = function(data) {
     axis_score <- function(data) {
         x <- data[,1]
         breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
@@ -34,8 +34,39 @@ assessment <- list(name = "custom_sc_range", assess = function(data) {
             x_bin_values <- c()
         }
 
-        return (max(abs(max(x_bin_means) - min(x_bin_means)),
-                    abs(max(x_bin_variances) - min(x_bin_variances))))
+        # Walk along vertical "stripe" bins comparing delta in mean, variance.
+
+        max_diff <- 0
+        ncomparisons <- length(x_bin_means)
+        bins_compared <- c()
+        while ((length(bins_compared) + 1) < ncomparisons) {
+            i <- (-1)
+            while (i < 0 || i %in% bins_compared)
+                i <- round(runif(1, 1, ncomparisons))
+
+            j <- (-1)
+            while (j < 0 || j %in% bins_compared)
+                j <- round(runif(1, 1, ncomparisons))
+
+            xm_a <- x_bin_means[i]
+            xm_b <- x_bin_means[j]
+            xv_a <- x_bin_variances[i]
+            xv_b <- x_bin_variances[j]
+
+            # TODO: What is the significance of skipping "NA" comparisons
+            #       (NA due to division by zero in earlier calculations)?
+
+            if (!is.na(xm_a) && !is.na(xm_b) && !is.na(xv_a) && !is.na(xv_b)) {
+                diff_mean <- abs(xm_b - xm_a)
+                diff_var <- abs(xv_b - xv_a)
+                max_diff <- max(max_diff, diff_mean, diff_var)
+            }
+
+            bins_compared <- append(bins_compared, i)
+            bins_compared <- append(bins_compared, j)
+        }
+
+        return (max_diff)
     }
 
     x <- data[,1]

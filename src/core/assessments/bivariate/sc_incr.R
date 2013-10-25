@@ -2,7 +2,7 @@
 
 source("src/core/util/breaks.R")
 
-assessment <- list(name = "custom_sc_rand", assess = function(data) {
+assessment <- list(name = "sc_incr", assess = function(data) {
     axis_score <- function(data) {
         x <- data[,1]
         breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
@@ -38,20 +38,11 @@ assessment <- list(name = "custom_sc_rand", assess = function(data) {
 
         max_diff <- 0
         ncomparisons <- length(x_bin_means)
-        bins_compared <- c()
-        while ((length(bins_compared) + 1) < ncomparisons) {
-            i <- (-1)
-            while (i < 0 || i %in% bins_compared)
-                i <- round(runif(1, 1, ncomparisons))
-
-            j <- (-1)
-            while (j < 0 || j %in% bins_compared)
-                j <- round(runif(1, 1, ncomparisons))
-
+        for (i in 1:ncomparisons) {
             xm_a <- x_bin_means[i]
-            xm_b <- x_bin_means[j]
+            xm_b <- x_bin_means[i + 1]
             xv_a <- x_bin_variances[i]
-            xv_b <- x_bin_variances[j]
+            xv_b <- x_bin_variances[i + 1]
 
             # TODO: What is the significance of skipping "NA" comparisons
             #       (NA due to division by zero in earlier calculations)?
@@ -61,9 +52,6 @@ assessment <- list(name = "custom_sc_rand", assess = function(data) {
                 diff_var <- abs(xv_b - xv_a)
                 max_diff <- max(max_diff, diff_mean, diff_var)
             }
-
-            bins_compared <- append(bins_compared, i)
-            bins_compared <- append(bins_compared, j)
         }
 
         return (max_diff)
