@@ -11,7 +11,6 @@ ci_pcor <- function(x, y, S, suffStat) {
     x. <- data.[,x]
     y. <- data.[,y]
     S. <- as.matrix(data.[,S])
-#p("Called ci_pcor(", x, ", ", y, ", ", S, ", <suffStat>[data length = ", ncol(S.), "]).")
     if (ncol(S.) > 0) {
         resid_xz <- residuals(lm(formula = x. ~ S.))
         resid_yz <- residuals(lm(formula = y. ~ S.))
@@ -25,6 +24,10 @@ ci_pcor <- function(x, y, S, suffStat) {
                       use    = "complete.obs",
                       method = method_cor)
     }
+
+#    p("Called ci_pcor:", x, ",", y, ",", S,
+#      ". [Z variables: ", ncol(S.), "]) -> ",
+#      "p-value = [", result, "].")
 
     return (result)
 }
