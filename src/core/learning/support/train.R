@@ -1,25 +1,22 @@
 # Christopher L. Simons, 2013
 
-result_matrix_str <- sprintf(fmt_s, "")
+bivariate.summary.header <- c("GENERATOR")
 for (assessment in assessments)
-    result_matrix_str <- paste(result_matrix_str,
-                               sprintf(fmt_s, assessment$name))
-result_matrix_str <- paste(result_matrix_str, "\n", sep="")
+    bivariate.summary.header <- append(bivariate.summary.header,
+                                       assessment$name)
 
 p("Training over synthetic data, 1/2 (scoring) ...")
 scores <- list()
 max_score <- NULL
+bivariate.summary <- NULL
 for (generator in generators) {
     data <- generator$generate(training.n)
     data <- interval_scale(data)
     annotation <- ""
 
-    result_matrix_str <- paste(result_matrix_str,
-                               sprintf(fmt_s, generator$name))
-
+    detail.row <- c(generator$name)
     for (assessment in assessments) {
         result <- assessment$assess(data)
-
         if (is.na(result))
             result <- "NA"
 
@@ -31,13 +28,14 @@ for (generator in generators) {
         if (is.numeric(result) && (is.null(max_score) || max_score < result))
             max_score <- result
 
-        result_matrix_str <- paste(result_matrix_str,
-                                   sprintf(fmt_s, nformat(result)),
-                                   sep="")
+        detail.row <- append(detail.row, nformat(result))
     }
 
-    result_matrix_str <- paste(result_matrix_str, "\n", sep="")
+    bivariate.summary <- rbind(bivariate.summary, detail.row)
 }
+
+bivariate.summary <- data.frame(bivariate.summary)
+names(bivariate.summary) <- bivariate.summary.header
 
 p("Training over synthetic data, 2/2 (optimizing decision thresholds) ...")
 thresholds <- list()

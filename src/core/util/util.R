@@ -2,9 +2,9 @@
 
 nformat <- function(n) {
     if (is.numeric(n))
-        return (sprintf("%8.3f", n))
+        return (sprintf("%.3f", n))
     else
-        return (sprintf("%12s", n))
+        return (n)
 }
 
 p <- function(...) {

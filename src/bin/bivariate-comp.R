@@ -5,4 +5,5 @@ source("src/conf/properties.R")
 source("src/core/util/init.R")
 source("src/core/learning/support/train.R")
 
-p("\n", result_matrix_str)
+options(width = 160)
+print.data.frame(bivariate.summary)
