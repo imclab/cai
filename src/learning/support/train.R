@@ -28,7 +28,7 @@ for (generator in generators) {
 
         scores[[assessment$name]][[generator$name]] <- result
 
-        if (is.null(max_score) || max_score < result)
+        if (is.numeric(result) && (is.null(max_score) || max_score < result))
             max_score <- result
 
         result_matrix_str <- paste(result_matrix_str,
