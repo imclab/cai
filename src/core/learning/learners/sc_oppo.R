@@ -5,7 +5,7 @@ learner <- list(name  = "sc_oppo",
                     result <- pc(suffStat
                                    = list(data = data.,
                                           bivariate_test =
-                                            assessments$sc_oppo$assess),
+                                            assessments$sc_oppo),
                                  indepTest = ci_comp,
                                  p         = ncol(data.),
                                  alpha     = thresholds$sc_oppo)

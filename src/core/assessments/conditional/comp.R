@@ -30,7 +30,7 @@ ci_comp <- function(x, y, S, suffStat) {
 
                 # May not have data for all intervals.
                 if (length(xy_matrix) > 0) {
-                    bivariate_score <- bivariate_test(xy_matrix)
+                    bivariate_score <- bivariate_test$assess(xy_matrix)
                     if (is.null(highest))
                         highest <- bivariate_score
                     else if (bivariate_score > highest)
@@ -39,12 +39,13 @@ ci_comp <- function(x, y, S, suffStat) {
             }
         }
     } else {
-        highest <- bivariate_test(cbind(x., y.))
+        highest <- bivariate_test$assess(cbind(x., y.))
     }
 
 #    p("Called ci_comp:", x, ",", y, ",", S,
 #      ". [Z variables: ", ncol(S.), "]) -> ",
-#      "p::alpha = [", highest, "]::[", thresholds$custom_sc_oppo, "].")
+#      "p::alpha = [", highest, "]::[",
+#      thresholds[[bivariate_test$name]], "].")
 
     return (highest)
 }
