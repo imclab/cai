@@ -1,10 +1,10 @@
 # Christopher L. Simons, 2013
 
-assessment <- list(name = "spearman_abs", assess = function(data) {
+assessment <- list(name = "cor_pearson", assess = function(data) {
     return (abs(cor(x      = data[,1],
                     y      = data[,2],
                     use    = "complete.obs",
-                    method = "spearman")))
+                    method = "pearson")))
 })
 
 class(assessment) <- "assessment"
