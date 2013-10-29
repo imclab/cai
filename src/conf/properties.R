@@ -1,7 +1,7 @@
-training.n    = 200
-testing.n     = 40000 # n >= 30 @ / 10 x 10 x 10 = 1000
+training.n    = 2000
+testing.n     = 20000 # n >= 30 @ / 10 x 10 x 10 = 1000
 fmt_s         = "%19s"
-break.fixed.n = 10
+break.fixed.n = 6
 break_method  = "fixed" # alternative: "sturges"
 
 # Generator "sigma" modifiers.
