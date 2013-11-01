@@ -2,7 +2,7 @@
 
 source("src/core/util/breaks.R")
 
-assessment <- list(name = "sc_incr", assess = function(data) {
+assessment <- list(name = "sc_sym", assess = function(data) {
     axis_score <- function(data) {
         x <- data[,1]
         breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
@@ -37,12 +37,13 @@ assessment <- list(name = "sc_incr", assess = function(data) {
         # Walk along vertical "stripe" bins comparing delta in mean, variance.
 
         max_diff <- 0
-        ncomparisons <- length(x_bin_means)
+        ncomparisons <- floor(length(x_bin_means) / 2)
         for (i in 1:ncomparisons) {
             xm_a <- x_bin_means[i]
-            xm_b <- x_bin_means[i + 1]
+            xm_b <- x_bin_means[length(x_bin_means) + 1 - i]
+
             xv_a <- x_bin_variances[i]
-            xv_b <- x_bin_variances[i + 1]
+            xv_b <- x_bin_variances[length(x_bin_means) + 1 - i]
 
             # TODO: What is the significance of skipping "NA" comparisons
             #       (NA due to division by zero in earlier calculations)?

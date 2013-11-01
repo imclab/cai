@@ -1,14 +1,14 @@
 # Christopher L. Simons, 2013
 
-learner <- list(name  = "sc_range",
+learner <- list(name  = "sc_span",
                 learn = function(data.) {
                     result <- pc(suffStat
                                    = list(data = data.,
                                           bivariate_test =
-                                            assessments$sc_range),
+                                            assessments$sc_span),
                                  indepTest = ci_comp,
                                  p         = ncol(data.),
-                                 alpha     = thresholds$sc_range)
+                                 alpha     = thresholds$sc_span)
                     nodes(result@graph) <- names(data.)
                     return (result)
                 })
