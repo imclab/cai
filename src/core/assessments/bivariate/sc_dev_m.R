@@ -2,7 +2,7 @@
 
 source("src/core/util/breaks.R")
 
-assessment <- list(name = "sc_span", assess = function(data) {
+assessment <- list(name = "sc_dev_d", assess = function(data) {
     axis_score <- function(data) {
         x <- data[,1]
         breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
@@ -34,21 +34,30 @@ assessment <- list(name = "sc_span", assess = function(data) {
             x_bin_values <- c()
         }
 
-        result <- max(navl(abs(max(x_bin_means)
-                        - min(x_bin_means)), 0),
-                    navl(abs(max(x_bin_variances)
-                        - min(x_bin_variances)), 0))
+        y <- data[,2]
+        overall_mean <- mean(y)
+        overall_var <- var(y)
 
-        return (navl(result, 0))
+        # Walk along vertical "stripe" bins comparing delta in mean, variance.
+
+        max_diff <- 0
+        ncomparisons <- length(x_bin_means)
+        for (i in 1:ncomparisons) {
+            diff_mean <- abs(overall_mean - x_bin_means[i])
+            diff_var <- abs(overall_var - x_bin_variances[i])
+            max_diff <- max(max_diff, diff_mean, diff_var)
+        }
+
+        return (max_diff)
     }
 
     x <- data[,1]
     y <- data[,2]
     rdata <- cbind(y, x)
 
-    hScore <- axis_score(data)
-    vScore <- axis_score(rdata)
-    score <- max(hScore, vScore)
+    hScore <- navl(axis_score(data), 0)
+    vScore <- navl(axis_score(rdata), 0)
+    score <- navl(max(hScore, vScore), 0)
 
     return (score)
 })
