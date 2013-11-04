@@ -1,5 +1,4 @@
-1. Fix computational CIT assessment.
-2. Implement other approaches.
+1. Implement other approaches.
    1. Margaritis.
    2. Zhang.
    3. Other methods (copula-, ECF-based?).
