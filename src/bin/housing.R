@@ -29,7 +29,7 @@ for (i in 1:length(learners)) {
 
 p("Plotting learned structures ...")
 par(mfrow = c(2, (ceiling((length(results) + 1) / 2))))
-plot(gold, main = "GS")
+#plot(gold, main = "GS")
 for (i in 1:length(results))
     plot(results[[i]]$struct,
          main = gsub("::", "\n", results[[i]]$learner.name))
