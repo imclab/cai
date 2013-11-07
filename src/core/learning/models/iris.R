@@ -3,7 +3,7 @@
 model <- list()
 
 d <- read.csv("data/iris.data", header = TRUE)
-d <- data.frame(interval_scale(as.matrix(data.)))
+d <- data.frame(interval_scale(as.matrix(d)))
 
 g <- graphNEL(nodes=names(d), edgemode="directed")
 g <- addEdge("class", "sepal_length", g)

@@ -3,7 +3,7 @@
 model <- list()
 
 d <- read.csv("data/housing.data", header = TRUE)
-d <- data.frame(interval_scale(as.matrix(data.)))
+d <- data.frame(interval_scale(as.matrix(d)))
 
 g <- graphNEL(edgemode = "directed",
               nodes    = names(d))
