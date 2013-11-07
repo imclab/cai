@@ -39,10 +39,11 @@ ci_comp <- function(x, y, S, suffStat) {
         scores <- append(scores, bivariate_test$assess(cbind(x., y.)))
     }
 
-#    p("Called ci_comp:", x, ",", y, ",", S,
-#      ". [Z variables: ", ncol(S.), "]) -> ",
-#      "p::alpha = [", highest, "]::[",
-#      thresholds[[bivariate_test$name]], "].")
+    highest <- max(scores)
+    verbose("Called ci_comp:", x, ",", y, ",", S,
+      ". [Z variables: ", ncol(S.), "]) -> ",
+      "p::alpha = [", highest, "]::[",
+      thresholds[[bivariate_test$name]], "].")
 
-    return (max(scores))
+    return (highest)
 }

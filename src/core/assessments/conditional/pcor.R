@@ -25,9 +25,9 @@ ci_pcor <- function(x, y, S, suffStat) {
                       method = method_cor)
     }
 
-#    p("Called ci_pcor:", x, ",", y, ",", S,
-#      ". [Z variables: ", ncol(S.), "]) -> ",
-#      "p-value = [", result, "].")
+    verbose("Called ci_pcor:", x, ",", y, ",", S,
+      ". [Z variables: ", ncol(S.), "]) -> ",
+      "p-value = [", result, "].")
 
     return (result)
 }
