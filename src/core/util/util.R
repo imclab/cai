@@ -23,6 +23,11 @@ pn <- function(...) {
     cat(..., sep="")
 }
 
+verbose <- function(...) {
+    if (param.verbose)
+        p(...)
+}
+
 p_matrix <- function(x) {
     write(x, sep="\t", ncolumns=length(x[,1]), file="")
 }
