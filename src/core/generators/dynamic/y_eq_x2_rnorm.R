@@ -6,7 +6,7 @@ generator <- list(name = paste("y_eq_x2_rnorm::",
                   modifiable = TRUE,
                   generate = function(n) {
         x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-        y <- (x^2) * rnorm(n, 0, 1 * CAI__GEN_MOD)
+        y <- (x^2) * rnorm(n, 0, 1 * CAI__GEN_MOD) + rnorm(n, 0, 1 * CAI__GEN_MOD)
         return (cbind(x, y))
     }
 )
