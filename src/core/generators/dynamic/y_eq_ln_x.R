@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("y_eq_ln_|x|+rnorm::",
+generator <- list(name = paste("y_eq_ln_|x|::",
                                CAI__GEN_MOD, sep=""),
                   dependent = TRUE,
                   modifiable = TRUE,
