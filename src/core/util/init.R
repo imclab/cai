@@ -4,6 +4,7 @@ stopifnot(require(graph))
 stopifnot(require(Rgraphviz))
 stopifnot(require(pcalg))
 
+p("Using k = ", break.fixed.n, " plot partitions ...")
 p("Using n = ", training.n, " data points for bivariate training ...")
 p("Using n = ", testing.n, " data points for CI testing ...")
 
