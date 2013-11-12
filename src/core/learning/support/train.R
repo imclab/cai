@@ -5,6 +5,31 @@ for (assessment in assessments)
     bivariate.summary.header <- append(bivariate.summary.header,
                                        assessment$name)
 
+alpha <- function(assessment, overrideLower) {
+    best <- list()
+    # improvement: proper optimization?
+    for (threshold in seq(0, max_score, 0.01)) {
+        ntotal <- 0
+        nerror <- 0
+        for (generator in generators) {
+            ntotal <- ntotal + 1
+            if ((threshold < scores[[assessment$name]][[generator$name]]
+                    && !generator$dependent) # false positive
+                || (scores[[assessment$name]][[generator$name]] < threshold
+                    && generator$dependent)) # false negative
+                nerror <- nerror + 1
+        }
+
+        if (is.null(best$error_rate)
+                || (overrideLower && ((nerror / ntotal) <= best$error_rate))
+                || (!overrideLower && ((nerror / ntotal) < best$error_rate))) {
+            best$threshold <- threshold
+            best$error_rate <- (nerror / ntotal)
+        }
+    }
+    return (best$threshold)
+}
+
 p("Training over synthetic data, 1/2 (scoring) ...")
 scores <- list()
 max_score <- NULL
@@ -44,29 +69,4 @@ for (assessment in assessments) {
     lowerbound <- alpha(assessment, overrideLower = FALSE)
     # Use "middle" optimal value.
     thresholds[assessment$name] <- upperbound - lowerbound
-}
-
-alpha <- function(assessment, overrideLower) {
-    best <- list()
-    # Improvement: Proper optimization?
-    for (threshold in seq(0, max_score, 0.01)) {
-        ntotal <- 0
-        nerror <- 0
-        for (generator in generators) {
-            ntotal <- ntotal + 1
-            if ((threshold < scores[[assessment$name]][[generator$name]]
-                    && !generator$dependent) # false positive
-                || (scores[[assessment$name]][[generator$name]] < threshold
-                    && generator$dependent)) # false negative
-                nerror <- nerror + 1
-        }
-
-        if (is.null(best$error_rate)
-                || (overrideLower && ((nerror / ntotal) <= best$error_rate))
-                || (!overrideLower && ((nerror / ntotal) < best$error_rate))) {
-            best$threshold <- threshold
-            best$error_rate <- (nerror / ntotal)
-        }
-    }
-    return (best$threshold)
 }
