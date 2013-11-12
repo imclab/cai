@@ -40,24 +40,33 @@ names(bivariate.summary) <- bivariate.summary.header
 p("Training over synthetic data, 2/2 (optimizing decision thresholds) ...")
 thresholds <- list()
 for (assessment in assessments) {
+    upperbound <- alpha(assessment, overrideLower = TRUE)
+    lowerbound <- alpha(assessment, overrideLower = FALSE)
+    # Use "middle" optimal value.
+    thresholds[assessment$name] <- upperbound - lowerbound
+}
+
+alpha <- function(assessment, overrideLower) {
     best <- list()
-    for (threshold in seq(0, max_score, 0.01)) { # Improvement: Proper optimization?
+    # Improvement: Proper optimization?
+    for (threshold in seq(0, max_score, 0.01)) {
         ntotal <- 0
         nerror <- 0
         for (generator in generators) {
             ntotal <- ntotal + 1
             if ((threshold < scores[[assessment$name]][[generator$name]]
-                 && !generator$dependent) # false positive
+                    && !generator$dependent) # false positive
                 || (scores[[assessment$name]][[generator$name]] < threshold
                     && generator$dependent)) # false negative
                 nerror <- nerror + 1
         }
-        # DET tradeoff: < vs. <=
+
         if (is.null(best$error_rate)
-            || ((nerror / ntotal) < best$error_rate)) {
+                || (overrideLower && ((nerror / ntotal) <= best$error_rate))
+                || (!overrideLower && ((nerror / ntotal) < best$error_rate))) {
             best$threshold <- threshold
             best$error_rate <- (nerror / ntotal)
         }
     }
-    thresholds[assessment$name] <- best$threshold
+    return (best$threshold)
 }
