@@ -10,7 +10,7 @@ navl <- function (a, b) {
 
 nformat <- function(n) {
     if (is.numeric(n))
-        return (sprintf("%.3f", n))
+        return (sprintf("%.2f", n))
     else
         return (n)
 }
