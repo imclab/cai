@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("y_eq_2sinx::",
+generator <- list(name = paste("2sinx::",
                                CAI__GEN_MOD, sep=""),
                   dependent = TRUE,
                   modifiable = TRUE,

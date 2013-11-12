@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("y_eq_x2::",
+generator <- list(name = paste("x^2::",
                                CAI__GEN_MOD, sep=""),
                   dependent = TRUE,
                   modifiable = TRUE,

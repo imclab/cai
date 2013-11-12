@@ -1,12 +1,12 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("y_eq_x_rnorm::",
+generator <- list(name = paste("ln_|x|::",
                                CAI__GEN_MOD, sep=""),
                   dependent = TRUE,
                   modifiable = TRUE,
                   generate = function(n) {
         x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-        y <- x * rnorm(n, 0, 1 * CAI__GEN_MOD) + rnorm(n, 0, 1 * CAI__GEN_MOD)
+        y <- log(abs(x)) + rnorm(n, 0, 1 * CAI__GEN_MOD)
         return (cbind(x, y))
     }
 )
