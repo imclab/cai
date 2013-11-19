@@ -8,7 +8,7 @@ source("src/core/learning/support/train.R")
 
 model <- NULL
 for (i in 1:length(models))
-    if (models[[i]][["name"]] == "temperature.continuous")
+    if (models[[i]][["name"]] == "temp")
         model <- models[[i]]
 
 results <- list()

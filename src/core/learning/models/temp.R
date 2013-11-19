@@ -60,7 +60,7 @@ d <- data.frame(cbind(temp_t0,
                       temp_outside_t2
                       ))
 
-model = list(name  = "temperature.continuous",
+model = list(name  = "temp",
              graph = g,
              data  = interval_scale(d))
 
