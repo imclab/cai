@@ -69,4 +69,5 @@ for (assessment in assessments) {
     lowerbound <- alpha(assessment, overrideLower = FALSE)
     # Use "middle" optimal value.
     thresholds[assessment$name] <- upperbound - lowerbound
+    p("\t[", assessment$name, "]\t-> [", (upperbound - lowerbound), "].")
 }
