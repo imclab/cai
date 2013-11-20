@@ -42,15 +42,7 @@ assessment <- list(name = "sc_span_d", assess = function(data) {
         return (navl(result, 0))
     }
 
-    x <- data[,1]
-    y <- data[,2]
-    rdata <- cbind(y, x)
-
-    hScore <- axis_score(data)
-    vScore <- axis_score(rdata)
-    score <- max(hScore, vScore)
-
-    return (score)
+    return (axis_score(data))
 })
 
 class(assessment) <- "assessment"
