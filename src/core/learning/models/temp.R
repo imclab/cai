@@ -35,13 +35,13 @@ sensor_t0       <- temp_t0 + rnorm(1, 0, 5) # Thermostat reading at t=0.
 temp_t1         <- temp_t0                  # Temperature inside at t-1.
                    + ((temp_outside_t0 - temp_t0) * 0.2)
                    + rnorm(1, 0, 5)
-temp_outside_t1 <- temp_outside_t0 + rnorm(1, 0 5)
+temp_outside_t1 <- temp_outside_t0 + rnorm(1, 0, 5)
 sensor_t1       <- temp_t1 + rnorm(1, 0, 5) # Thermostat reading at t=0.
 
 temp_t2         <- temp_t1                  # Temperature inside at t-1.
                    + ((temp_outside_t1 - temp_t1) * 0.2)
                    + rnorm(1, 0, 5)
-temp_outside_t2 <- temp_outside_t1 + rnorm(1, 0 5)
+temp_outside_t2 <- temp_outside_t1 + rnorm(1, 0, 5)
 sensor_t2       <- temp_t2 + rnorm(1, 0, 5) # Thermostat reading at t=0.
 
 temp_t3         <- temp_t2                  # Temperature inside at t-1.
