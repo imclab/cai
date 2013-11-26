@@ -2,7 +2,7 @@
 
 source("src/core/util/breaks.R")
 
-assessment <- list(name = "sc_dev_d", assess = function(data) {
+assessment <- list(name = "sc_variance", assess = function(data) {
     axis_score <- function(data) {
         x <- data[,1]
         breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
@@ -10,7 +10,6 @@ assessment <- list(name = "sc_dev_d", assess = function(data) {
         # Walk along x-axis creating vertical "stripe" bins.
 
         x_bin_values <- c()
-        x_bin_medians <- c()
         x_bin_variances <- c()
         for (xb in 1:(length(breaks_x) - 1)) {
             for (i in 1:length(data[,1])) {
@@ -21,12 +20,7 @@ assessment <- list(name = "sc_dev_d", assess = function(data) {
                     x_bin_values <- append(x_bin_values, yi)
             }
 
-            x_bin_medians <- append(x_bin_medians,
-                                  if (length(x_bin_values) > 0)
-                                      median(x_bin_values)
-                                  else
-                                      0)
-            x_bin_variances <- append(x_bin_variances,
+            x_bin_variances <- append(x_bin_medians,
                                       if (length(x_bin_values) > 0)
                                           var(x_bin_values)
                                       else
@@ -35,31 +29,21 @@ assessment <- list(name = "sc_dev_d", assess = function(data) {
         }
 
         y <- data[,2]
-        overall_median <- median(y)
-        overall_var <- var(y)
+        overall_variance <- var(y)
 
         # Walk along vertical "stripe" bins comparing delta in median, variance.
 
         max_diff <- 0
-        ncomparisons <- length(x_bin_medians)
+        ncomparisons <- length(x_bin_variances)
         for (i in 1:ncomparisons) {
-            diff_median <- abs(overall_median - x_bin_medians[i])
-            diff_var <- abs(overall_var - x_bin_variances[i])
-            max_diff <- max(max_diff, diff_median, diff_var)
+            diff_variance <- abs(overall_variance - x_bin_variances[i])
+            max_diff <- max(max_diff, diff_variance)
         }
 
         return (max_diff)
     }
 
-    x <- data[,1]
-    y <- data[,2]
-    rdata <- cbind(y, x)
-
-    hScore <- navl(axis_score(data), 0)
-    vScore <- navl(axis_score(rdata), 0)
-    score <- navl(max(hScore, vScore), 0)
-
-    return (score)
+    return (navl(axis_score(data), 0))
 })
 
 class(assessment) <- "assessment"
