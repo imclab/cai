@@ -20,7 +20,7 @@ assessment <- list(name = "sc_variance", assess = function(data) {
                     x_bin_values <- append(x_bin_values, yi)
             }
 
-            x_bin_variances <- append(x_bin_medians,
+            x_bin_variances <- append(x_bin_variances,
                                       if (length(x_bin_values) > 0)
                                           var(x_bin_values)
                                       else
@@ -31,7 +31,7 @@ assessment <- list(name = "sc_variance", assess = function(data) {
         y <- data[,2]
         overall_variance <- var(y)
 
-        # Walk along vertical "stripe" bins comparing delta in median, variance.
+        # Find maximum discrepancy between a partition and the whole plot.
 
         max_diff <- 0
         ncomparisons <- length(x_bin_variances)
