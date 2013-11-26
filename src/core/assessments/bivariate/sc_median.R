@@ -31,7 +31,7 @@ assessment <- list(name = "sc_median", assess = function(data) {
         y <- data[,2]
         overall_median <- median(y)
 
-        # Walk along vertical "stripe" bins comparing delta in median, variance.
+        # Find maximum discrepancy between a partition and the whole plot.
 
         max_diff <- 0
         ncomparisons <- length(x_bin_medians)
