@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("ind_norm::",
+generator <- list(name = paste("ind_UxU::",
                                CAI__GEN_MOD, sep=""),
                   dependent = FALSE,
                   modifiable = TRUE,
