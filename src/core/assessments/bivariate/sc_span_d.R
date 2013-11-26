@@ -34,11 +34,12 @@ assessment <- list(name = "sc_span_d", assess = function(data) {
             x_bin_values <- c()
         }
 
-        result <- max(navl(abs(max(x_bin_medians)
-                        - min(x_bin_medians)), 0),
-                    navl(abs(max(x_bin_variances)
-                        - min(x_bin_variances)), 0))
+#        result <- max(navl(abs(max(x_bin_medians)
+#                        - min(x_bin_medians)), 0),
+#                    navl(abs(max(x_bin_variances)
+#                        - min(x_bin_variances)), 0))
 
+        result <- navl(abs(max(x_bin_medians) - min(x_bin_medians)), 0)
         return (navl(result, 0))
     }
 
