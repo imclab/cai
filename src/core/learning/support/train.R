@@ -9,25 +9,30 @@ alpha <- function(assessment, overrideLower) {
     best <- list()
     # improvement: proper optimization?
     for (threshold in seq(0, max_score, 0.01)) {
-        ntotal <- 0
-        nerror <- 0
+        n_total <- 0
+        n_error <- 0
         for (generator in generators) {
-            ntotal <- ntotal + 1
+            n_total <- n_total + 1
             if ((threshold < scores[[assessment$name]][[generator$name]]
                     && !generator$dependent) # false positive
                 || (scores[[assessment$name]][[generator$name]] < threshold
                     && generator$dependent)) # false negative
-                nerror <- nerror + 1
+                n_error <- n_error + 1
         }
+        n_correct <- n_total - n_error
 
         if (is.null(best$error_rate)
-                || (overrideLower && ((nerror / ntotal) <= best$error_rate))
-                || (!overrideLower && ((nerror / ntotal) < best$error_rate))) {
+                || (overrideLower && ((n_error / n_total) <= best$error_rate))
+                || (!overrideLower && ((n_error / n_total) < best$error_rate))) {
             best$threshold <- threshold
-            best$error_rate <- (nerror / ntotal)
+            best$n_total <- n_total
+            best$n_error <- n_error
+            best$n_correct <- n_correct
+            best$accuracy_str <- paste(n_correct, "/", n_total, sep="")
+            best$error_rate <- (n_error / n_total)
         }
     }
-    return (best$threshold)
+    return (best)
 }
 
 p("Training over synthetic data, 1/2 (scoring) ...")
@@ -37,7 +42,6 @@ bivariate.summary <- NULL
 for (generator in generators) {
     data <- generator$generate(training.n)
     data <- interval_scale(data)
-    annotation <- ""
 
     detail.row <- c(generator$name)
     for (assessment in assessments) {
@@ -68,5 +72,10 @@ for (assessment in assessments) {
     upperbound <- alpha(assessment, overrideLower = TRUE)
     lowerbound <- alpha(assessment, overrideLower = FALSE)
     # Use "middle" optimal value.
-    thresholds[assessment$name] <- upperbound - lowerbound
+    score <- upperbound$threshold - lowerbound$threshold
+    thresholds[assessment$name] <- score
+    p("[", assessment$name, "]\t-> [ ",
+      lowerbound$accuracy_str, " @ ", nformat(lowerbound$threshold),
+      " < ", nformat(score), " < ",
+      upperbound$accuracy_str, " @ ", nformat(upperbound$threshold), "].")
 }
