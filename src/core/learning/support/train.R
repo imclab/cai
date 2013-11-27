@@ -72,7 +72,7 @@ for (assessment in assessments) {
     upperbound <- alpha(assessment, overrideLower = TRUE)
     lowerbound <- alpha(assessment, overrideLower = FALSE)
     # Use "middle" optimal value.
-    score <- upperbound$threshold - lowerbound$threshold
+    score <- mean(lowerbound$threshold, upperbound$threshold)
     thresholds[assessment$name] <- score
     p("[", assessment$name, "]\t-> [ ",
       lowerbound$accuracy_str, " @ ", nformat(lowerbound$threshold),
