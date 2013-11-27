@@ -40,9 +40,8 @@ ci_comp <- function(x, y, S, suffStat) {
     }
 
     highest <- max(scores)
-    verbose("Called ci_comp:", x, ",", y, ",", S,
-      ". [Z variables: ", ncol(S.), "]) -> ",
-      "p::alpha = [", highest, "]::[",
+    verbose("Called ci_comp:", x, ",", y, ",[", S,
+      "]\t-> ", "p::alpha = [", highest, "]::[",
       thresholds[[bivariate_test$name]], "].")
 
     return (highest)
