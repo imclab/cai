@@ -25,8 +25,8 @@ ci_pcor <- function(x, y, S, suffStat) {
                           method = method_cor))
     }
 
-    verbose("Called ci_pcor:", x, ",", y, ",[", S,
-      "]\t-> ", "[", nformat(result), "].")
+    verbose("Called ci_pcor:", x, ",", y, ",[|", ncol(S.),
+      "|]\t-> ", nformat(result), ".")
 
     return (result)
 }
