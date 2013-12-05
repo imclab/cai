@@ -4,7 +4,15 @@ stopifnot(require(graph))
 stopifnot(require(Rgraphviz))
 stopifnot(require(pcalg))
 
-p("Using k = ", break.fixed.n, " plot partitions ...")
+if (break_method == "fixed") {
+    p("Using fixed k = ", break.fixed.n, " plot partitions ...")
+} else if (break_method == "sturges") {
+    p("Using Sturges' Rule for plot partitions",
+      "; k = ",
+      bin_count(training.n),
+      " for training data ...")
+}
+
 p("Using n = ", training.n, " data points for bivariate training ...")
 p("Using n = ", testing.n, " data points for CI testing ...")
 
