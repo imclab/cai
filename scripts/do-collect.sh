@@ -31,7 +31,7 @@ fi
 
 mkdir -p results
 
-echo -n "Running $n iterations of model $model ... "
+echo -n "Collecting for $n iterations over model '$model' ... "
 
 i=0
 while [ $i -lt $n ]
