@@ -17,7 +17,7 @@ ci_comp <- function(x, y, S, suffStat) {
         for (Si in 1:ncol(S.)) {
             z. <- S.[,Si]
 
-            breaks_z <- breaks_uniform_width(z., bin_count(nrow(z.)))
+            breaks_z <- breaks_uniform_width(z., bin_count(length(z.)))
             xyz_df <- data.frame(cbind(x., y., z.))
 
             for (zb in 1:(length(breaks_z) - 1)) {
