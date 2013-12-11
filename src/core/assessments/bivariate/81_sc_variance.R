@@ -2,7 +2,7 @@
 
 source("src/core/util/breaks.R")
 
-assessment <- list(name = "sc_variance", assess = function(data) {
+assessment <- list(name = "SC_{\\sigma^2}", assess = function(data) {
     axis_score <- function(data) {
         x <- data[,1]
         breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
