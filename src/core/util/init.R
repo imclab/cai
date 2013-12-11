@@ -4,6 +4,9 @@ stopifnot(require(graph))
 stopifnot(require(Rgraphviz))
 stopifnot(require(pcalg))
 
+source("src/core/util/util.R")
+source("src/conf/properties.R")
+
 if (break_method == "fixed") {
     p("Using fixed k = ", break.fixed.n, " plot partitions ...")
 } else if (break_method == "sturges") {

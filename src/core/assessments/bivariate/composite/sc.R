@@ -1,11 +1,15 @@
 # Christopher L. Simons, 2013
 
+p("---------------------------------------- LOADING SC ASSESSMENT.")
+
 assessment <- list(name = "sc", assess = function(data) {
     dep <- FALSE
-    for (assessment in assessments) {
-        if (assessment$assess(data) > thresholds[assessment$name]) {
-            dep <- TRUE
-            break
+    for (i in assessments) {
+        if (length(grep("sc_", i$name)) > 0) {
+            if (i$assess(data) > thresholds[i$name]) {
+                dep <- TRUE
+                break
+            }
         }
     }
     return (if (dep) 1 else 0)

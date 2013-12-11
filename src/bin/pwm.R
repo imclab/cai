@@ -1,8 +1,9 @@
 # Christopher L. Simons, 2013
 
-source("src/core/util/util.R")
-source("src/conf/properties.R")
 source("src/core/util/init.R")
+p("Started program at [", date(), "].")
+source("src/core/learning/support/train.R")
+source("src/core/util/init_learners.R")
 
 p("\nUsing n = ", training.n, " data points per generator ...\n")
 

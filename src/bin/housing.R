@@ -1,10 +1,9 @@
 # Christopher L. Simons, 2013
 
-source("src/core/util/util.R")
-p("Started program at [", date(), "].")
-source("src/conf/properties.R")
 source("src/core/util/init.R")
+p("Started program at [", date(), "].")
 source("src/core/learning/support/train.R")
+source("src/core/util/init_learners.R")
 
 model <- NULL
 for (i in 1:length(models))
