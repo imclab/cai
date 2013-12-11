@@ -38,7 +38,7 @@ for (generator in generators) {
     data <- generator$generate(training.n)
     data <- interval_scale(data)
 
-    detail.row <- c(generator$name)
+    detail.row <- c(paste("$", generator$name, "$"))
     for (assessment in assessments) {
         result <- assessment$assess(data)
         if (is.na(result))
@@ -76,10 +76,11 @@ for (assessment in assessments) {
 bivariate.summary.header <- c("GENERATOR")
 for (assessment in assessments)
     bivariate.summary.header <- append(bivariate.summary.header,
-                                       paste(assessment$name,
-                                             "^{$\\theta=",
+                                       paste("$",
+                                             assessment$name,
+                                             "^{\\theta=",
                                              nformat(thresholds[assessment$name]),
-                                             "$}",
+                                             "}$",
                                              sep=""))
 
 bivariate.summary <- data.frame(bivariate.summary)
