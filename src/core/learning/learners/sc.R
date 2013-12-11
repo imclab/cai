@@ -5,15 +5,15 @@ for (dirname in c("src/core/assessments/bivariate/composite"))
         for (filename in list.files(path = dirname, pattern = ".+\\.R"))
             source(paste(dirname, "/", filename, sep = ""))
 
-learner <- list(name  = "sc",
+learner <- list(name  = "SC",
                 learn = function(data.) {
                     result <- pc(suffStat
                                    = list(data = data.,
                                           bivariate_test =
-                                            assessments$sc),
+                                            assessments$SC),
                                  indepTest = ci_comp,
                                  p         = ncol(data.),
-                                 alpha     = thresholds$sc)
+                                 alpha     = thresholds$SC)
                     nodes(result@graph) <- names(data.)
                     return (result)
                 })
