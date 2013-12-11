@@ -79,7 +79,7 @@ for (assessment in assessments) {
 }
 
 # Formatting for LaTeX 'tabular' environment.
-bivariate.summary.header <- c("$ f(x) $")
+bivariate.summary.header <- c("$ f(x) $ & $ \\ind? $")
 for (assessment in assessments)
     bivariate.summary.header <- append(bivariate.summary.header,
                                        paste("$",
