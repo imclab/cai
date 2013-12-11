@@ -9,8 +9,8 @@ break_method  = "sturges"
 
 # Generator "sigma" modifiers.
 CAI__GEN_MOD_DEFAULT = 1
-CAI__GEN_MODS        = c(0.01, 0.1, 1, 10, 100)
-#CAI__GEN_MODS        = c(1)
+CAI__GEN_MODS        = c(1)
+#CAI__GEN_MODS        = c(0.01, 0.1, 1, 10, 100)
 
 AUTOLOAD_DIRS = c(
     "src/core/generators",
