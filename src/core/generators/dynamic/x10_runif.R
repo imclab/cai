@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("x^10 \\times \\unoise::",
+generator <- list(name = paste("x^{10} \\times \\unoise::",
                                CAI__GEN_MOD, sep=""),
                   dependent = TRUE,
                   modifiable = TRUE,
