@@ -1,10 +1,5 @@
 # Christopher L. Simons, 2013
 
-bivariate.summary.header <- c("GENERATOR")
-for (assessment in assessments)
-    bivariate.summary.header <- append(bivariate.summary.header,
-                                       assessment$name)
-
 alpha <- function(assessment, overrideLower) {
     best <- list()
     # improvement: proper optimization?
@@ -63,12 +58,10 @@ for (generator in generators) {
     bivariate.summary <- rbind(bivariate.summary, detail.row)
 }
 
-bivariate.summary <- data.frame(bivariate.summary)
-names(bivariate.summary) <- bivariate.summary.header
-
 p("Training over synthetic data, 2/2 (optimizing decision thresholds) ...")
 thresholds <- list()
 for (assessment in assessments) {
+    p("\tTraining on assessment ", assessment$name, " [0..", max_score, "] ...")
     upperbound <- alpha(assessment, overrideLower = TRUE)
     lowerbound <- alpha(assessment, overrideLower = FALSE)
     # Use "middle" optimal value.
@@ -79,3 +72,15 @@ for (assessment in assessments) {
       " < ", nformat(score), " < ",
       upperbound$accuracy_str, " @ ", nformat(upperbound$threshold), "].")
 }
+
+bivariate.summary.header <- c("GENERATOR")
+for (assessment in assessments)
+    bivariate.summary.header <- append(bivariate.summary.header,
+                                       paste(assessment$name,
+                                             "^{$\\theta=",
+                                             nformat(thresholds[assessment$name]),
+                                             "$}",
+                                             sep=""))
+
+bivariate.summary <- data.frame(bivariate.summary)
+names(bivariate.summary) <- bivariate.summary.header
