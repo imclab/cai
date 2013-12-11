@@ -21,10 +21,10 @@ assessment <- list(name = "sc_median", assess = function(data) {
             }
 
             x_bin_medians <- append(x_bin_medians,
-                                  if (length(x_bin_values) > 0)
-                                      median(x_bin_values)
-                                  else
-                                      0)
+                                    if (length(x_bin_values) > 0)
+                                        median(x_bin_values)
+                                    else
+                                        0)
             x_bin_values <- c()
         }
 
