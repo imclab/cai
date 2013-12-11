@@ -16,6 +16,5 @@ AUTOLOAD_DIRS = c(
     "src/core/generators",
     "src/core/assessments/bivariate",
     "src/core/assessments/conditional",
-    "src/core/learning/learners",
     "src/core/learning/models",
 "")
