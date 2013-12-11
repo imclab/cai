@@ -38,7 +38,12 @@ for (generator in generators) {
     data <- generator$generate(training.n)
     data <- interval_scale(data)
 
-    detail.row <- c(paste("$", generator$name, "$"))
+    detail.row <- c(paste("$ ", generator$name, " + \\noise $",
+                          " & ",
+                          "$",
+                          (if (generator$dependent) "\\dep" else "\\ind"),
+                          "$",
+                          sep=""))
     for (assessment in assessments) {
         result <- assessment$assess(data)
         if (is.na(result))
@@ -73,7 +78,8 @@ for (assessment in assessments) {
       upperbound$accuracy_str, " @ ", nformat(upperbound$threshold), "].")
 }
 
-bivariate.summary.header <- c("GENERATOR")
+# Formatting for LaTeX 'tabular' environment.
+bivariate.summary.header <- c("$ f(x) $")
 for (assessment in assessments)
     bivariate.summary.header <- append(bivariate.summary.header,
                                        paste("$",

@@ -6,10 +6,14 @@ source("src/core/learning/support/train.R")
 
 options(width = 160)
 
-write.csv(bivariate.summary,
-          file      = "bivariate-comp.csv",
-          quote     = FALSE,
-          row.names = FALSE,
-          col.names = TRUE)
+# Formatting for LaTeX 'tabular' environment.
+write.table(bivariate.summary,
+            file      = "bivariate-comp.csv",
+            quote     = FALSE,
+            row.names = FALSE,
+            col.names = TRUE,
+            sep       = " & ",
+            eol       = " \\\\\n"
+            )
 
 print.data.frame(bivariate.summary)
