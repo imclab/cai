@@ -43,7 +43,14 @@ assessment <- list(name = "SC_{\\sigma^2}", assess = function(data) {
         return (max_diff)
     }
 
-    return (navl(axis_score(data), 0))
+    #return (navl(axis_score(data), 0))
+
+    # Multiplying by 4 since we scale to [0,1] and maximum
+    # possible variance is max/4 (0.25 in this case); this
+    # allows us direct comparison to the other assessments,
+    # whose range is [0,1].
+    #
+    return (navl(axis_score(data), 0) * 4)
 })
 
 class(assessment) <- "assessment"
