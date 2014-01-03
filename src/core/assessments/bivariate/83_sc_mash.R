@@ -1,0 +1,97 @@
+# Christopher L. Simons, 2013
+
+source("src/core/util/breaks.R")
+
+assessment <- list(name = "SC_{mash}", assess = function(data) {
+    axis_score_median <- function(data) {
+        x <- data[,1]
+        breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
+
+        # Walk along x-axis creating vertical "stripe" bins.
+
+        x_bin_values <- c()
+        x_bin_medians <- c()
+        for (xb in 1:(length(breaks_x) - 1)) {
+            for (i in 1:length(data[,1])) {
+                xi <- data[i,][1]
+                yi <- data[i,][2]
+
+                if (xi >= breaks_x[xb] && xi <= breaks_x[xb + 1])
+                    x_bin_values <- append(x_bin_values, yi)
+            }
+
+            x_bin_medians <- append(x_bin_medians,
+                                    if (length(x_bin_values) > 0)
+                                        median(x_bin_values)
+                                    else
+                                        0)
+            x_bin_values <- c()
+        }
+
+        y <- data[,2]
+        overall_median <- median(y)
+
+        # Find maximum discrepancy between a partition and the whole plot.
+
+        max_diff <- 0
+        ncomparisons <- length(x_bin_medians)
+        for (i in 1:ncomparisons) {
+            diff_median <- abs(overall_median - x_bin_medians[i])
+            max_diff <- max(max_diff, diff_median)
+        }
+
+        return (max_diff)
+    }
+
+    axis_score_variance <- function(data) {
+        x <- data[,1]
+        breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
+
+        # Walk along x-axis creating vertical "stripe" bins.
+
+        x_bin_values <- c()
+        x_bin_variances <- c()
+        for (xb in 1:(length(breaks_x) - 1)) {
+            for (i in 1:length(data[,1])) {
+                xi <- data[i,][1]
+                yi <- data[i,][2]
+
+                if (xi >= breaks_x[xb] && xi <= breaks_x[xb + 1])
+                    x_bin_values <- append(x_bin_values, yi)
+            }
+
+            x_bin_variances <- append(x_bin_variances,
+                                      if (length(x_bin_values) > 0)
+                                          var(x_bin_values)
+                                      else
+                                          0)
+            x_bin_values <- c()
+        }
+
+        y <- data[,2]
+        overall_variance <- var(y)
+
+        # Find maximum discrepancy between a partition and the whole plot.
+
+        max_diff <- 0
+        ncomparisons <- length(x_bin_variances)
+        for (i in 1:ncomparisons) {
+            diff_variance <- abs(overall_variance - x_bin_variances[i])
+            max_diff <- max(max_diff, diff_variance)
+        }
+
+        # Multiplying by 4 since we scale to [0,1] and maximum
+        # possible variance is max/4 (0.25 in this case); this
+        # allows us direct comparison to the other assessments,
+        # whose range is [0,1].
+        #
+        return (max_diff * 4)
+    }
+
+
+    return (max(navl(axis_score_median(data), 0),
+                navl(axis_score_variance(data), 0)))
+})
+
+class(assessment) <- "assessment"
+assessments[[assessment$name]] <- assessment

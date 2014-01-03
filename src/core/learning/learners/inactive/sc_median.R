@@ -1,19 +1,14 @@
 # Christopher L. Simons, 2013
 
-for (dirname in c("src/core/assessments/bivariate/composite"))
-    if (length(dirname) > 0)
-        for (filename in list.files(path = dirname, pattern = ".+\\.R"))
-            source(paste(dirname, "/", filename, sep = ""))
-
-learner <- list(name  = "SC",
+learner <- list(name  = "SC_{median}",
                 learn = function(data.) {
                     result <- pc(suffStat
                                    = list(data = data.,
                                           bivariate_test =
-                                            assessments$SC),
+                                            assessments[["SC_{\\widetilde{x}}"]]),
                                  indepTest = ci_comp,
                                  p         = ncol(data.),
-                                 alpha     = thresholds$SC)
+                                 alpha     = thresholds[["SC_{\\widetilde{x}}"]])
                     nodes(result@graph) <- names(data.)
                     return (result)
                 })
