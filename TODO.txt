@@ -1,6 +1,0 @@
-1. Implement other approaches.
-   1. Margaritis.
-   2. Zhang.
-   3. Other methods (copula-, ECF-based?).
-
-X. More independent generators for higher training quality.
