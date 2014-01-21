@@ -1,7 +1,10 @@
 # Christopher L. Simons, 2013
 
 source("src/core/util/init.R")
+source("src/core/util/plot_disc.R")
+
 p("Started program at [", date(), "].")
+
 source("src/core/learning/support/train.R")
 source("src/core/util/init_learners.R")
 
