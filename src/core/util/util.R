@@ -49,6 +49,28 @@ interval_scale <- function(x, a = 0, b = 1) {
              / (max(x) - min(x))) + a)
 }
 
+iqr <- function(data) {
+    # Reduce 'data' to inner-quartile range per X-axis.
+
+    x <- data[,1]
+    idx_25 <- floor(length(x) / 4)
+    idx_75 <- ceiling((length(x) / 4) * 3)
+    x_sorted <- sort(x)
+    iqr_a <- x_sorted[idx_25]
+    iqr_b <- x_sorted[idx_75]
+
+    reduced_data <- NULL
+    for (i in 1:length(data[,1])) {
+        xi <- data[i,1]
+        yi <- data[i,2]
+        if (xi >= iqr_a && xi <= iqr_b) {
+            reduced_data <- rbind(reduced_data, cbind(xi, yi))
+        }
+    }
+
+    return (reduced_data)
+}
+
 bin_count_fixed <- function(n) {
     return (break.fixed.n);
 }
