@@ -68,7 +68,7 @@ cellColor <- function(fill, gradient, cell_weight) {
 }
 
 plot_disc <- function(data,
-                      showPlot=TRUE,
+                      filename=NULL,
                       fill=TRUE,
                       gradient=TRUE,
                       debug=FALSE) {
@@ -80,13 +80,17 @@ plot_disc <- function(data,
 
     n_cells <- length(cell_points)
 
-    if (showPlot) {
-        plot(data)
-        for (i in 1:n_cells) {
-            cell_weight <- cell_points[i] / max_cell_points
-            polygon(coords_x[i,], coords_y[i,],
-                    col=cellColor(fill, gradient, cell_weight))
-        }
+    if (!is.null(filename)) {
+        png(filename)
+    }
+    plot(data)
+    for (i in 1:n_cells) {
+        cell_weight <- cell_points[i] / max_cell_points
+        polygon(coords_x[i,], coords_y[i,],
+                col=cellColor(fill, gradient, cell_weight))
+    }
+    if (!is.null(filename)) {
+        dev.off()
     }
 }
 
