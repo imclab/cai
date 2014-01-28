@@ -86,3 +86,10 @@ break_methods = list(fixed   = bin_count_fixed,
 bin_count <- function(n) {
     return (break_methods[[break_method]](n))
 }
+
+# From http://stackoverflow.com/questions/2547402/
+#          standard-library-function-in-r-for-finding-the-mode
+Mode <- function(x) {
+    ux <- unique(x)
+    ux[which.max(tabulate(match(x, ux)))]
+}
