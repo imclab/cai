@@ -11,14 +11,14 @@ name_friendly <- function(nom) {
     return (nom)
 }
 
-examine_variance <- function(data, gen_name) { # Adapted from 81_sc_variance.R.
+sc_debug <- function(data, gen_name, fnSS) {
     x <- data[,1]
     breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
 
     # Walk along x-axis creating vertical "stripe" bins.
 
     x_bin_values <- c()
-    x_bin_variances <- c()
+    x_bin_stats <- c()
     for (xb in 1:(length(breaks_x) - 1)) {
         for (i in 1:length(data[,1])) {
             xi <- data[i,][1]
@@ -28,26 +28,27 @@ examine_variance <- function(data, gen_name) { # Adapted from 81_sc_variance.R.
                 x_bin_values <- append(x_bin_values, yi)
         }
 
-        x_bin_variances <- append(x_bin_variances,
-                                  if (length(x_bin_values) > 0)
-                                      var(x_bin_values)
-                                  else
-                                      0)
+        x_bin_stats <- append(x_bin_stats,
+                              if (length(x_bin_values) > 0)
+                                  get(fnSS)(x_bin_values)
+                              else
+                                  0)
         x_bin_values <- c()
     }
 
     y <- data[,2]
-    overall_variance <- var(y)
+    overall_stat <- var(y)
 
     # Find maximum discrepancy between a partition and the whole plot.
 
     max_diff <- 0
-    ncomparisons <- length(x_bin_variances)
+    ncomparisons <- length(x_bin_stats)
     for (i in 1:ncomparisons) {
-        p("var-comp: ", gen_name, ": var_i / overall = ",
-          x_bin_variances[i], " / ", overall_variance)
-        diff_variance <- abs(overall_variance - x_bin_variances[i])
-        max_diff <- max(max_diff, diff_variance)
+        p("sc-debug: ", gen_name,
+          ": ", fnSS, "_i / ", fnSS, " = ",
+          x_bin_stats[i], " / ", overall_stat)
+        diff_stat <- abs(overall_stat - x_bin_stats[i])
+        max_diff <- max(max_diff, diff_stat)
     }
 
     return (max_diff)
@@ -60,12 +61,14 @@ for (generator in generators) {
         data <- generator$generate(training.n)
         data <- interval_scale(data)
 
+        fnSS <- "var"
         nom <- name_friendly(generator$name)
-        examine_variance(data, nom)
+        sc_debug(data, nom, fnSS)
         plot_disc(data,
-                  filename=paste("variance-comp/", nom, ".png", sep=""),
+                  filename=paste("sc-debug/", fnSS, "-", nom, ".png", sep=""),
                   fill=FALSE,
                   gradient=TRUE,
                   debug=FALSE)
     }
 }
+p("Program completed at [", date(), "].")
