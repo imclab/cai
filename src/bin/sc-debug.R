@@ -45,11 +45,13 @@ sc_debug <- function(data, gen_name, fnSS) {
     ncomparisons <- length(x_bin_stats)
     for (i in 1:ncomparisons) {
         p("sc-debug: ", gen_name,
-          ": ", fnSS, "_i / ", fnSS, " = ",
-          x_bin_stats[i], " / ", overall_stat)
+          ": |", fnSS, " - ", fnSS, "_i| = |",
+          nformat(overall_stat), " - ", nformat(x_bin_stats[i]),
+          "| = ", nformat(abs(overall_stat - x_bin_stats[i])))
         diff_stat <- abs(overall_stat - x_bin_stats[i])
         max_diff <- max(max_diff, diff_stat)
     }
+    p("sc-debug: ", gen_name, ": max deviation = ", nformat(max_diff))
 
     return (max_diff)
 }
