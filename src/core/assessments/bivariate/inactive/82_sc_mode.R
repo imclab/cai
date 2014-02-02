@@ -37,7 +37,8 @@ assessment <- list(name = "SC_{Mo}", assess = function(data) {
         ncomparisons <- length(x_bin_modes)
         for (i in 1:ncomparisons) {
             diff_mode <- abs(overall_mode - x_bin_modes[i])
-            max_diff <- max(max_diff, diff_mode)
+            if (!is.na(diff_mode))
+                max_diff <- max(max_diff, diff_mode)
         }
 
         return (max_diff)

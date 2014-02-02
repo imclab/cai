@@ -37,7 +37,8 @@ assessment <- list(name = "SC_{\\overline{x}}", assess = function(data) {
         ncomparisons <- length(x_bin_means)
         for (i in 1:ncomparisons) {
             diff_mean <- abs(overall_mean - x_bin_means[i])
-            max_diff <- max(max_diff, diff_mean)
+            if (!is.na(diff_mean))
+                max_diff <- max(max_diff, diff_mean)
         }
 
         return (max_diff)

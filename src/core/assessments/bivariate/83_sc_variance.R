@@ -37,7 +37,8 @@ assessment <- list(name = "SC_{\\sigma^2}", assess = function(data) {
         ncomparisons <- length(x_bin_variances)
         for (i in 1:ncomparisons) {
             diff_variance <- abs(overall_variance - x_bin_variances[i])
-            max_diff <- max(max_diff, diff_variance)
+            if(!is.na(diff_variance))
+                max_diff <- max(max_diff, diff_variance)
         }
 
         return (max_diff)

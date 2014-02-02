@@ -37,7 +37,8 @@ assessment <- list(name = "SC_{\\widetilde{x}}", assess = function(data) {
         ncomparisons <- length(x_bin_medians)
         for (i in 1:ncomparisons) {
             diff_median <- abs(overall_median - x_bin_medians[i])
-            max_diff <- max(max_diff, diff_median)
+            if (!is.na(diff_median))
+                max_diff <- max(max_diff, diff_median)
         }
 
         return (max_diff)

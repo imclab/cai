@@ -37,7 +37,8 @@ assessment <- list(name = "SC_{mash}", assess = function(data) {
         ncomparisons <- length(x_bin_medians)
         for (i in 1:ncomparisons) {
             diff_median <- abs(overall_median - x_bin_medians[i])
-            max_diff <- max(max_diff, diff_median)
+            if (!is.na(diff_median))
+                max_diff <- max(max_diff, diff_median)
         }
 
         return (max_diff)
@@ -77,7 +78,8 @@ assessment <- list(name = "SC_{mash}", assess = function(data) {
         ncomparisons <- length(x_bin_variances)
         for (i in 1:ncomparisons) {
             diff_variance <- abs(overall_variance - x_bin_variances[i])
-            max_diff <- max(max_diff, diff_variance)
+            if (!is.na(diff_variance))
+                max_diff <- max(max_diff, diff_variance)
         }
 
         # Multiplying by 4 since we scale to [0,1] and maximum
