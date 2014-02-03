@@ -17,3 +17,7 @@ for (dirname in c("src/core/generators/dynamic")) {
         }
     }
 }
+
+if (length(CAI__GEN_MODS) == 1)
+    for (generator in generators)
+        generator$name <- gsub("::([^ ]+)", "", generator$name)
