@@ -23,3 +23,7 @@ for (dirname in AUTOLOAD_DIRS)
     if (length(dirname) > 0)
         for (filename in list.files(path = dirname, pattern = ".+\\.R"))
             source(paste(dirname, "/", filename, sep = ""))
+
+if (length(CAI__GEN_MODS) == 1)
+    for (generator in generators)
+        generator$name <- gsub("::([^ ]+)", "", generator$name)
