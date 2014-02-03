@@ -13,7 +13,6 @@ for (dirname in c("src/core/generators/dynamic")) {
                     CAI__GEN_MOD = CAI__GEN_MODS[i]
                     source(paste(dirname, "/", filename, sep = ""))
                 }
-                CAI__GEN_MOD = CAI__GEN_MOD_DEFAULT
             }
         }
     }

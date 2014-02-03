@@ -17,11 +17,11 @@ for (dirname in AUTOLOAD_DIRS)
         for (filename in list.files(path = dirname, pattern = ".+\\.R"))
             source(paste(dirname, "/", filename, sep = ""))
 
-# Only print default version of generators.
-CAI__GEN_MOD = CAI__GEN_MOD_DEFAULT
-
+CAI__GEN_MODS_ORIG = CAI__GEN_MODS
+CAI__GEN_MODS = c(1)
 for (generator in generators) {
     data <- generator$generate(training.n)
     p("\n", generator$name, ":")
     print_weight_matrix(data)
 }
+CAI__GEN_MODS = CAI__GEN_MODS_ORIG
