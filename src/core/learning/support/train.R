@@ -38,7 +38,14 @@ for (generator in generators) {
     data <- generator$generate(training.n)
     data <- interval_scale(data)
 
-    detail.row <- c(paste("$ ", generator$name, " + \\noise $",
+p("{", generator$name, "]")
+    detail.row <- c(paste("$ ", generator$name,
+                          (
+                              if (! grepl("^\\\\(u?)noise", generator$name))
+                                  " + \\noise $"
+                              else
+                                  ""
+                          ),
                           " & ",
                           "$",
                           (if (generator$dependent) "\\dep" else "\\ind"),
