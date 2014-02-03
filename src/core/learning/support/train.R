@@ -44,7 +44,7 @@ p("{", generator$name, "]")
                               if (! grepl("^\\\\(u?)noise", generator$name))
                                   " + \\noise $"
                               else
-                                  ""
+                                  " $"
                           ),
                           " & ",
                           "$",
