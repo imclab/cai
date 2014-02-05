@@ -3,6 +3,7 @@
 stopifnot(require(graph))
 stopifnot(require(Rgraphviz))
 stopifnot(require(pcalg))
+stopifnot(require(energy))
 
 source("src/core/util/util.R")
 source("src/conf/properties.R")
