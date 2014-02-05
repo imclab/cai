@@ -91,7 +91,7 @@ for (assessment in assessments)
     bivariate.summary.header <- append(bivariate.summary.header,
                                        paste("$",
                                              assessment$name,
-                                             "^{\\theta=",
+                                             "^{\\alpha=",
                                              nformat(thresholds[assessment$name]),
                                              "}$",
                                              sep=""))
