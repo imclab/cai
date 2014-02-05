@@ -49,7 +49,7 @@ interval_scale <- function(x, a = 0, b = 1) {
              / (max(x) - min(x))) + a)
 }
 
-iqr <- function(data) {
+iqr_reduce <- function(data) {
     # Reduce 'data' to inner-quartile range per X-axis.
 
     x <- data[,1]
