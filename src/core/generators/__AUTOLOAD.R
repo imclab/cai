@@ -18,21 +18,21 @@ for (dirname in c("src/core/generators/dynamic")) {
     }
 }
 
-# Offset dependent generators with equal number of independent generators:
-for (i in 1:length(generators)) {
-    generator <- list(name = paste("\\noise_{", i, "}::",
-                                   CAI__GEN_MOD, sep=""),
-                      dependent = FALSE,
-                      modifiable = TRUE,
-                      generate = function(n) {
-            x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-            y <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-            return (cbind(x, y))
-        }
-    )
-    class(generator) <- "generator"
-    generators[[length(generators) + 1]] <- generator
-}
+## Offset dependent generators with equal number of independent generators:
+#for (i in 1:length(generators)) {
+#    generator <- list(name = paste("\\noise_{", i, "}::",
+#                                   CAI__GEN_MOD, sep=""),
+#                      dependent = FALSE,
+#                      modifiable = TRUE,
+#                      generate = function(n) {
+#            x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
+#            y <- rnorm(n, 0, 1 * CAI__GEN_MOD)
+#            return (cbind(x, y))
+#        }
+#    )
+#    class(generator) <- "generator"
+#    generators[[length(generators) + 1]] <- generator
+#}
 
 # Remove modifier annotation if not using multiple modifiers:
 if (length(CAI__GEN_MODS) == 1)

@@ -40,7 +40,8 @@ for (generator in generators) {
 
     detail.row <- c(paste("$ ", generator$name,
                           (
-                              if (! grepl("^\\\\(u?)noise", generator$name))
+                              if ((! grepl("^\\\\(u?)noise", generator$name))
+                                    && (! grepl("^\\\\beta", generator$name)))
                                   " + \\noise $"
                               else
                                   " $"
