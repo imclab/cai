@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("\\noise::",
+generator <- list(name = paste("\\unoise::",
                                CAI__GEN_MOD, sep=""),
                   dependent = FALSE,
                   modifiable = TRUE,
