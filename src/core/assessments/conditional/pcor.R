@@ -14,15 +14,21 @@ ci_pcor <- function(x, y, S, suffStat) {
     if (ncol(S.) > 0) {
         resid_xz <- residuals(lm(formula = x. ~ S.))
         resid_yz <- residuals(lm(formula = y. ~ S.))
-        result <- abs(cor(x      = resid_xz,
-                          y      = resid_yz,
-                          use    = "complete.obs",
-                          method = method_cor))
+        result <- if (method_cor == "dcor")
+                      dcor(x = resid_xz, y = resid_yz)
+                  else
+                      abs(cor(x      = resid_xz,
+                              y      = resid_yz,
+                              use    = "complete.obs",
+                              method = method_cor))
     } else {
-        result <- abs(cor(x      = x.,
-                          y      = y.,
-                          use    = "complete.obs",
-                          method = method_cor))
+        result <- if (method_cor == "dcor")
+                      dcor(x = x., y = y.)
+                  else
+                      abs(cor(x      = x.,
+                              y      = y.,
+                              use    = "complete.obs",
+                              method = method_cor))
     }
 
     verbose("Called ci_pcor:", x, ",", y, ",[|", ncol(S.),
