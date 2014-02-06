@@ -33,8 +33,3 @@ for (dirname in c("src/core/generators/dynamic")) {
 #    class(generator) <- "generator"
 #    generators[[length(generators) + 1]] <- generator
 #}
-
-# Remove modifier annotation if not using multiple modifiers:
-if (length(CAI__GEN_MODS) == 1)
-    for (generator in generators)
-        generator$name <- gsub("::([^ ]+)", "", generator$name)
