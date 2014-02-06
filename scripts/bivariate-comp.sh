@@ -12,6 +12,4 @@ then
     exit 1
 fi
 
-sed -i "s/::1//g" bivariate-comp.csv
-
 echo "done."

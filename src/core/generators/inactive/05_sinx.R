@@ -1,12 +1,11 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("\\beta(0.5, 0.5)::",
-                               CAI__GEN_MOD, sep=""),
-                  dependent = FALSE,
+generator <- list(name = "sin(x)",
+                  dependent = TRUE,
                   modifiable = TRUE,
                   generate = function(n) {
-        x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-        y <- rbeta(n, 0.5, 0.5)
+        x <- rnorm(n, 0, 1)
+        y <- sin(x) + rnorm(n, 0, 1)
         return (cbind(x, y))
     }
 )

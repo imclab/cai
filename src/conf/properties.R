@@ -7,9 +7,6 @@ break_method  = "sturges"
 #break_method  = "fixed"
 #break.fixed.n = 20
 
-# Generator "sigma" modifiers.
-CAI__GEN_MODS = c(1) # c(0.01, 0.1, 1, 10, 100)
-
 AUTOLOAD_DIRS = c(
     "src/core/generators",
     "src/core/assessments/bivariate",

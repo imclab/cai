@@ -1,12 +1,11 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("x \\times \\noise::",
-                               CAI__GEN_MOD, sep=""),
+generator <- list(name = "ln |x|",
                   dependent = TRUE,
                   modifiable = TRUE,
                   generate = function(n) {
-        x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-        y <- x * rnorm(n, 0, 1 * CAI__GEN_MOD) + rnorm(n, 0, 1 * CAI__GEN_MOD)
+        x <- rnorm(n, 0, 1)
+        y <- log(abs(x)) + rnorm(n, 0, 1)
         return (cbind(x, y))
     }
 )

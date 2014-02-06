@@ -1,12 +1,11 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("ln |x|::",
-                               CAI__GEN_MOD, sep=""),
+generator <- list(name = "x/100",
                   dependent = TRUE,
                   modifiable = TRUE,
                   generate = function(n) {
-        x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-        y <- log(abs(x)) + rnorm(n, 0, 1 * CAI__GEN_MOD)
+        x <- rnorm(n, 0, 1)
+        y <- (x/100) + rnorm(n, 0, 1)
         return (cbind(x, y))
     }
 )

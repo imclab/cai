@@ -1,12 +1,11 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("x^2::",
-                               CAI__GEN_MOD, sep=""),
-                  dependent = TRUE,
+generator <- list(name = "\\beta(0.5, 0.5)",
+                  dependent = FALSE,
                   modifiable = TRUE,
                   generate = function(n) {
-        x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-        y <- (x^2) + rnorm(n, 0, 1 * CAI__GEN_MOD)
+        x <- rnorm(n, 0, 1)
+        y <- rbeta(n, 0.5, 0.5)
         return (cbind(x, y))
     }
 )

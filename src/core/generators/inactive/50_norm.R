@@ -1,12 +1,11 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("\\beta(2, 2)::",
-                               CAI__GEN_MOD, sep=""),
+generator <- list(name = "\\noise",
                   dependent = FALSE,
                   modifiable = TRUE,
                   generate = function(n) {
-        x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-        y <- rbeta(n, 2, 2)
+        x <- rnorm(n, 0, 1)
+        y <- rnorm(n, 0, 1)
         return (cbind(x, y))
     }
 )

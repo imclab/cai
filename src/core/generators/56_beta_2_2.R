@@ -1,12 +1,11 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("\\unoise::",
-                               CAI__GEN_MOD, sep=""),
+generator <- list(name = "\\beta(2, 2)",
                   dependent = FALSE,
                   modifiable = TRUE,
                   generate = function(n) {
-        x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-        y <- runif(n, 0, 1 * CAI__GEN_MOD)
+        x <- rnorm(n, 0, 1)
+        y <- rbeta(n, 2, 2)
         return (cbind(x, y))
     }
 )

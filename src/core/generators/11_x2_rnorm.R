@@ -1,12 +1,11 @@
 # Christopher L. Simons, 2013
 
-generator <- list(name = paste("sin(x) \\times \\noise::",
-                               CAI__GEN_MOD, sep=""),
+generator <- list(name = "x^2 \\times \\noise",
                   dependent = TRUE,
                   modifiable = TRUE,
                   generate = function(n) {
-        x <- rnorm(n, 0, 1 * CAI__GEN_MOD)
-        y <- sin(x) * rnorm(n, 0, 1 * CAI__GEN_MOD) + rnorm(n, 0, 1 * CAI__GEN_MOD)
+        x <- rnorm(n, 0, 1)
+        y <- (x^2) * rnorm(n, 0, 1) + rnorm(n, 0, 1)
         return (cbind(x, y))
     }
 )
