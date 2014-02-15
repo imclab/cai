@@ -2,7 +2,7 @@
 
 model <- list()
 
-d <- read.csv("data/iris.data", header = TRUE)
+d <- read.csv("data/iris.csv", header = TRUE)
 d <- data.frame(interval_scale(as.matrix(d)))
 
 g <- graphNEL(nodes=names(d), edgemode="directed")
