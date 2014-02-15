@@ -1,12 +1,12 @@
 # Christopher L. Simons, 2013
 
-learner <- list(name  = "pcor::pearson::0.045",
+learner <- list(name  = "pcor::dcor::0.25",
                 learn = function(data.) {
                     result <- pc(suffStat = list(data = data.,
-                                                 method_cor = "pearson"),
+                                                 method_cor = "dcor"),
                                  indepTest = ci_pcor,
                                  p         = ncol(data.),
-                                 alpha     = 0.045)
+                                 alpha     = 0.25)
                     nodes(result@graph) <- names(data.)
                     return (result)
                 })
