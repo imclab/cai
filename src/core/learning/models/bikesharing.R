@@ -2,7 +2,7 @@
 
 model <- list()
 
-d <- read.csv("data/bikesharing-daily.csv", header = TRUE)
+d <- read.csv("data/bikesharing-daily-custom.csv", header = TRUE)
 d <- data.frame(interval_scale(as.matrix(d)))
 
 g <- graphNEL(edgemode = "directed",
@@ -10,16 +10,24 @@ g <- graphNEL(edgemode = "directed",
 
 # Edges defined here.
 g <- addEdge("mnth", "season", g)
-g <- addEdge("weekday", "workingday", g)
-g <- addEdge("holiday", "workingday", g)
 g <- addEdge("mnth", "temp", g)
-g <- addEdge("temp", "casual", g)
+g <- addEdge("season", "mnth", g)
+
+g <- addEdge("season", "registered", g)
+g <- addEdge("season", "casual", g)
+
 g <- addEdge("temp", "registered", g)
-g <- addEdge("temp", "atemp", g)
-g <- addEdge("atemp", "temp", g)
+g <- addEdge("temp", "casual", g)
+
+g <- addEdge("mnth", "registered", g)
 g <- addEdge("mnth", "casual", g)
-g <- addEdge("weathersit", "casual", g)
+
 g <- addEdge("weathersit", "registered", g)
+g <- addEdge("weathersit", "casual", g)
+
+g <- addEdge("workingday", "registered", g)
+g <- addEdge("workingday", "casual", g)
+
 g <- addEdge("registered", "cnt", g)
 g <- addEdge("casual", "cnt", g)
 
