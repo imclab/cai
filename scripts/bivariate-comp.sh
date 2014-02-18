@@ -2,7 +2,7 @@
 
 echo -n "Generating bivariate-comparison table ... "
 
-[ -f bivariate-comp.csv ] && rm bivariate-comp.csv
+[ -f bivariate-comp.texf ] && rm bivariate-comp.texf
 
 Rscript src/bin/bivariate-comp.R > /dev/null 2>&1
 

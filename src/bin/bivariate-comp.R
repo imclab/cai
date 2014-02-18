@@ -8,7 +8,7 @@ options(width = 160)
 
 # Formatting for LaTeX 'tabular' environment.
 write.table(bivariate.summary,
-            file      = "bivariate-comp.csv",
+            file      = "bivariate-comp.texf",
             quote     = FALSE,
             row.names = FALSE,
             col.names = TRUE,
