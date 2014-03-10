@@ -74,7 +74,7 @@ for (generator in generators)
         fnSS <- "var"
         nom <- nameFriendly(generator$name)
         scDebug(data, nom, fnSS)
-        plot_disc(data,
+        plotDisc(data,
                   filename=paste("sc-debug/", fnSS, "-", nom, ".png", sep=""),
                   fill=FALSE,
                   gradient=TRUE,
