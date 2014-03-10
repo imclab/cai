@@ -12,7 +12,7 @@ p("\nUsing n = ", training.n, " data points per generator ...\n")
 
 assessments <- list()
 generators <- list()
-for (dirname in AUTOLOAD_DIRS)
+for (dirname in AUTOLOAD.DIRS)
     if (length(dirname) > 0)
         for (filename in list.files(path = dirname, pattern = ".+\\.R"))
             source(paste(dirname, "/", filename, sep = ""))
