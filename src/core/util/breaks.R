@@ -1,30 +1,34 @@
 # Christopher L. Simons, 2013
 
 # Provide break points to establish n bins of equal width.
-breaks_uniform_width <- function(data, n_bins) {
-    vec_min <- min(data)
-    vec_max <- max(data)
-    span <- vec_max - vec_min
-    bin_width <- span / n_bins
+breaksUniformWidth <- function(data, n.bins)
+{
+    vec.min <- min(data)
+    vec.max <- max(data)
+    span <- vec.max - vec.min
+    bin.width <- span / n.bins
 
-    breakpoints <- c(vec_min)
-    while (length(breakpoints) <= n_bins) {
-        next_break <- vec_min + (length(breakpoints) * bin_width)
-        breakpoints[length(breakpoints) + 1] <- next_break
+    breakpoints <- c(vec.min)
+    while (length(breakpoints) <= n.bins)
+    {
+        next.break <- vec.min + (length(breakpoints) * bin.width)
+        breakpoints[length(breakpoints) + 1] <- next.break
     }
     return (breakpoints)
 }
 
 # Provide break points to establish n bins of equal data points.
-breaks_uniform_counts <- function(data, n_bins) {
-    bin_count <- length(data) / n_bins
-    sorted_data <- sort(data)
-    vec_min <- sorted_data[1]
+breaksUniformCounts <- function(data, n.bins)
+{
+    bin.count <- length(data) / n.bins
+    sorted.data <- sort(data)
+    vec.min <- sorted.data[1]
 
-    breakpoints <- c(vec_min)
-    while (length(breakpoints) <= n_bins) {
-        next_break <- sorted_data[length(breakpoints) * bin_count]
-        breakpoints[length(breakpoints) + 1] <- next_break
+    breakpoints <- c(vec.min)
+    while (length(breakpoints) <= n.bins)
+    {
+        next.break <- sorted.data[length(breakpoints) * bin.count]
+        breakpoints[length(breakpoints) + 1] <- next.break
     }
     return (breakpoints)
 }

@@ -11,7 +11,8 @@ for (i in 1:length(models))
         model <- models[[i]]
 
 results <- list()
-for (i in 1:length(learners)) {
+for (i in 1:length(learners))
+{
     learner <- learners[[i]]
     pn(date(), ": Learning using [", sprintf(fmt_s, learner$name), "] ...")
     result$struct <- learner$learn(model$data)

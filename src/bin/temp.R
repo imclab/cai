@@ -11,9 +11,10 @@ for (i in 1:length(models))
         model <- models[[i]]
 
 results <- list()
-for (i in 1:length(learners)) {
+for (i in 1:length(learners))
+{
     learner <- learners[[i]]
-    pn(date(), ": Learning using [", sprintf(fmt_s, learner$name), "] ...")
+    pn(date(), ": Learning using [", sprintf(fmt.s, learner$name), "] ...")
     result$struct <- learner$learn(model$data)
     result$learner.name <- learner$name
     p(" done; SHD = ", shd(model$graph, result$struct), ".")
@@ -25,6 +26,6 @@ par(mfrow = c(2, (ceiling((length(results) + 1) / 2))))
 plot(model$graph, main = "GS")
 for (i in 1:length(results))
     plot(results[[i]]$struct,
-         main = gsub("::", "\n", results[[i]]$learner.name))
+         main=gsub("::", "\n", results[[i]]$learner.name))
 
 p("Completed program at [", date(), "] local time.")

@@ -20,7 +20,8 @@ sensor       <- temp_t0 + rnorm(1, 0, 5) # Thermostat reading at t=0.
 door         <- round(runif(testing.n, 0, 1)) # Door (open/closed).
 
 temp_t1 <- c()
-for (i in 1:length(temp_t0)) {
+for (i in 1:length(temp_t0))
+{
     if (door[i] == 0) # closed
         append(temp_t1, temp_t0
                         + ((temp_outside - temp_t0) * 0.2)
@@ -36,7 +37,7 @@ d <- data.frame(cbind(temp_t0, temp_outside, sensor, door, temp_t1))
 
 model = list(name  = "temperature.mixed",
              graph = g,
-             data  = interval_scale(d))
+             data  = intervalScale(d))
 
 class(model) <- "model"
 models[[length(models) + 1]] <- model

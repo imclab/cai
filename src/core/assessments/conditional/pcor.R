@@ -1,37 +1,41 @@
 # Christopher L. Simons, 2013
 
-ci_pcor <- function(x, y, S, suffStat) {
+ciPCor <- function(x, y, S, suffStat)
+{
     data. <- suffStat$data
-    method_cor <- suffStat$method_cor
+    method.cor <- suffStat$method.cor
     if (is.null(data.))
         stop("suffStat$data is NULL.")
-    if (is.null(method_cor))
-        stop("suffStat$method_cor is NULL.")
+    if (is.null(method.cor))
+        stop("suffStat$method.cor is NULL.")
 
     x. <- data.[,x]
     y. <- data.[,y]
     S. <- as.matrix(data.[,S])
-    if (ncol(S.) > 0) {
-        resid_xz <- residuals(lm(formula = x. ~ S.))
-        resid_yz <- residuals(lm(formula = y. ~ S.))
-        result <- if (method_cor == "dcor")
-                      dcor(x = resid_xz, y = resid_yz)
+    if (ncol(S.) > 0)
+    {
+        resid.xz <- residuals(lm(formula = x. ~ S.))
+        resid.yz <- residuals(lm(formula = y. ~ S.))
+        result <- if (method.cor == "dcor")
+                      dcor(x = resid.xz, y = resid.yz)
                   else
-                      abs(cor(x      = resid_xz,
-                              y      = resid_yz,
+                      abs(cor(x      = resid.xz,
+                              y      = resid.yz,
                               use    = "complete.obs",
-                              method = method_cor))
-    } else {
-        result <- if (method_cor == "dcor")
+                              method = method.cor))
+    }
+    else
+    {
+        result <- if (method.cor == "dcor")
                       dcor(x = x., y = y.)
                   else
                       abs(cor(x      = x.,
                               y      = y.,
                               use    = "complete.obs",
-                              method = method_cor))
+                              method = method.cor))
     }
 
-    verbose("Called ci_pcor:", x, ",", y, ",[|", ncol(S.),
+    verbose("Called ciPCor:", x, ",", y, ",[|", ncol(S.),
       "|]\t-> ", nformat(result), ".")
 
     return (result)

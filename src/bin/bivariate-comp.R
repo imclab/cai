@@ -4,7 +4,7 @@ source("src/core/util/init.R")
 p("Started program at [", date(), "].")
 source("src/core/learning/support/train.R")
 
-options(width = 160)
+options(width=160)
 
 # Formatting for LaTeX 'tabular' environment.
 write.table(bivariate.summary,
@@ -13,7 +13,6 @@ write.table(bivariate.summary,
             row.names = FALSE,
             col.names = TRUE,
             sep       = " & ",
-            eol       = " \\\\\n"
-            )
+            eol       = " \\\\\n")
 
 print.data.frame(bivariate.summary)

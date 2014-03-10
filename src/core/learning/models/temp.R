@@ -62,7 +62,7 @@ d <- data.frame(cbind(temp_t0,
 
 model = list(name  = "temp",
              graph = g,
-             data  = interval_scale(d))
+             data  = intervalScale(d))
 
 class(model) <- "model"
 models[[length(models) + 1]] <- model

@@ -1,38 +1,46 @@
 # Christopher L. Simons, 2013
 
-nvl <- function (a, b) {
+nvl <- function (a, b)
+{
     return (if (is.null(a)) b else a)
 }
 
-navl <- function (a, b) {
+navl <- function (a, b)
+{
     return (if (is.na(a)) b else a)
 }
 
-nformat <- function(n) {
+nformat <- function(n)
+{
     if (is.numeric(n))
         return (sprintf("%.2f", n))
     else
         return (n)
 }
 
-p <- function(...) {
+p <- function(...)
+{
     cat(..., "\n", sep="")
 }
 
-pn <- function(...) {
+pn <- function(...)
+{
     cat(..., sep="")
 }
 
-verbose <- function(...) {
+verbose <- function(...)
+{
     if (param.verbose)
         p(...)
 }
 
-p_matrix <- function(x) {
+pMatrix <- function(x)
+{
     write(x, sep="\t", ncolumns=length(x[,1]), file="")
 }
 
-interval_scale <- function(x, a = 0, b = 1) {
+intervalScale <- function(x, a = 0, b = 1)
+{
     # To [0, 1]:
     #
     #         x - min
@@ -49,47 +57,52 @@ interval_scale <- function(x, a = 0, b = 1) {
              / (max(x) - min(x))) + a)
 }
 
-iqr_reduce <- function(data) {
+iqrReduce <- function(data)
+{
     # Reduce 'data' to inner-quartile range per X-axis.
 
     x <- data[,1]
-    idx_25 <- floor(length(x) / 4)
-    idx_75 <- ceiling((length(x) / 4) * 3)
-    x_sorted <- sort(x)
-    iqr_a <- x_sorted[idx_25]
-    iqr_b <- x_sorted[idx_75]
+    idx.25 <- floor(length(x) / 4)
+    idx.75 <- ceiling((length(x) / 4) * 3)
+    x.sorted <- sort(x)
+    iqr.a <- x.sorted[idx.25]
+    iqr.b <- x.sorted[idx.75]
 
-    reduced_data <- NULL
-    for (i in 1:length(data[,1])) {
+    reduced.data <- NULL
+    for (i in 1:length(data[,1]))
+    {
         xi <- data[i,1]
         yi <- data[i,2]
-        if (xi >= iqr_a && xi <= iqr_b) {
-            reduced_data <- rbind(reduced_data, cbind(xi, yi))
-        }
+        if (xi >= iqr.a && xi <= iqr.b)
+            reduced.data <- rbind(reduced.data, cbind(xi, yi))
     }
 
-    return (reduced_data)
+    return (reduced.data)
 }
 
-bin_count_fixed <- function(n) {
+binCountFixed <- function(n)
+{
     return (break.fixed.n);
 }
 
 # (Sturges, 1926)
-bin_count_sturges <- function(n) {
+binCountSturges <- function(n)
+{
     return (ceiling(1 + log2(n)))
 }
 
-break_methods = list(fixed   = bin_count_fixed,
-                     sturges = bin_count_sturges)
+break.methods = list(fixed   = binCountFixed,
+                     sturges = binCountSturges)
 
-bin_count <- function(n) {
-    return (break_methods[[break_method]](n))
+binCount <- function(n)
+{
+    return (break.methods[[break.method]](n))
 }
 
 # From http://stackoverflow.com/questions/2547402/
 #          standard-library-function-in-r-for-finding-the-mode
-Mode <- function(x) {
+Mode <- function(x)
+{
     ux <- unique(x)
     ux[which.max(tabulate(match(x, ux)))]
 }

@@ -17,7 +17,8 @@ for (dirname in AUTOLOAD_DIRS)
         for (filename in list.files(path = dirname, pattern = ".+\\.R"))
             source(paste(dirname, "/", filename, sep = ""))
 
-for (generator in generators) {
+for (generator in generators)
+{
     data <- generator$generate(training.n)
     p("\n", generator$name, ":")
     print_weight_matrix(data)

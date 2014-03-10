@@ -3,7 +3,7 @@
 model <- list()
 
 d <- read.csv("data/housing.csv", header = TRUE)
-d <- data.frame(interval_scale(as.matrix(d)))
+d <- data.frame(intervalScale(as.matrix(d)))
 
 g <- graphNEL(edgemode = "directed",
               nodes    = names(d))
@@ -12,7 +12,7 @@ g <- graphNEL(edgemode = "directed",
 
 model = list(name  = "housing",
              graph = g,
-             data  = interval_scale(d))
+             data  = intervalScale(d))
 
 class(model) <- "model"
 models[[length(models) + 1]] <- model

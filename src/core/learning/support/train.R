@@ -1,30 +1,34 @@
 # Christopher L. Simons, 2013
 
-alpha <- function(assessment, overrideLower) {
+alpha <- function(assessment, overrideLower)
+{
     best <- list()
     # improvement: proper optimization?
-    for (threshold in seq(0, max_score, 0.01)) {
-        n_total <- 0
-        n_error <- 0
-        for (generator in generators) {
-            n_total <- n_total + 1
+    for (threshold in seq(0, max.score, 0.01))
+    {
+        n.total <- 0
+        n.error <- 0
+        for (generator in generators)
+        {
+            n.total <- n.total + 1
             if ((threshold < scores[[assessment$name]][[generator$name]]
                     && !generator$dependent) # false positive
                 || (scores[[assessment$name]][[generator$name]] < threshold
                     && generator$dependent)) # false negative
-                n_error <- n_error + 1
+                n.error <- n.error + 1
         }
-        n_correct <- n_total - n_error
+        n.correct <- n.total - n.error
 
-        if (is.null(best$error_rate)
-                || (overrideLower && ((n_error / n_total) <= best$error_rate))
-                || (!overrideLower && ((n_error / n_total) < best$error_rate))) {
+        if (is.null(best$error.rate)
+                || (overrideLower && ((n.error / n.total) <= best$error.rate))
+                || (!overrideLower && ((n.error / n.total) < best$error.rate)))
+        {
             best$threshold <- threshold
-            best$n_total <- n_total
-            best$n_error <- n_error
-            best$n_correct <- n_correct
-            best$accuracy_str <- paste(n_correct, "/", n_total, sep="")
-            best$error_rate <- (n_error / n_total)
+            best$n.total <- n.total
+            best$n.error <- n.error
+            best$n.correct <- n.correct
+            best$accuracy.str <- paste(n.correct, "/", n.total, sep="")
+            best$error.rate <- (n.error / n.total)
         }
     }
     return (best)
@@ -32,11 +36,12 @@ alpha <- function(assessment, overrideLower) {
 
 p("Training over synthetic data, 1/2 (scoring) ...")
 scores <- list()
-max_score <- NULL
+max.score <- NULL
 bivariate.summary <- NULL
-for (generator in generators) {
+for (generator in generators)
+{
     data <- generator$generate(training.n)
-    data <- interval_scale(data)
+    data <- intervalScale(data)
 
     detail.row <- c(paste("$ ", generator$name,
                           (
@@ -51,7 +56,8 @@ for (generator in generators) {
                           (if (generator$dependent) "\\dep" else "\\ind"),
                           "$",
                           sep=""))
-    for (assessment in assessments) {
+    for (assessment in assessments)
+    {
         result <- assessment$assess(data)
         if (is.na(result))
             result <- "NA"
@@ -61,8 +67,8 @@ for (generator in generators) {
 
         scores[[assessment$name]][[generator$name]] <- result
 
-        if (is.numeric(result) && (is.null(max_score) || max_score < result))
-            max_score <- result
+        if (is.numeric(result) && (is.null(max.score) || max.score < result))
+            max.score <- result
 
         detail.row <- append(detail.row, nformat(result))
     }
@@ -72,17 +78,18 @@ for (generator in generators) {
 
 p("Training over synthetic data, 2/2 (optimizing decision thresholds) ...")
 thresholds <- list()
-for (assessment in assessments) {
-    p("\tTraining on assessment ", assessment$name, " [0..", max_score, "] ...")
+for (assessment in assessments)
+{
+    p("\tTraining on assessment ", assessment$name, " [0..", max.score, "] ...")
     upperbound <- alpha(assessment, overrideLower = TRUE)
     lowerbound <- alpha(assessment, overrideLower = FALSE)
     # Use "middle" optimal value.
     score <- mean(c(lowerbound$threshold, upperbound$threshold))
     thresholds[[assessment$name]] <- score
     p("[", assessment$name, "]\t-> [ ",
-      lowerbound$accuracy_str, " @ ", nformat(lowerbound$threshold),
+      lowerbound$accuracy.str, " @ ", nformat(lowerbound$threshold),
       " < ", nformat(score), " < ",
-      upperbound$accuracy_str, " @ ", nformat(upperbound$threshold), "].")
+      upperbound$accuracy.str, " @ ", nformat(upperbound$threshold), "].")
 }
 
 # Formatting for LaTeX 'tabular' environment.

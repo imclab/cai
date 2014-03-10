@@ -11,7 +11,8 @@ for (i in 1:length(models))
         model <- models[[i]]
 
 results <- list()
-for (i in 1:length(learners)) {
+for (i in 1:length(learners))
+{
     learner <- learners[[i]]
     pn(date(), ": Learning using [", sprintf(fmt_s, learner$name), "] ...")
     result$struct <- learner$learn(model$data)
@@ -21,7 +22,7 @@ for (i in 1:length(learners)) {
 }
 
 p("Plotting learned structures ...")
-par(mfrow = c(2, (ceiling((length(results) + 1) / 2))))
+par(mfrow=c(2, (ceiling((length(results) + 1) / 2))))
 plot(model$graph, main = "GS")
 for (i in 1:length(results))
     plot(results[[i]]$struct,

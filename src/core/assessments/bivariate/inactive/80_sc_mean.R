@@ -1,4 +1,4 @@
 # Christopher L. Simons, 2013
 
-assessment <- create_sc_assessment("\\overline{x}", "mean")
+assessment <- createSCAssessment("\\overline{x}", "mean")
 assessments[[assessment$name]] <- assessment

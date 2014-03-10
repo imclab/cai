@@ -1,4 +1,4 @@
 # Christopher L. Simons, 2013
 
-assessment <- create_sc_assessment("Mo", "Mode")
+assessment <- createSCAssessment("Mo", "Mode")
 assessments[[assessment$name]] <- assessment

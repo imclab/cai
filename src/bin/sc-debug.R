@@ -4,69 +4,76 @@ source("src/core/util/init.R")
 p("Started program at [", date(), "].")
 source("src/core/util/plot_disc.R")
 
-name_friendly <- function(nom) {
+nameFriendly <- function(nom)
+{
     nom <- gsub("::1", "", nom)
     nom <- gsub("\\\\", "", nom)
     nom <- gsub(" ", "_", nom)
     return (nom)
 }
 
-sc_debug <- function(data, gen_name, fnSS) {
+scDebug <- function(data, gen.name, fnSS)
+{
     x <- data[,1]
-    breaks_x <- breaks_uniform_width(x, bin_count(nrow(data)))
+    breaks.x <- breaks.uniform.width(x, binCount(nrow(data)))
 
     # Walk along x-axis creating vertical "stripe" bins.
 
-    x_bin_values <- c()
-    x_bin_stats <- c()
-    for (xb in 1:(length(breaks_x) - 1)) {
-        for (i in 1:length(data[,1])) {
+    x.bin.values <- c()
+    x.bin.stats <- c()
+    for (xb in 1:(length(breaks.x) - 1))
+    {
+        for (i in 1:length(data[,1]))
+        {
             xi <- data[i,][1]
             yi <- data[i,][2]
 
-            if (xi >= breaks_x[xb] && xi <= breaks_x[xb + 1])
-                x_bin_values <- append(x_bin_values, yi)
+            if (xi >= breaks.x[xb] && xi <= breaks.x[xb + 1])
+                x.bin.values <- append(x.bin.values, yi)
         }
 
-        x_bin_stats <- append(x_bin_stats,
-                              if (length(x_bin_values) > 0)
-                                  get(fnSS)(x_bin_values)
+        x.bin.stats <- append(x.bin.stats,
+                              if (length(x.bin.values) > 0)
+                                  get(fnSS)(x.bin.values)
                               else
                                   0)
-        x_bin_values <- c()
+        x.bin.values <- c()
     }
 
     y <- data[,2]
-    overall_stat <- var(y)
+    overall.stat <- var(y)
 
     # Find maximum discrepancy between a partition and the whole plot.
 
-    max_diff <- 0
-    ncomparisons <- length(x_bin_stats)
-    for (i in 1:ncomparisons) {
-        p("sc-debug: ", gen_name,
+    max.diff <- 0
+    ncomparisons <- length(x.bin.stats)
+    for (i in 1:ncomparisons)
+    {
+        p("sc-debug: ", gen.name,
           ": |", fnSS, " - ", fnSS, "_i| = |",
-          nformat(overall_stat), " - ", nformat(x_bin_stats[i]),
-          "| = ", nformat(abs(overall_stat - x_bin_stats[i])))
-        diff_stat <- abs(overall_stat - x_bin_stats[i])
-        if (!is.na(diff_stat))
-            max_diff <- max(max_diff, diff_stat)
+          nformat(overall.stat), " - ", nformat(x.bin.stats[i]),
+          "| = ", nformat(abs(overall.stat - x.bin.stats[i])))
+        diff.stat <- abs(overall.stat - x.bin.stats[i])
+        if (!is.na(diff.stat))
+            max.diff <- max(max.diff, diff.stat)
     }
-    p("sc-debug: ", gen_name, ": max deviation = ", nformat(max_diff))
+    p("sc-debug: ", gen.name, ": max deviation = ", nformat(max.diff))
 
-    return (max_diff)
+    return (max.diff)
 }
 
-for (generator in generators) {
+for (generator in generators)
+{
     if (generator$name == "x::1"
             || generator$name == "x \\times \\noise::1"
-            || generator$name == "\\noise_1::1") {
+            || generator$name == "\\noise_1::1")
+    {
         data <- generator$generate(training.n)
         data <- interval_scale(data)
 
         fnSS <- "var"
-        nom <- name_friendly(generator$name)
-        sc_debug(data, nom, fnSS)
+        nom <- nameFriendly(generator$name)
+        scDebug(data, nom, fnSS)
         plot_disc(data,
                   filename=paste("sc-debug/", fnSS, "-", nom, ".png", sep=""),
                   fill=FALSE,

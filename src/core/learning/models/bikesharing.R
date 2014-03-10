@@ -3,7 +3,7 @@
 model <- list()
 
 d <- read.csv("data/bikesharing-daily-custom.csv", header = TRUE)
-d <- data.frame(interval_scale(as.matrix(d)))
+d <- data.frame(intervalScale(as.matrix(d)))
 
 g <- graphNEL(edgemode = "directed",
               nodes    = names(d))
@@ -33,7 +33,7 @@ g <- addEdge("casual", "cnt", g)
 
 model = list(name  = "bikesharing",
              graph = g,
-             data  = interval_scale(d))
+             data  = intervalScale(d))
 
 class(model) <- "model"
 models[[length(models) + 1]] <- model

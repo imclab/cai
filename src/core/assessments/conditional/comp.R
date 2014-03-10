@@ -1,48 +1,54 @@
 # Christopher L. Simons, 2013
 
-ci_comp <- function(x, y, S, suffStat) {
-    data. <- suffStat$data
-    bivariate_test <- suffStat$bivariate_test
+ciComp <- function(x, y, S, sufficient.stat) {
+    data. <- sufficient.stat$data
+    bivariate.test <- sufficient.stat$bivariate.test
     if (is.null(data.))
-        stop("suffStat$data is NULL.")
-    if (is.null(bivariate_test))
-        stop("suffStat$bivariate_test is NULL.")
+        stop("sufficient.stat$data is NULL.")
+    if (is.null(bivariate.test))
+        stop("sufficient.stat$bivariate.test is NULL.")
 
     x. <- data.[,x]
     y. <- data.[,y]
     S. <- as.matrix(data.[,S])
 
     scores <- c()
-    if (ncol(S.) > 0) {
-        for (Si in 1:ncol(S.)) {
+    if (ncol(S.) > 0)
+    {
+        for (Si in 1:ncol(S.))
+        {
             z. <- S.[,Si]
 
-            breaks_z <- breaks_uniform_width(z., bin_count(length(z.)))
-            xyz_df <- data.frame(cbind(x., y., z.))
+            breaks.z <- breaksUniformWidth(z., binCount(length(z.)))
+            xyz.df <- data.frame(cbind(x., y., z.))
 
-            for (zb in 1:(length(breaks_z) - 1)) {
-                xy_subset <- subset(xyz_df,
-                                    subset = (  z. >= breaks_z[zb]
-                                              & z. <= breaks_z[zb + 1]),
+            for (zb in 1:(length(breaks.z) - 1))
+            {
+                xy.subset <- subset(xyz.df,
+                                    subset = (  z. >= breaks.z[zb]
+                                              & z. <= breaks.z[zb + 1]),
                                     select = c(x., y.))
 
-                xy_matrix <- cbind(xy_subset$x., xy_subset$y.)
+                xy.matrix <- cbind(xy.subset$x., xy.subset$y.)
 
                 # May not have data for all intervals.
-                if (length(xy_matrix) > 0) {
-                    bivariate_score <- bivariate_test$assess(xy_matrix)
-                    scores <- append(scores, bivariate_score)
+                if (length(xy.matrix) > 0)
+                {
+                    bivariate.score <- bivariate.test$assess(xy.matrix)
+                    scores <- append(scores, bivariate.score)
                 }
             }
         }
-    } else {
-        scores <- append(scores, bivariate_test$assess(cbind(x., y.)))
+    }
+    else
+    {
+        scores <- append(scores, bivariate.test$assess(cbind(x., y.)))
     }
 
     highest <- max(scores)
-    verbose("Called ci_comp:", x, ",", y, ",[|", ncol(S.),
+    verbose("Called ciComp:", x, ",", y, ",[|", ncol(S.),
       "|]\t-> ", "p : alpha = ", nformat(highest), " : ",
-      nformat(thresholds[[bivariate_test$name]]), ".")
+      nformat(thresholds[[bivariate.test$name]]), ".")
 
     return (highest)
 }
