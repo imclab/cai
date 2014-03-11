@@ -126,3 +126,12 @@ printWeightMatrix <- function(data)
     z <- buildPlotMatrix(data)
     pMatrix(round(z * 100))
 }
+
+printModeMatrix <- function(data, theta)
+{
+    z <- buildPlotMatrix(data)
+    for (i in 1:nrow(z))
+        for (j in ncol(z))
+            z[i,j] <- if (z[i,j] >= theta) 1 else 0
+    pMatrix(round(z * 100))
+}
