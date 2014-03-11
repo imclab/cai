@@ -21,5 +21,5 @@ for (generator in generators)
 {
     data <- generator$generate(training.n)
     p("\n", generator$name, ":")
-    print_weight_matrix(data)
+    printWeightMatrix(data)
 }
