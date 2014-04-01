@@ -8,14 +8,10 @@ stopifnot(require(energy))
 source("src/core/util/util.R")
 source("src/conf/properties.R")
 
-if (break.method == "fixed") {
-    p("Using fixed k = ", break.fixed.n, " plot partitions ...")
-} else if (break.method == "sturges") {
-    p("Using Sturges' Rule for plot partitions",
-      "; k = ",
-      binCount(training.n),
-      " for training data ...")
-}
+p("Using Sturges' Rule for plot partitions",
+  "; k = ",
+  binCount(training.n),
+  " for training data ...")
 
 p("Using n = ", training.n, " data points for bivariate training ...")
 p("Using n = ", testing.n, " data points for CI testing ...")

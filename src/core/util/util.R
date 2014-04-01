@@ -80,23 +80,9 @@ iqrReduce <- function(data)
     return (reduced.data)
 }
 
-binCountFixed <- function(n)
-{
-    return (break.fixed.n);
-}
-
-# (Sturges, 1926)
-binCountSturges <- function(n)
-{
-    return (ceiling(1 + log2(n)))
-}
-
-break.methods = list(fixed   = binCountFixed,
-                     sturges = binCountSturges)
-
 binCount <- function(n)
 {
-    return (break.methods[[break.method]](n))
+    return (ceiling(1 + log2(n))) # (Sturges, 1926)
 }
 
 # From http://stackoverflow.com/questions/2547402/
