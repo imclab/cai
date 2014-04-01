@@ -86,10 +86,16 @@ binCount <- function(n)
 }
 
 # Provide break points to establish n bins of equal width.
-breaksUniformWidth <- function(data, n.bins)
+breaksUniformWidth <- function(data, n.bins, preSorted=FALSE)
 {
-    vec.min <- min(data)
-    vec.max <- max(data)
+    if (preSorted) {
+        vec.min <- data[1]
+        vec.max <- data[length(data)]
+    } else {
+        vec.min <- min(data)
+        vec.max <- max(data)
+    }
+
     span <- vec.max - vec.min
     bin.width <- span / n.bins
 
