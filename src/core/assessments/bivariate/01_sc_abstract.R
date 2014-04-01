@@ -1,7 +1,5 @@
 # Christopher L. Simons, 2013
 
-source("src/core/util/breaks.R")
-
 createSCAssessment <- function(stat.tex.name, fn.name)
 {
     assessment <- list(name=paste("SC_{", stat.tex.name, "}", sep=""), assess=function(data)

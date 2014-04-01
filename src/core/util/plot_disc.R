@@ -1,7 +1,5 @@
 # Christopher L. Simons, 2013
 
-source("src/core/util/breaks.R")
-
 buildDiscretizedStruct <- function(data)
 {
     x <- data[,1]
