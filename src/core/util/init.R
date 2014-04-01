@@ -1,5 +1,6 @@
 # Christopher L. Simons, 2013
 
+stopifnot(require(modeest))
 stopifnot(require(graph))
 stopifnot(require(Rgraphviz))
 stopifnot(require(pcalg))
