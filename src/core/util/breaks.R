@@ -16,19 +16,3 @@ breaksUniformWidth <- function(data, n.bins)
     }
     return (breakpoints)
 }
-
-# Provide break points to establish n bins of equal data points.
-breaksUniformCounts <- function(data, n.bins)
-{
-    bin.count <- length(data) / n.bins
-    sorted.data <- sort(data)
-    vec.min <- sorted.data[1]
-
-    breakpoints <- c(vec.min)
-    while (length(breakpoints) <= n.bins)
-    {
-        next.break <- sorted.data[length(breakpoints) * bin.count]
-        breakpoints[length(breakpoints) + 1] <- next.break
-    }
-    return (breakpoints)
-}
