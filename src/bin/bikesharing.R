@@ -14,7 +14,7 @@ results <- list()
 for (i in 1:length(learners))
 {
     learner <- learners[[i]]
-    pn(date(), ": Learning using [", sprintf(fmt_s, learner$name), "] ...")
+    pn(date(), ": Learning using [", sprintf(fmt.s, learner$name), "] ...")
     result$struct <- learner$learn(model$data)
     result$learner.name <- learner$name
     p(" done; SHD = ", shd(model$graph, result$struct), ".")
