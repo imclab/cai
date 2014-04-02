@@ -19,7 +19,7 @@ alpha <- function(assessment, overrideLower)
         }
         n.correct <- n.total - n.error
 
-        if (is.null(best$error.rate)
+        if (length(best) == 0 # Best object is empty.
                 || (overrideLower && ((n.error / n.total) <= best$error.rate))
                 || (!overrideLower && ((n.error / n.total) < best$error.rate)))
         {
