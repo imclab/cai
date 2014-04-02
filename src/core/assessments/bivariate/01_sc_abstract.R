@@ -6,45 +6,42 @@ createSCAssessment <- function(stat.tex.name, fn.name)
     {
         axisScore <- function(data)
         {
-            x <- data[,1]
-            breaks.x <- breaksUniformWidth(x, binCount(nrow(data)))
+            breaks.x <- breaksUniformWidth(data[,1], binCount(nrow(data)))
 
-            # Walk along x-axis creating vertical "stripe" bins.
+            # Walk along x-axis creating partitions.
 
-            x.bin.stats <- c()
-
+            partition.stats <- c()
             for (xb in 1:(length(breaks.x) - 1)) {
-                bin.values <- c()
+                partition.values <- c()
 
                 for (i in 1:length(data[,1])) {
                     xi <- data[i,][1]
                     yi <- data[i,][2]
 
                     if (xi >= breaks.x[xb] && xi <= breaks.x[xb + 1])
-                        bin.values <- append(bin.values, yi)
+                        partition.values <- append(partition.values, yi)
                 }
 
-                x.bin.stats <- append(x.bin.stats,
-                                    if (length(bin.values) > 0)
-                                        get(fn.name)(bin.values)
+                partition.stats <- append(partition.stats,
+                                    if (length(partition.values) > 0)
+                                        get(fn.name)(partition.values)
                                     else
                                         0)
             }
 
-            y <- data[,2]
-            overall.stat <- get(fn.name)(y)
+            overall.stat <- get(fn.name)(data[,2])
 
             # Find maximum discrepancy between a partition and the whole plot.
 
-            max.bin.deviation <- 0
-            ncomparisons <- length(x.bin.stats)
+            max.deviation <- 0
+            ncomparisons <- length(partition.stats)
             for (i in 1:ncomparisons) {
-                bin.deviation <- abs(overall.stat - x.bin.stats[i])
-                if (!is.na(bin.deviation))
-                    max.bin.deviation <- max(max.bin.deviation, bin.deviation)
+                deviation <- abs(overall.stat - partition.stats[i])
+                if (!is.na(deviation))
+                    max.deviation <- max(max.deviation, deviation)
             }
 
-            return (max.bin.deviation)
+            return (max.deviation)
         }
 
         return (navl(axisScore(data), 0))
