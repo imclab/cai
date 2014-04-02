@@ -1,12 +1,17 @@
 # Christopher L. Simons, 2013
 
-ciComp <- function(x, y, S, sufficient.stat) {
+# sufficient.stat should be an object containing:
+#
+#   assessment : a bivariate assessment.
+#   data       : a data frame
+#
+ci.test.partition <- function(x, y, S, sufficient.stat) {
     data. <- sufficient.stat$data
-    bivariate.test <- sufficient.stat$bivariate.test
+    assessment <- sufficient.stat$assessment
     if (is.null(data.))
         stop("sufficient.stat$data is NULL.")
-    if (is.null(bivariate.test))
-        stop("sufficient.stat$bivariate.test is NULL.")
+    if (is.null(assessment))
+        stop("sufficient.stat$assessment is NULL.")
 
     x. <- data.[,x]
     y. <- data.[,y]
@@ -34,7 +39,7 @@ ciComp <- function(x, y, S, sufficient.stat) {
                 # May not have data for all intervals.
                 if (length(xy.matrix) > 0)
                 {
-                    bivariate.score <- bivariate.test$assess(xy.matrix)
+                    bivariate.score <- assessment$assess(xy.matrix)
                     scores <- append(scores, bivariate.score)
                 }
             }
@@ -42,13 +47,13 @@ ciComp <- function(x, y, S, sufficient.stat) {
     }
     else
     {
-        scores <- append(scores, bivariate.test$assess(cbind(x., y.)))
+        scores <- append(scores, assessment$assess(cbind(x., y.)))
     }
 
     highest <- max(scores)
-    verbose("Called ciComp:", x, ",", y, ",[|", ncol(S.),
+    verbose("Called ci.test.partition:", x, ",", y, ",[|", ncol(S.),
       "|]\t-> ", "p : alpha = ", nformat(highest), " : ",
-      nformat(thresholds[[bivariate.test$name]]), ".")
+      nformat(thresholds[[assessment$name]]), ".")
 
     return (highest)
 }

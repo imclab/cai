@@ -16,9 +16,12 @@ createSCAssessment <- function(stat.tex.name, fn.name)
             all.values <- c()
             partition.stats <- c()
             for (xb in 1:(length(breaks.x) - 1)) {
+                if (length(all.values) == nrow(data))
+                    break
+
                 partition.values <- c()
 
-                for (i in (1 + length(all.values)):length(data[,1])) {
+                for (i in (1 + length(all.values)):nrow(data)) {
                     xi <- data[i,][1]
                     yi <- data[i,][2]
 
@@ -30,11 +33,9 @@ createSCAssessment <- function(stat.tex.name, fn.name)
 
                 all.values <- append(all.values, partition.values)
 
-                partition.stats <- append(partition.stats,
-                                    if (length(partition.values) > 0)
-                                        get(fn.name)(partition.values)
-                                    else
-                                        0)
+                if (length(partition.values) > 0)
+                    partition.stats <- append(partition.stats,
+                                              get(fn.name)(partition.values))
             }
 
             overall.stat <- get(fn.name)(data[,2])

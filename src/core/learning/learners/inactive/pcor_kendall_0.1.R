@@ -3,7 +3,7 @@
 learner <- list(name="pcor::kendall::0.1", learn=function(data.)
 {
     result <- pc(suffStat  = list(data=data., method.cor="kendall"),
-                 indepTest = ciPCor,
+                 indepTest = ci.test.pcor,
                  p         = ncol(data.),
                  alpha     = 0.1)
     nodes(result@graph) <- names(data.)

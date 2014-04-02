@@ -1,6 +1,6 @@
 # Christopher L. Simons, 2013
 
-ciPCor <- function(x, y, S, suffStat)
+ci.test.pcor <- function(x, y, S, suffStat)
 {
     data. <- suffStat$data
     method.cor <- suffStat$method.cor
@@ -35,7 +35,7 @@ ciPCor <- function(x, y, S, suffStat)
                               method = method.cor))
     }
 
-    verbose("Called ciPCor:", x, ",", y, ",[|", ncol(S.),
+    verbose("Called ci.test.pcor:", x, ",", y, ",[|", ncol(S.),
       "|]\t-> ", nformat(result), ".")
 
     return (result)

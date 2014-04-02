@@ -82,7 +82,10 @@ iqrReduce <- function(data)
 
 binCount <- function(n)
 {
-    return (ceiling(1 + log2(n))) # (Sturges, 1926)
+    return (if (n < 1)
+                1
+            else
+                ceiling(1 + log2(n))) # (Sturges, 1926)
 }
 
 # Provide break points to establish n bins of equal width.
