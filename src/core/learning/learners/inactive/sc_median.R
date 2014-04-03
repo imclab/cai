@@ -2,11 +2,12 @@
 
 learner <- list(name="SC_{median}", learn=function(data.)
 {
+    assessment. <- assessments[["SC_{\\widetilde{x}}"]]
     result <- pc(suffStat  = list(data=data.,
-                                  assessment=assessments[["SC_{\\widetilde{x}}"]]),
+                                  assessment=assessment.),
                  indepTest = ci.test.partition,
                  p         = ncol(data.),
-                 alpha     = thresholds[["SC_{\\widetilde{x}}"]])
+                 alpha     = assessment.$alpha_mid)
     nodes(result@graph) <- names(data.)
     return (result)
 })

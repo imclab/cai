@@ -2,8 +2,7 @@
 
 source("src/core/util/init.R")
 source("src/core/util/plot_disc.R")
-
-p("Started program at [", date(), "].")
+p("Started main logic at [", date(), "].")
 
 source("src/core/learning/support/train.R")
 source("src/core/util/init_learners.R")

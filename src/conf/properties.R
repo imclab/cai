@@ -7,6 +7,12 @@ fmt.s         = "%19s"
 AUTOLOAD.DIRS = c(
     "src/core/generators",
     "src/core/assessments/bivariate",
-    "src/core/assessments/conditional",
     "src/core/learning/models",
+    "src/core/learning/support",
+
+    # Train before loading conditional tests
+    # so that alpha-levels are set in the
+    # bivariate assessment components.
+    #
+    "src/core/assessments/conditional",
 "")

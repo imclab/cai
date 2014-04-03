@@ -1,8 +1,8 @@
 # Christopher L. Simons, 2013
 
 source("src/core/util/init.R")
-p("Started program at [", date(), "].")
 source("src/core/util/plot_disc.R")
+p("Started main logic at [", date(), "].")
 
 nameFriendly <- function(nom)
 {

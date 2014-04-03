@@ -76,20 +76,22 @@ for (generator in generators)
     bivariate.summary <- rbind(bivariate.summary, detail.row)
 }
 
-p("Training over synthetic data, 2/2 (optimizing decision thresholds) ...")
-thresholds <- list()
+p("Training over synthetic data, 2/2 (calculating alpha levels) ...")
 for (assessment in assessments)
 {
     p("\tTraining on assessment ", assessment$name, " [0..", max.score, "] ...")
     upperbound <- alpha(assessment, overrideLower = TRUE)
     lowerbound <- alpha(assessment, overrideLower = FALSE)
-    # Use "middle" optimal value.
-    score <- mean(c(lowerbound$threshold, upperbound$threshold))
-    thresholds[[assessment$name]] <- score
+
+    assessment$alpha_min <- lowerbound$threshold
+    assessment$alpha_max <- upperbound$threshold
+    assessment$alpha_mid <- mean(c(lowerbound$threshold, upperbound$threshold))
+    assessments[[assessment$name]] <- assessment
+
     p("[", assessment$name, "]\t-> [ ",
-      lowerbound$accuracy.str, " @ ", nformat(lowerbound$threshold),
-      " < ", nformat(score), " < ",
-      upperbound$accuracy.str, " @ ", nformat(upperbound$threshold), "].")
+      lowerbound$accuracy.str, " @ ", nformat(assessment$alpha_min),
+      " < ", nformat(assessment$alpha_mid), " < ",
+      upperbound$accuracy.str, " @ ", nformat(assessment$alpha_max), "].")
 }
 
 # Formatting for LaTeX 'tabular' environment.
@@ -99,7 +101,7 @@ for (assessment in assessments)
                                        paste("$",
                                              assessment$name,
                                              "^{\\alpha=",
-                                             nformat(thresholds[assessment$name]),
+                                             nformat(assessment$alpha_mid),
                                              "}$",
                                              sep=""))
 

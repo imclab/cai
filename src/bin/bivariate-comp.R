@@ -1,8 +1,7 @@
 # Christopher L. Simons, 2013
 
 source("src/core/util/init.R")
-p("Started program at [", date(), "].")
-source("src/core/learning/support/train.R")
+p("Started main logic at [", date(), "].")
 
 options(width=160)
 

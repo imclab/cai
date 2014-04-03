@@ -5,6 +5,7 @@
 #   assessment : a bivariate assessment.
 #   data       : a data frame
 #
+
 ci.test.partition <- function(x, y, S, sufficient.stat) {
     data. <- sufficient.stat$data
     assessment <- sufficient.stat$assessment
@@ -53,7 +54,7 @@ ci.test.partition <- function(x, y, S, sufficient.stat) {
     highest <- max(scores)
     verbose("Called ci.test.partition:", x, ",", y, ",[|", ncol(S.),
       "|]\t-> ", "p : alpha = ", nformat(highest), " : ",
-      nformat(thresholds[[assessment$name]]), ".")
+      nformat(assessment$alpha_mid), ".")
 
     return (highest)
 }

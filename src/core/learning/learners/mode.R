@@ -2,11 +2,12 @@
 
 learner <- list(name="SC_{Mo}", learn=function(data.)
 {
+    assessment. <- assessments[["SC_{Mo}"]]
     result <- pc(suffStat  = list(data=data.,
-                                  assessment=assessments[["SC_{Mo}"]]),
+                                  assessment=assessment.),
                  indepTest = ci.test.partition,
                  p         = ncol(data.),
-                 alpha     = thresholds[["SC_{Mo}"]])
+                 alpha     = assessment.$alpha_mid)
     nodes(result@graph) <- names(data.)
     return (result)
 })
