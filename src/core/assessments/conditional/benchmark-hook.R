@@ -23,8 +23,6 @@ ci.test.hook <- function(x, y, S, sufficient.stat)
         }
     }
 
-    combo.results <- list()
-
     x.name <- x[1]
     y.name <- y[1]
     s.name <- ""
@@ -35,6 +33,8 @@ ci.test.hook <- function(x, y, S, sufficient.stat)
             s.name <- paste(s.name, "/", sep="")
     }
 
+    combo.results.table <- NULL
+
     for (i in 1:length(sufficient.stat)) {
         ci.test       <- sufficient.stat[[i]][["ci.test"]]
         ci.test.name. <- sufficient.stat[[i]][["ci.test.name"]]
@@ -42,16 +42,18 @@ ci.test.hook <- function(x, y, S, sufficient.stat)
 
         ci.test.result <- ci.test(x, y, S, ci.suff.stat)
 
-        combo.results[[length(combo.results) + 1]] <- list(
-            ci.test.name  = ci.test.name.,
-            ci.test.X     = x.name,
-            ci.test.Y     = y.name,
-            ci.test.S     = s.name,
-            ci.test.p     = ci.test.result
-        )
+        combo.results.table <- rbind(combo.results.table, c(
+            ci.test.name.,
+            x.name,
+            y.name,
+            s.name,
+            ci.test.result
+        ))
     }
 
-    write.csv(as.data.frame(combo.results), file="benchmark.csv")
+    combo.results.table <- data.frame(combo.results.table)
+    names(combo.results.table) <- c("ci.test.name", "X", "Y", "S", "p-value")
+    write.csv(combo.results.table, file="benchmark.csv")
 
     return (0)
 }
