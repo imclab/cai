@@ -9,10 +9,11 @@
 ci.test.partition <- function(x, y, S, sufficient.stat) {
     data. <- sufficient.stat$data
     assessment <- sufficient.stat$assessment
+
     if (is.null(data.))
-        stop("sufficient.stat$data is NULL.")
+        stop("ci.test.partition: sufficient.stat$data is NULL.")
     if (is.null(assessment))
-        stop("sufficient.stat$assessment is NULL.")
+        stop("ci.test.partition: sufficient.stat$assessment is NULL.")
 
     x. <- data.[,x]
     y. <- data.[,y]

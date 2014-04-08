@@ -28,6 +28,7 @@ ci.test.hook <- function(x, y, S, sufficient.stat)
     x.name <- x[1]
     y.name <- y[1]
     s.name <- ""
+
     for (i in 1:length(S)) {
         s.name <- paste(s.name, S[i], sep="")
         if (i < length(S))
@@ -35,23 +36,22 @@ ci.test.hook <- function(x, y, S, sufficient.stat)
     }
 
     for (i in 1:length(sufficient.stat)) {
-        ci.test <- sufficient.stat[[i]][["ci.test"]]
-        ci.suff.stat <- sufficient.stat[[i]][["ci.suff.stat"]]
-        ci.test.alpha <- ci.test$alpha_mid
+        ci.test       <- sufficient.stat[[i]][["ci.test"]]
+        ci.test.name. <- sufficient.stat[[i]][["ci.test.name"]]
+        ci.suff.stat  <- sufficient.stat[[i]][["ci.suff.stat"]]
 
         ci.test.result <- ci.test(x, y, S, ci.suff.stat)
 
         combo.results[[length(combo.results) + 1]] <- list(
-            ci.test.name  = ci.test$name,
+            ci.test.name  = ci.test.name.,
             ci.test.X     = x.name,
             ci.test.Y     = y.name,
             ci.test.S     = s.name,
-            ci.test.alpha = ci.test.alpha,
             ci.test.p     = ci.test.result
         )
     }
 
-    write.csv(as.data.frame(combo.results), file="results/benchmark.csv")
+    write.csv(as.data.frame(combo.results), file="benchmark.csv")
 
     return (0)
 }

@@ -1,13 +1,14 @@
 # Christopher L. Simons, 2013
 
-ci.test.pcor <- function(x, y, S, suffStat)
+ci.test.pcor <- function(x, y, S, sufficient.stat)
 {
-    data. <- suffStat$data
-    method.cor <- suffStat$method.cor
+    data. <- sufficient.stat$data
+    method.cor <- sufficient.stat$method.cor
+
     if (is.null(data.))
-        stop("suffStat$data is NULL.")
+        stop("ci.test.pcor: sufficient.stat$data is NULL.")
     if (is.null(method.cor))
-        stop("suffStat$method.cor is NULL.")
+        stop("ci.test.pcor: sufficient.stat$method.cor is NULL.")
 
     x. <- data.[,x]
     y. <- data.[,y]
