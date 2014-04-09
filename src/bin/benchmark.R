@@ -4,6 +4,8 @@ source("src/core/util/init.R")
 source("src/core/util/init_learners.R")
 p("Started main logic at [", date(), "].")
 
+combo.results.table <- NULL
+
 model <- NULL
 for (i in 1:length(models))
     if (models[[i]][["name"]] == "Retention-MN")
@@ -20,5 +22,10 @@ for (i in 1:length(learners)) {
 pn(date(), ": Learning using [", sprintf(fmt.s, learner$name), "] ...")
 result$struct <- learner$learn(model$data)
 p(" done.")
+
+p("Writing results to 'benchmark.csv'.")
+combo.results.table <- data.frame(combo.results.table)
+names(combo.results.table) <- c("ci.test.name", "X", "Y", "S", "p-value")
+write.csv(combo.results.table, file="benchmark.csv")
 
 p("Completed program at [", date(), "] local time.")

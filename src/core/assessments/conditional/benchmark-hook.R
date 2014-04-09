@@ -33,8 +33,6 @@ ci.test.hook <- function(x, y, S, sufficient.stat)
             s.name <- paste(s.name, "/", sep="")
     }
 
-    combo.results.table <- NULL
-
     for (i in 1:length(sufficient.stat)) {
         ci.test       <- sufficient.stat[[i]][["ci.test"]]
         ci.test.name. <- sufficient.stat[[i]][["ci.test.name"]]
@@ -50,10 +48,6 @@ ci.test.hook <- function(x, y, S, sufficient.stat)
             ci.test.result
         ))
     }
-
-    combo.results.table <- data.frame(combo.results.table)
-    names(combo.results.table) <- c("ci.test.name", "X", "Y", "S", "p-value")
-    write.csv(combo.results.table, file="benchmark.csv")
 
     return (0)
 }
