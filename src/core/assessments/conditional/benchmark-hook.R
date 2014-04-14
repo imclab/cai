@@ -41,7 +41,8 @@ ci.test.hook <- function(x, y, S, sufficient.stat)
 
         ci.test.result <- ci.test(x, y, S, ci.suff.stat)
 
-        result.str <- paste(result.str, ci.test.name., "=", ci.test.result,
+        result.str <- paste(result.str,
+                            ci.test.name., "=", nformat(ci.test.result),
                             if (length(sufficient.stat) > i)
                                 ";"
                             else
