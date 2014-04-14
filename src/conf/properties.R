@@ -1,4 +1,4 @@
-param.verbose = TRUE
+param.verbose = FALSE
 
 training.n    = 2000
 testing.n     = 20000

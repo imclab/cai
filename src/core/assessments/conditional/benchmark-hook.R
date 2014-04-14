@@ -30,9 +30,10 @@ ci.test.hook <- function(x, y, S, sufficient.stat)
     for (i in 1:length(S)) {
         s.name <- paste(s.name, S[i], sep="")
         if (i < length(S))
-            s.name <- paste(s.name, "/", sep="")
+            s.name <- paste(s.name, ",", sep="")
     }
 
+    result.str <- ""
     for (i in 1:length(sufficient.stat)) {
         ci.test       <- sufficient.stat[[i]][["ci.test"]]
         ci.test.name. <- sufficient.stat[[i]][["ci.test.name"]]
@@ -40,14 +41,21 @@ ci.test.hook <- function(x, y, S, sufficient.stat)
 
         ci.test.result <- ci.test(x, y, S, ci.suff.stat)
 
-        combo.results.table <- rbind(combo.results.table, c(
-            ci.test.name.,
-            x.name,
-            y.name,
-            s.name,
-            ci.test.result
-        ))
+        result.str <- paste(result.str, ci.test.name., "=", ci.test.result,
+                            if (length(sufficient.stat) > i)
+                                ";"
+                            else
+                                "", sep="")
     }
+
+    newRow <- c(
+        x.name,
+        y.name,
+        s.name,
+        result.str
+    )
+
+    combo.results.table <<- rbind(combo.results.table, newRow)
 
     return (0)
 }
