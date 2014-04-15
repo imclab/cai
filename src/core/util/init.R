@@ -2,6 +2,7 @@
 
 stopifnot(require(modeest))
 stopifnot(require(graph))
+stopifnot(require(RBGL))
 stopifnot(require(Rgraphviz))
 stopifnot(require(pcalg))
 stopifnot(require(energy))

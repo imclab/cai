@@ -2,7 +2,17 @@
 
 learner <- list(name="benchmark", learn=function(data.)
 {
-    result <- pc(suffStat  = list(list(ci.test=ci.test.partition,
+    model <- NULL
+    for (i in 1:length(models))
+        if (models[[i]][["name"]] == "Retention-MN")
+            model <- models[[i]]
+
+    graph. <- model$graph
+
+    result <- pc(suffStat  = list(list(ci.test=ci.test.gold,
+                                       ci.test.name="gold",
+                                       ci.suff.stat=list(data=data., graph=graph.)),
+                                  list(ci.test=ci.test.partition,
                                        ci.test.name="mode",
                                        ci.suff.stat=list(data=data., assessment=assessments[["SC_{Mo}"]])),
                                   list(ci.test=ci.test.pcor,
