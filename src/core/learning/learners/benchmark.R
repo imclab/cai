@@ -8,10 +8,11 @@ learner <- list(name="benchmark", learn=function(data.)
             model <- models[[i]]
 
     graph. <- model$graph
+    nodes. <- model$nodes
 
     result <- pc(suffStat  = list(list(ci.test=ci.test.gold,
                                        ci.test.name="gold",
-                                       ci.suff.stat=list(data=data., graph=graph.)),
+                                       ci.suff.stat=list(data=data., graph=graph., nodes=nodes.)),
                                   list(ci.test=ci.test.partition,
                                        ci.test.name="mode",
                                        ci.suff.stat=list(data=data., assessment=assessments[["SC_{Mo}"]])),

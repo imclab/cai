@@ -28,6 +28,7 @@ g <- addEdge("strat", "spend", g)
 
 model = list(name  = "Retention-MN",
              graph = g,
+             nodes = names(d),
              data  = intervalScale(d))
 
 class(model) <- "model"
