@@ -53,8 +53,28 @@ intervalScale <- function(x, a = 0, b = 1)
     # f(x) = --------------  +  a
     #          max - min
     #
-    return ((((b - a) * (x - min(x)))
-             / (max(x) - min(x))) + a)
+
+    #
+    # TODO: Scaling over entire data frame is not helpful.
+    #       We want to scale individual variables to their sample domains.
+    #
+#    return ((((b - a) * (x - min(x)))
+#             / (max(x) - min(x))) + a)
+
+    x. <- c()
+    for (i in 1:ncol(x)) {
+        vec. <- x[,i]
+        min. <- min(vec.)
+        max. <- max(vec.)
+
+        new. <- ((((b - a) * (vec. - min(vec.)))
+                    / (max(vec.) - min(vec.))) + a)
+
+        x. <- cbind(x., new.)
+    }
+
+    dimnames(x.)[[2]] <- dimnames(x)[[2]]
+    return (x.)
 }
 
 iqrReduce <- function(data)
