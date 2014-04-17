@@ -22,7 +22,8 @@ learner <- list(name="benchmark", learn=function(data.)
                  indepTest = ci.test.hook,
                  p         = ncol(data.),
                  alpha     = 1)
-    nodes(result@graph) <- names(data.)
+
+    nodes(result@graph) <- dimnames(data.)[[2]]
     return (result)
 })
 class(learner) <- "learner"
