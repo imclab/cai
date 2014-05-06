@@ -8,6 +8,11 @@ fi
 
 echo -n "Adjusting benchmark output ... "
 
+# TODO: The MacOS version of 'sed' requires an additional
+#       argument before the filename, whereas the MinGW version
+#       cannot take this argument; make this cross-platform
+#       (via $OSTYPE, uname -s, etc.).
+#
 sed \
     -e 's/"p-values"/"gold-p","mode-p","pcor-p"/g' \
     -e 's/gold=//g' \
