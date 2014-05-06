@@ -53,7 +53,10 @@ createSCAssessment <- function(stat.tex.name, fn.name)
             return (max.deviation)
         }
 
-        return (navl(axisScore(data), 0))
+#        return (navl(axisScore(data), 0))
+        a <- (navl(axisScore(data), 0))
+        b <- (navl(axisScore(cbind(data[,2], data[,1])), 0)) # Swap axes.
+        return (max(c(a, b)))
     })
     class(assessment) <- "assessment"
     return (assessment)
