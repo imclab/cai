@@ -54,12 +54,11 @@ intervalScale <- function(x, a = 0, b = 1)
     #          max - min
     #
 
-    #
-    # TODO: Scaling over entire data frame is not helpful.
-    #       We want to scale individual variables to their sample domains.
-    #
-#    return ((((b - a) * (x - min(x)))
-#             / (max(x) - min(x))) + a)
+    # Old version: scaled over entire data frame.
+    # This was problematic; instead we should scale
+    # individual variables to their sample domains.
+    #     return ((((b - a) * (x - min(x)))
+    #              / (max(x) - min(x))) + a)
 
     x. <- c()
     for (i in 1:ncol(x)) {
