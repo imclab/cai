@@ -33,7 +33,7 @@ createSCAssessment <- function(stat.tex.name, fn.name)
 
                 all.values <- append(all.values, partition.values)
 
-                if (length(partition.values) > 0)
+                if (length(partition.values) >= min.test.n)
                     partition.stats <- append(partition.stats,
                                               get(fn.name)(partition.values))
             }
@@ -44,10 +44,12 @@ createSCAssessment <- function(stat.tex.name, fn.name)
 
             max.deviation <- 0
             ncomparisons <- length(partition.stats)
-            for (i in 1:ncomparisons) {
-                deviation <- abs(overall.stat - partition.stats[i])
-                if (!is.na(deviation))
-                    max.deviation <- max(max.deviation, deviation)
+            if (ncomparisons > 0) {
+                for (i in 1:ncomparisons) {
+                    deviation <- abs(overall.stat - partition.stats[i])
+                    if (!is.na(deviation))
+                        max.deviation <- max(max.deviation, deviation)
+                }
             }
 
             return (max.deviation)
