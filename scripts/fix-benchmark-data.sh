@@ -11,14 +11,27 @@ echo -n "Adjusting benchmark output ... "
 # TODO: The MacOS version of 'sed' requires an additional
 #       argument before the filename, whereas the MinGW version
 #       cannot take this argument; make this cross-platform
-#       (via $OSTYPE, uname -s, etc.).
+#       (via $OSTYPE, uname -s, etc.) and test on all systems.
 #
-sed \
-    -e 's/"p-values"/"gold-p","mode-p","pcor-p"/g' \
-    -e 's/gold=//g' \
-    -e 's/mode=//g' \
-    -e 's/pcor=//g' \
-    -e 's/;/","/g' \
-    -i $1
+os=`uname -s`
+
+if [[ $os == 'MINGW'* ]]
+then
+    sed \
+        -e 's/"p-values"/"gold-p","mode-p","pcor-p"/g' \
+        -e 's/gold=//g' \
+        -e 's/mode=//g' \
+        -e 's/pcor=//g' \
+        -e 's/;/","/g' \
+        -i $1
+else
+    sed \
+        -e 's/"p-values"/"gold-p","mode-p","pcor-p"/g' \
+        -e 's/gold=//g' \
+        -e 's/mode=//g' \
+        -e 's/pcor=//g' \
+        -e 's/;/","/g' \
+        -i "" $1
+fi
 
 echo "done."
