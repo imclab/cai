@@ -1,4 +1,4 @@
-# Christopher L. Simons, 2013
+# Copyright 2013, 2014 by Christopher L. Simons
 
 generator <- list(name       = "\\beta(0.5, 0.5)",
                   dependent  = FALSE,

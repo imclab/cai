@@ -1,4 +1,4 @@
-# Christopher L. Simons, 2013
+# Copyright 2013, 2014 by Christopher L. Simons
 
 source("src/core/util/init.R")
 source("src/core/util/init_learners.R")

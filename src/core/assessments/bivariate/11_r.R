@@ -1,4 +1,4 @@
-# Christopher L. Simons, 2013
+# Copyright 2013, 2014 by Christopher L. Simons
 
 assessment <- list(name="r", assess=function(data)
 {

@@ -1,4 +1,4 @@
-# Christopher L. Simons, 2013
+# Copyright 2013, 2014 by Christopher L. Simons
 
 # We use this CI 'test' as a hook into the PC algorithm.  Here we always return
 # dependence, causing a complete graph to be maintained by PC so that all
