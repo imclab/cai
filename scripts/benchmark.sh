@@ -20,7 +20,7 @@ echo "done."
 
 echo -n "Adjusting benchmark output ... "
 
-perl -pi -e '
+perl -pi.bak -e '
     s/^"\d*",//;
     s/"p-values"/"gold-p","mode-p","pcor-p"/;
     s/gold=//;
@@ -28,6 +28,14 @@ perl -pi -e '
     s/pcor=//;
     s/;/","/g;
     ' benchmark.csv
+
+if [ -e benchmark.csv ]
+then
+    if [ -e benchmark.csv.bak ]
+    then
+        rm benchmark.csv.bak
+    fi
+fi
 
 echo "done."
 
@@ -45,8 +53,16 @@ echo "done."
 
 echo -n "Adjusting ROC data ... "
 
-perl -pi -e '
+perl -pi.bak -e '
     s/^"\d*",//;
     ' roc.csv
+
+if [ -e roc.csv ]
+then
+    if [ -e roc.csv.bak ]
+    then
+        rm roc.csv.bak
+    fi
+fi
 
 echo "done."
