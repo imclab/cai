@@ -7,3 +7,7 @@ Rplots.pdf
 bivariate-comp.csv
 bivariate-comp.texf
 results
+benchmark.csv
+roc.csv
+data/Retention-MN-10K.csv
+data/Retention-MN-10K.zip
