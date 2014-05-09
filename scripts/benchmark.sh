@@ -14,7 +14,7 @@ fi
 
 echo -n "Running benchmark ... "
 
-#Rscript src/bin/benchmark.R > /dev/null 2>&1
+Rscript src/bin/benchmark.R > /dev/null 2>&1
 
 if [ $? -ne 0 ]
 then
