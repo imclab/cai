@@ -28,6 +28,6 @@ p("Writing results to 'benchmark.csv'.")
 combo.results.table <- data.frame(combo.results.table)
 names(combo.results.table) <- c("X", "Y", "S", "p-values")
 
-write.csv(combo.results.table, file="benchmark.csv")
+write.csv(combo.results.table, quote=FALSE, row.names=FALSE, file="benchmark.csv")
 
 p("Completed program at [", date(), "] local time.")

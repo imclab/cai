@@ -1,21 +1,30 @@
 # Copyright 2013, 2014 by Christopher L. Simons
 
+source("src/core/util/util.R")
+
 d <- read.csv("benchmark.csv", header = TRUE)
 
 gold.p <- d[,4]
 mode.p <- d[,5]
 pcor.p <- d[,6]
 
-roc.data <- NULL
+roc.data <- c(0, 0, 0)
 for (alpha in seq(0, 1, 0.01)) {
     positives.actual <- 0
     negatives.actual <- 0
-    mode.TP <- 0
-    mode.FP <- 0
-    pcor.TP <- 0
-    pcor.FP <- 0
+
     mode.hits <- 0
     pcor.hits <- 0
+
+    mode.TP <- 0
+    mode.FP <- 0
+    mode.TN <- 0
+    mode.FN <- 0
+
+    pcor.TP <- 0
+    pcor.FP <- 0
+    pcor.TN <- 0
+    pcor.FN <- 0
 
     for (i in 1:nrow(d)) {
         positives.actual <- positives.actual + gold.p[i]
@@ -23,8 +32,13 @@ for (alpha in seq(0, 1, 0.01)) {
 
         mode.TP <- mode.TP + if (gold.p[i] == 1 && mode.p[i] >= alpha) 1 else 0
         mode.FP <- mode.FP + if (gold.p[i] == 0 && mode.p[i] >= alpha) 1 else 0
+        mode.FN <- mode.FN + if (gold.p[i] == 1 && mode.p[i]  < alpha) 1 else 0
+        mode.TN <- mode.TN + if (gold.p[i] == 0 && mode.p[i]  < alpha) 1 else 0
+
         pcor.TP <- pcor.TP + if (gold.p[i] == 1 && pcor.p[i] >= alpha) 1 else 0
         pcor.FP <- pcor.FP + if (gold.p[i] == 0 && pcor.p[i] >= alpha) 1 else 0
+        mode.FN <- mode.FN + if (gold.p[i] == 1 && pcor.p[i]  < alpha) 1 else 0
+        mode.TN <- mode.TN + if (gold.p[i] == 0 && pcor.p[i]  < alpha) 1 else 0
 
         mode.hits <- mode.hits + if ((gold.p[i] == 1 && mode.p[i] >= alpha)
                                   || (gold.p[i] == 0 && mode.p[i] < alpha))
@@ -42,23 +56,21 @@ for (alpha in seq(0, 1, 0.01)) {
     pcor.TPR <- pcor.TP / positives.actual
     pcor.FPR <- pcor.FP / negatives.actual
 
-    roc.data <- rbind(roc.data, c(alpha,
-                                  mode.TPR,
-                                  mode.FPR,
-                                  mode.hits / nrow(d),
-                                  pcor.TPR,
-                                  pcor.FPR,
-                                  pcor.hits / nrow(d)))
+    # F1 score for ROC plot is given by 2TP/(2TP + FP + FN).
+    #
+    mode.F1 <- (2 * mode.TP) / ((2 * mode.TP) + mode.FP + mode.FN)
+    pcor.F1 <- (2 * pcor.TP) / ((2 * pcor.TP) + pcor.FP + pcor.FN)
+
+    roc.data <- rbind(roc.data, c(nformat(alpha),
+                                  nformat(mode.F1),
+                                  nformat(pcor.F1)))
 }
 
+roc.data <- rbind(roc.data, c(1, 1, 1))
 roc.df <- data.frame(roc.data)
 
 names(roc.df) <- c("alpha",
-                   "mode.TPR",
-                   "mode.FPR",
-                   "mode.correct",
-                   "pcor.TPR",
-                   "pcor.FPR",
-                   "pcor.correct")
+                   "mode.F1",
+                   "pcor.F1")
 
-write.csv(roc.df, file="roc.csv")
+write.csv(roc.df, quote=FALSE, row.names=FALSE, file="roc.csv")
