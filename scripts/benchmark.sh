@@ -80,8 +80,8 @@ gnuplot > accuracy.png << EOF
     set terminal png
     set datafile separator ","
 
-    set xlabel "Percent Correct"
-    set ylabel "alpha-level"
+    set xlabel "alpha-level"
+    set ylabel "Percent Correct"
 
     set title "Accuracy of mode, pCor Methods"
     # set nokey
