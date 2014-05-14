@@ -12,37 +12,42 @@ then
     exit 1
 fi
 
-echo -n "Running benchmark ... "
-
-Rscript src/bin/benchmark.R > /dev/null 2>&1
-
-if [ $? -ne 0 ]
-then
-    echo "aborting (Rscript completed in error)."
-    exit 1
-fi
-
-echo "done."
-
-echo -n "Adjusting benchmark output ... "
-
-perl -pi.bak -e '
-    s/"p-values"/"gold-p","mode-p","pcor-p"/;
-    s/gold=//;
-    s/mode=//;
-    s/pcor=//;
-    s/;/","/g;
-    ' benchmark.csv
-
 if [ -e benchmark.csv ]
 then
-    if [ -e benchmark.csv.bak ]
-    then
-        rm benchmark.csv.bak
-    fi
-fi
+    echo "Found benchmark.csv, so using existing benchmark."
+else
+    echo -n "Running benchmark ... "
 
-echo "done."
+    Rscript src/bin/benchmark.R > /dev/null 2>&1
+
+    if [ $? -ne 0 ]
+    then
+        echo "aborting (Rscript completed in error)."
+        exit 1
+    fi
+
+    echo "done."
+
+    echo -n "Adjusting benchmark output ... "
+
+    perl -pi.bak -e '
+        s/"p-values"/"gold-p","mode-p","pcor-p"/;
+        s/gold=//;
+        s/mode=//;
+        s/pcor=//;
+        s/;/","/g;
+        ' benchmark.csv
+
+    if [ -e benchmark.csv ]
+    then
+        if [ -e benchmark.csv.bak ]
+        then
+            rm benchmark.csv.bak
+        fi
+    fi
+
+    echo "done."
+fi
 
 echo -n "Generating accuracy data ... "
 
