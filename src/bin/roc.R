@@ -67,7 +67,7 @@ for (alpha in seq(0, 1, 0.01)) {
 
     roc.data <- rbind(roc.data, row.)
 
-    # Once we've gotten to all zeroes, we can stop.
+    # Once we're seeing only zeroes, we can stop.
     doBreak <- TRUE
     for (i in 2:length(row.)) {
 p("row.[", i , "] == ", row.[i], "; nformat(0) == ", nformat(0))
