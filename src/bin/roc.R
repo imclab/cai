@@ -8,6 +8,10 @@ gold.p <- d[,4]
 mode.p <- d[,5]
 pcor.p <- d[,6]
 
+# For ROC AUC calculation:
+mode.acc.FPR <- 0
+pcor.acc.FPR <- 0
+
 roc.data <- NULL
 for (alpha in seq(0, 1, 0.01)) {
     positives.actual <- 0
@@ -56,6 +60,9 @@ for (alpha in seq(0, 1, 0.01)) {
     pcor.TPR <- pcor.TP / positives.actual
     pcor.FPR <- pcor.FP / negatives.actual
 
+    mode.acc.FPR <- mode.acc.FPR + mode.FPR
+    pcor.acc.FPR <- pcor.acc.FPR + pcor.FPR
+
     # F1 score for ROC plot is given by 2TP/(2TP + FP + FN).
     #
     mode.F1 <- (2 * mode.TP) / ((2 * mode.TP) + mode.FP + mode.FN)
@@ -70,7 +77,6 @@ for (alpha in seq(0, 1, 0.01)) {
     # Once we're seeing only zeroes, we can stop.
     doBreak <- TRUE
     for (i in 2:length(row.)) {
-p("row.[", i , "] == ", row.[i], "; nformat(0) == ", nformat(0))
         if (row.[i] != nformat(0))
             doBreak <- FALSE
     }
@@ -87,3 +93,10 @@ names(roc.df) <- c("alpha",
                    "pcor.FPR")
 
 write.csv(roc.df, row.names=FALSE, file="roc.csv")
+
+mode.AUC <- mode.acc.FPR / nrow(roc.data)
+pcor.AUC <- pcor.acc.FPR / nrow(roc.data)
+
+auc.df <- data.frame(rbind(NULL, c(nformat(mode.AUC), nformat(pcor.AUC))))
+names(auc.df) <- c("mode-auc", "pcor-auc")
+write.csv(auc.df, row.names=FALSE, file="auc.csv")
