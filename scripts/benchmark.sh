@@ -106,8 +106,10 @@ gnuplot > roc.png << EOF
     set size square
 
     plot \
-    "roc.csv" using 1:2 title columnhead with lines lw 2, \
-           "" using 1:3 title columnhead with lines lw 2
+    "roc.csv" using 3:2 title columnhead with lines lw 2, \
+           "" using 5:4 title columnhead with lines lw 2
+
+    plot x title "random" with lines lw 2
 EOF
 
 echo "done."

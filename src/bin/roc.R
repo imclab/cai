@@ -8,7 +8,7 @@ gold.p <- d[,4]
 mode.p <- d[,5]
 pcor.p <- d[,6]
 
-roc.data <- c(0, 0, 0)
+roc.data <- NULL
 for (alpha in seq(0, 1, 0.01)) {
     positives.actual <- 0
     negatives.actual <- 0
@@ -61,16 +61,29 @@ for (alpha in seq(0, 1, 0.01)) {
     mode.F1 <- (2 * mode.TP) / ((2 * mode.TP) + mode.FP + mode.FN)
     pcor.F1 <- (2 * pcor.TP) / ((2 * pcor.TP) + pcor.FP + pcor.FN)
 
-    roc.data <- rbind(roc.data, c(nformat(alpha),
-                                  nformat(mode.F1),
-                                  nformat(pcor.F1)))
+    row. <- c(nformat(alpha),
+              nformat(mode.TPR), nformat(mode.FPR),
+              nformat(pcor.TPR), nformat(pcor.FPR))
+
+    roc.data <- rbind(roc.data, row.)
+
+    # Once we've gotten to all zeroes, we can stop.
+    doBreak <- TRUE
+    for (i in 2:length(row.)) {
+p("row.[", i , "] == ", row.[i], "; nformat(0) == ", nformat(0))
+        if (row.[i] != nformat(0))
+            doBreak <- FALSE
+    }
+    if (doBreak)
+        break
 }
 
-roc.data <- rbind(roc.data, c(1, 1, 1))
 roc.df <- data.frame(roc.data)
 
 names(roc.df) <- c("alpha",
-                   "mode.F1",
-                   "pcor.F1")
+                   "mode.TPR",
+                   "mode.FPR",
+                   "pcor.TPR",
+                   "pcor.FPR")
 
 write.csv(roc.df, row.names=FALSE, file="roc.csv")
