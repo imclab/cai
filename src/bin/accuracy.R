@@ -34,4 +34,4 @@ names(accuracy.df) <- c("alpha",
                         "mode.accuracy",
                         "pcor.accuracy")
 
-write.csv(accuracy.df, quote=FALSE, row.names=FALSE, file="accuracy.csv")
+write.csv(accuracy.df, row.names=FALSE, file="accuracy.csv")

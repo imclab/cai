@@ -27,11 +27,11 @@ echo "done."
 echo -n "Adjusting benchmark output ... "
 
 perl -pi.bak -e '
-    s/p-values/gold-p,mode-p,pcor-p/;
+    s/"p-values"/"gold-p","mode-p","pcor-p"/;
     s/gold=//;
     s/mode=//;
     s/pcor=//;
-    s/;/,/g;
+    s/;/","/g;
     ' benchmark.csv
 
 if [ -e benchmark.csv ]

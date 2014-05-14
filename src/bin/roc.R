@@ -73,4 +73,4 @@ names(roc.df) <- c("alpha",
                    "mode.F1",
                    "pcor.F1")
 
-write.csv(roc.df, quote=FALSE, row.names=FALSE, file="roc.csv")
+write.csv(roc.df, row.names=FALSE, file="roc.csv")
