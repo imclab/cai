@@ -68,7 +68,7 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
         yb <- c()
         for (m in 1:length(getNumFns())) {
             for (n in 1:length(getNumFns())) {
-                for (1 in 1:length(x...)) {
+                for (i in 1:length(x...)) {
                     xb[i] <- cciFn(m, x...[i])
                     yb[i] <- cciFn(n, y...[i])
                 }
@@ -121,7 +121,7 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
             }
         } else {
             h. <- 0
-            for (in in 1:length(S)) {
+            for (i in 1:length(S)) {
                 s <- S[i]
                 if (h.widths[[s]] > h.)
                     h. <- h.widths[[s]]
@@ -232,7 +232,7 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
     #
     kernel. <- function(z)
     {
-        return if (abs(z) > 1) 0 else 0.5
+        return (if (abs(z) > 1) 0 else 0.5)
     }
 
     distance.euclidean <- function(data.., y.cols, i, j)
@@ -331,11 +331,11 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
     p <- c()
     min.p <- NULL
     h.widths <- list()
-    for (i in 1:ncol(data.))
+    for (i in 1:ncol(data.)) # TODO: Problem (?) when ncol(data.) = 8.
         h.widths[[i]] <- h(data[,i])
 
     verbose("Called ci.test.cci:", x, ",", y, ",[|", ncol(S.),
       "|]\t-> ", nformat(result), ".")
 
-    return if (is.independent(x., y., S.)) 1 else 0
+    return (if (is.independent(x., y., S.)) 1 else 0)
 }
