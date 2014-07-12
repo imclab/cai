@@ -30,7 +30,7 @@ ci.test.gold <- function(x, y, S, sufficient.stat)
 #                       list(g=graph.,
 #                            jp=johnson.all.pairs.sp(graph.)))
 
-    verbose("Called ci.test.pcor:", x, ",", y, ",[|", ncol(S.),
+    verbose("Called ci.test.gold:", x, ",", y, ",[|", ncol(S),
       "|]\t-> ", nformat(result), ".")
 
     return (result)
