@@ -12,14 +12,13 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
     if (is.null(data.))
         stop("ci.test.cci: sufficient.stat$data is NULL.")
 
-    x. <- data.[,x]
-    y. <- data.[,y]
-    S. <- as.matrix(data.[,S])
+    # S. <- as.matrix(data.[,S])
 
-    is.independent <- function(x.., y.., S..)
+    # Here, parameters {x., y., S.} are (single or vectors of) indices of "data.".
+    is.independent <- function(x., y., S.)
     {
-        r.xy <- residuals.nonparametric(x.., y..)
-        r.yz <- residuals.nonparametric(y.., S..)
+        r.xy <- residuals.nonparametric(x., y.)
+        r.yz <- residuals.nonparametric(y., S.)
         return (independent.cci(r.xy, r.yz))
     }
 
@@ -88,21 +87,23 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
                 # and assuming that fourth moments of xb and yb are finite
                 # and that the sample is large.
                 #
+xb1 <- xb
                 standardize(xb)
+p("xb same after standardize() call? -> [", xb1 == xb, "]")
                 standardize(yb)
 
                 t2 <- moment22(xb, yb)
                 t <- sqrt(t2)
                 p. <- 2 * (1 - normal.cdf(0, t, abs(w)))
                 if (!is.na(p.) && !is.null(p.))
-                    p <- append(p, p.)
+                    p.val <- append(p, p.)
             }
         }
 
-        p <- sort(p)
+        p.val  <- sort(p)
         cutoff <- fdr(alpha, p, TRUE)
-        min. <- if (length(p) == 0) NA else p[1]
-        min.p <- min.
+        min.   <- if (length(p) == 0) NA else p[1]
+        min.p  <- min.
 
         if (is.na(min.) || is.null(min.))
             return (TRUE) # No basis on which to remove an edge for PC.
@@ -110,23 +111,26 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
         return (min. > cutoff)
     }
 
-    residuals.nonparametric <- function(x.., z..)
+    # Here, parameters {x.., z..} are (single or vectors of) indices of "data.".
+    residuals.nonparametric <- function(x., z.)
     {
+        x.. <- as.matrix(data.[,x.])
+        z.. <- as.matrix(data.[,z.])
+
         n <- nrow(x..)
         residuals. <- c()
 
-        if (ncol(z..) == 0) {
+        if (length(z..) == 0) {
             for (i in 1:length(n)) {
                 residuals. <- append(residuals., x..[i])
             }
         } else {
             h. <- 0
-            for (i in 1:length(S)) {
-                s <- S[i]
-                if (h.widths[[s]] > h.)
-                    h. <- h.widths[[s]]
+            for (i in 1:length(z.)) {
+                if (h.widths[[i]] > h.)
+                    h. <- h.widths[[i]]
             }
-            h. <- h. * sqrt(length(S))
+            h. <- h. * sqrt(length(z.))
 
             sums <- list()
             weights <- list()
@@ -136,7 +140,7 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
 
                 j <- i + 1
                 while (j <= n) {
-                    d. <- distance.euclidian(data., S, i, j) # TODO: Really S?
+                    d. <- distance.euclidean(data., z., i, j)
                     k. <- kernel.(d. / h.)
                     xj <- x.[j]
 
@@ -152,7 +156,7 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
 
             for (i in 1:n) {
                 xi <- x.[i]
-                d. <- distance.euclidian(data., S, i, i) # TODO: Really S?
+                d. <- distance.euclidean(data., z., i, i)
                 k. <- kernel.(d. / h.)
                 sums[[i]] <- sums[[i]] + (k. * xi)
                 weights[[i]] <- weights[[i]] + k.
@@ -245,7 +249,7 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
             sum <- sum + (d * d)
         }
 
-        return (sqrt(d))
+        return (sqrt(sum))
     }
 
     standardize <- function(data..) # TODO: Check that data is modified in caller.
@@ -294,14 +298,14 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
 
     calculate.fdr.q <- function() {
         #
-        # If a legitimate p value is desired for this test,
+        # If a legitimate p.val value is desired for this test,
         # should estimate the FDR q value.
         #
-        p    <- sort(p)     # TODO: global reference!
-        min. <- min(p)
-        high <- 1
-        low  <- 0
-        q    <- alpha       # TODO: global reference!
+        p.val <- sort(p)     # TODO: global reference!
+        min.  <- min(p)
+        high  <- 1
+        low   <- 0
+        q     <- alpha       # TODO: global reference!
 
         while ((high - low) > (1e-5)) {
             midpoint <- (high + low) / 2
@@ -325,17 +329,19 @@ ci.test.cci <- function(x, y, S, sufficient.stat)
     # ----------------------------------------
     # Top-level logic follows.
     # ----------------------------------------
-
     alpha <- 0.25
 
-    p <- c()
+    p.val <- c()
     min.p <- NULL
     h.widths <- list()
-    for (i in 1:ncol(data.)) # TODO: Problem (?) when ncol(data.) = 8.
-        h.widths[[i]] <- h(data[,i])
 
-    verbose("Called ci.test.cci:", x, ",", y, ",[|", ncol(S.),
-      "|]\t-> ", nformat(result), ".")
+    for (i in 1:ncol(data.))
+        h.widths[[i]] <- h(data.[,i])
 
-    return (if (is.independent(x., y., S.)) 1 else 0)
+    result <- if (is.independent(x, y, S)) 1 else 0
+
+    verbose("Called ci.test.cci:", x, ",", y, ",[|", length(S),
+            "|]\t-> ", result, ".")
+
+    return (result)
 }
