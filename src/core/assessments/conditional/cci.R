@@ -134,6 +134,10 @@ p("xb same after standardize() call? -> [", xb1 == xb, "]")
 
             sums <- list()
             weights <- list()
+            for (i in 1:n) {
+                sums[[i]] <- 0
+                weights[[i]] <- 0
+            }
 
             for (i in 1:n) {
                 xi <- x.[i]
